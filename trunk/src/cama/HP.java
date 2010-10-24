@@ -1,0 +1,4 @@
+package cama;
+class HP {
+    
+}
