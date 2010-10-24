@@ -8,7 +8,7 @@ class Game
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         konsol ks = new konsol();
         ks.start();        
-        w.write("\r\n"+"Enter your names now: ");
+        w.write("\r\n"+"Enter your names: ");
         w.flush();
         String[]s = r.readLine().split(" ");
         w.close();
