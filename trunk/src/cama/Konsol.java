@@ -1,6 +1,6 @@
 package cama;
 import java.io.*;
-class konsol {
+class Konsol {
     private BufferedWriter kw;
     private BufferedReader kr;
     private String[][] field= new String[3][3];
