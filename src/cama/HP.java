@@ -5,7 +5,7 @@ class HP{
     private BufferedReader br;
     public boolean b;
     String n = new String();
-    konsol ks1 = new konsol();
+    Konsol ks1 = new Konsol();
     String name;
     public void xod(String s)throws IOException{
         bw = new BufferedWriter(new OutputStreamWriter(System.out));

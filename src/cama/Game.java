@@ -6,7 +6,7 @@ class Game
     {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        konsol ks = new konsol();
+        Konsol ks = new Konsol();
         ks.start();        
         w.write("\r\n"+"Enter your names: ");
         w.flush();
