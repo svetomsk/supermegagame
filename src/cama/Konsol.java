@@ -11,7 +11,7 @@ class Konsol {
         for(int i = 0; i <4; i++){
             kw.write(kr.readLine()+"\r\n");
             kw.flush();
-        }
+        }        
         kr.close();
     }
     public void getField() throws IOException{
@@ -43,15 +43,74 @@ class Konsol {
             kw.flush();
         }
     }
+    public void readField(String fname)throws IOException{
+        kr = new BufferedReader(new FileReader(fname));
+        for(int i = 0; i < 3; i++){
+            String str[] = kr.readLine().split(" ");
+            System.arraycopy(str, 0, field[i], 0, 3);
+        }
+    }
     public void rewrite(int i, int g, String s)throws IOException{
         kw = new BufferedWriter(new FileWriter("now.txt"));
         field[i][g]  = s;
         for(int f = 0;f<3;f++){
             for(int t =0;t<3;t++){
                 kw.write(field[f][t]+" ");
+                kw.flush();
             }
             kw.write("\r\n");
+            kw.flush();
+        }        
+    }
+    public void check()throws IOException{
+        b = true;
+        if(b == true){
+            for(int i = 0; i < 3; i++){
+                for(int g = 0; g < 3; g++){
+                    if(field[i][g].equals("W")) b = false;
+                }
+            }
+            if(b == true){
+                kw.write("Black win!");
+                kw.flush();
+                System.exit(1);
+            }
+            b = true;
+            for(int i = 0; i < 3; i++){
+                for(int g = 0; g < 3; g++){
+                    if(field[i][g].equals("B")) b = false;
+                }
+            }
+            if(b == true){
+                kw.write("While win!");
+                kw.flush();
+                System.exit(1);
+            }
+            b = true;
+            for(int i = 0 ; i < 3; i++){
+                if(field[0][i].equals("B")) b = false;                
+            }
+            if(b == false){
+                kw.write("Black win!");
+                kw.flush();
+                System.exit(1);
+            }
+            b = true;
+            for(int i = 0 ; i < 3; i++){
+                if(field[2][i].equals("W")) b = false;
+            }
+            if(b == false){
+                kw.write("Black win!");
+                kw.flush();
+                System.exit(1);
+            }
+           /* for(int i = 0; i < 3 ; i++){
+                for(int g = 0; g < 3 ; g++){
+                    if(field[i][g].equals("W")){
+                        
+                    }
+                }
+            }*/
         }
-        kw.close();
     }
 }
