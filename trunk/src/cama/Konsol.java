@@ -62,9 +62,9 @@ class Konsol {
             kw.flush();
         }        
     }
-    public void check()throws IOException{
+    public void check(boolean cb)throws IOException{
         b = true;
-        if(b == true){
+        
             for(int i = 0; i < 3; i++){
                 for(int g = 0; g < 3; g++){
                     if(field[i][g].equals("W")) b = false;
@@ -104,13 +104,107 @@ class Konsol {
                 kw.flush();
                 System.exit(1);
             }
-           /* for(int i = 0; i < 3 ; i++){
-                for(int g = 0; g < 3 ; g++){
-                    if(field[i][g].equals("W")){
-                        
+            b = false;
+            boolean wh[] = new boolean[6];
+            boolean bl[] = new boolean[6];
+            for(int i = 0 ; i <6 ;i++){
+                wh[i] = true;
+                bl[i] = true;
+            }
+            int iw = 0;
+            int ib = 0;
+            if(field[0][0].equals("W")){
+                if(!field[1][1].equals("B")&&!field[1][0].equals("E")){
+                    wh[iw]=false;
+                    iw++;
+                }
+            }
+            if(field[0][1].equals("W")){
+                if(!field[1][0].equals("B")&&!field[1][1].equals("E")&&!field[1][2].equals("B")){
+                    wh[iw]= false;
+                    iw++;
+                }
+            }
+            if(field[0][2].equals("W")){
+                if(!field[1][1].equals("B")&&!field[1][2].equals("E")){
+                    wh[iw]=false;
+                    iw++;
+                }
+            }
+            if(field[1][0].equals("W")){
+                if(!field[2][0].equals("E")&&!field[2][1].equals("B")){
+                    wh[iw]=false;
+                    iw++;
+                }
+            }else if (field[1][0].equals("B")){
+                if(!field[2][0].equals("E")&&!field[2][1].equals("W")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(field[1][1].equals("W")){
+                if(!field[2][0].equals("B")&&!field[2][2].equals("B")&&!field[2][1].equals("E")){
+                    wh[iw]=false;
+                    iw++;
+                }
+            }else if(field[1][1].equals("B")){
+                if(!field[2][0].equals("W")&&!field[2][2].equals("W")&&!field[2][1].equals("E")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(field[1][2].equals("W")){
+                if(!field[2][2].equals("E")&&!field[2][1].equals("B")){
+                    wh[iw]=false;
+                    iw++;
+                }
+            }else if(field[1][2].equals("B")){
+                if(!field[2][2].equals("E")&&!field[2][1].equals("B")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(field[2][0].equals("B")){
+                if(!field[1][0].equals("E")&&!field[1][1].equals("W")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(field[2][1].equals("B")){
+                if(!field[1][0].equals("W")&&!field[1][2].equals("W")&&field[1][1].equals("E")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(field[2][2].equals("B")){
+                if(!field[1][1].equals("W")&&!field[1][2].equals("E")){
+                    bl[ib] = false;
+                    ib++;
+                }
+            }
+            if(cb = false){
+                for(int i = 0; i<iw;i++){
+                    if(wh[i]!=false){
+                        b = true;
                     }
                 }
-            }*/
-        }
+                if(b == false){
+                    kw.write("Black win!");
+                    kw.flush();
+                    System.exit(1);
+                }
+            }else if(cb == true){
+                for(int i = 0; i<ib;i++){
+                    if(bl[i]!=false){
+                        b = true;
+                    }
+                }
+                if(b == false){
+                    kw.write("While win!");
+                    kw.flush();
+                    System.exit(1);
+                }
+            }
+
     }
 }
