@@ -2,7 +2,7 @@ package cama;
 import java.io.*;
 class Game
 {
-    public void game() throws IOException
+    static public void main(String[]args) throws IOException
     {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
@@ -41,13 +41,13 @@ class Game
                     ks.who(h1);                    
                     h1.xod(true);
                     ks.readField("now.txt");
-                    ks.check();
+                    ks.check(true);
                     i = 1;
                 }else if(i == 1){
                     ks.who(h2); 
                     h2.xod(false);
                     ks.readField("now.txt");
-                    ks.check();
+                    ks.check(false);
                     i = 0;
                 }
             }else{                
