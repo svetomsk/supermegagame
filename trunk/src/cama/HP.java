@@ -15,7 +15,7 @@ class HP{
             int x1, y1, x2, y2;
             x1 = x2 = y1 = y2 = 0;
             s = br.readLine();
-            if(s.equals("exit")) System.exit(1);
+            if(s.equals("exit")) System.exit(0);
             String[]s1 = s.split("-");
             String[]s2 = s1[0].split("");
             String[]s3 = s1[1].split("");

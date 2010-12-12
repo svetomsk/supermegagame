@@ -65,7 +65,7 @@ class Konsol {
     public void check(boolean cb)throws IOException{
         b = true;
         
-            for(int i = 0; i < 3; i++){
+            for(int i = 0; i < 3; i++){                     // отсюда
                 for(int g = 0; g < 3; g++){
                     if(field[i][g].equals("W")) b = false;
                 }
@@ -73,7 +73,7 @@ class Konsol {
             if(b == true){
                 kw.write("Black win!");
                 kw.flush();
-                System.exit(1);
+                System.exit(0);
             }
             b = true;
             for(int i = 0; i < 3; i++){
@@ -84,30 +84,30 @@ class Konsol {
             if(b == true){
                 kw.write("While win!");
                 kw.flush();
-                System.exit(1);
+                System.exit(0);                             //досюда проверка на наличие пешек противника
             }
-            b = true;
+            b = true;                                       //отсюда
             for(int i = 0 ; i < 3; i++){
                 if(field[0][i].equals("B")) b = false;                
             }
             if(b == false){
                 kw.write("Black win!");
                 kw.flush();
-                System.exit(1);
+                System.exit(0);
             }
             b = true;
-            for(int i = 0 ; i < 3; i++){
+            for(int i=0; i<3; i++){
                 if(field[2][i].equals("W")) b = false;
             }
             if(b == false){
-                kw.write("Black win!");
+                kw.write("White win!");
                 kw.flush();
-                System.exit(1);
+                System.exit(0);                                 //досюда проверка на наличие пешки в полследнем ряду
             }
             b = false;
             boolean wh[] = new boolean[6];
             boolean bl[] = new boolean[6];
-            for(int i = 0 ; i <6 ;i++){
+            for(int i=0 ; i<6 ;i++){
                 wh[i] = true;
                 bl[i] = true;
             }
@@ -191,7 +191,7 @@ class Konsol {
                 if(b == false){
                     kw.write("Black win!");
                     kw.flush();
-                    System.exit(1);
+                    System.exit(0);
                 }
             }else if(cb == true){
                 for(int i = 0; i<ib;i++){
@@ -200,11 +200,12 @@ class Konsol {
                     }
                 }
                 if(b == false){
-                    kw.write("While win!");
+                    kw.write("White win!");
                     kw.flush();
-                    System.exit(1);
+                    System.exit(0);
                 }
             }
+
 
     }
 }
