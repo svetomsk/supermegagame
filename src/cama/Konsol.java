@@ -8,7 +8,8 @@ class Konsol {
     public void start()throws IOException{
         kr = new BufferedReader(new FileReader("kwtext.txt"));
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        for(int i = 0; i <4; i++){
+        kw.write("Добро пожаловать в игру \"Пешки 3х3\"!\nДля того, чтобы сделать ход, выберите\nкоординаты пешки, поставьте тире\nи выберите координаты места, куда\nхотите поставить пешку. Удачи!\n");
+        for(int i = 0; i <5; i++){
             kw.write(kr.readLine()+"\r\n");
             kw.flush();
         }        
@@ -29,7 +30,7 @@ class Konsol {
         }
     }
     public String getCh(int i, int g){
-        return field[i][g];
+    return field[i][g];
     }
     public void who(HP player)throws IOException{
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -37,7 +38,7 @@ class Konsol {
             kw.write(player.name + " goes: \r\n");
             b = false;
             kw.flush();
-        }else if(player.b = false){
+        }else{
             kw.write(player.name + " goes: \r\n");
             b = true;
             kw.flush();
