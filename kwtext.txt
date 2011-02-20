@@ -1,5 +1,5 @@
   a b c
-1 W W W
-2 E E E
-3 B B B
-Example: a1-a2
+1 o o o
+2 ▫ ▫ ▫
+3 • • •
+Пример: a1-a2
