@@ -3,27 +3,28 @@ import java.io.*;
 class Konsol {
     private BufferedWriter kw;
     private BufferedReader kr;
-    private String[][] field= new String[3][3];
+    private String[][] field;
     public boolean b;
+    Konsol() throws IOException{
+        this.b=b;
+        field = new String[3][3];
+        kw = new BufferedWriter(new OutputStreamWriter(System.out));
+        kr = new BufferedReader(new FileReader("now.txt"));
+    }
     public void start()throws IOException{
         kr = new BufferedReader(new FileReader("kwtext.txt"));
-        kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        kw.write("Добро пожаловать в игру \"Пешки 3х3\"!\nДля того, чтобы сделать ход, выберите\nкоординаты пешки, поставьте тире\nи выберите координаты места, куда\nхотите поставить пешку. Удачи!\n");
+        //kw.write("Добро пожаловать в игру \"Пешки 3х3\"!\nДля того, чтобы сделать ход, выберите\nкоординаты пешки, поставьте тире\nи выберите координаты места, куда\nхотите поставить пешку. Удачи!\n");
         for(int i = 0; i <5; i++){
             kw.write(kr.readLine()+"\r\n");
-            kw.flush();
-        }        
-        kr.close();
+        }
+        kw.flush();
     }
     public void getField() throws IOException{
-        kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        kr  = new BufferedReader(new FileReader("now.txt"));
         for(int i =0;i<3;i++){
             String[]k = kr.readLine().split(" ");
             for(int g = 0;g<3;g++){
                 kw.write(k[g]+" ");
                 field[i][g] = k[g];
-                kw.flush();
             }
             kw.write("\r\n");
             kw.flush();
@@ -52,7 +53,6 @@ class Konsol {
         }
     }
     public void rewrite(int i, int g, String s)throws IOException{
-        kw = new BufferedWriter(new FileWriter("now.txt"));
         field[i][g]  = s;
         for(int f = 0;f<3;f++){
             for(int t =0;t<3;t++){
@@ -221,7 +221,6 @@ class Konsol {
                 if(field[i][j].equals("W")) count++;
             }
         }
-       // System.out.println("White: "+count);
         return count;
     }
     private int bl_q(){
@@ -231,7 +230,6 @@ class Konsol {
                 if(field[i][j].equals("B")) count++;
             }
         }
-        //System.out.println("Black is: "+count);
         return count;
     }
     private void badpos (){
