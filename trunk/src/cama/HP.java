@@ -4,29 +4,24 @@ class HP{
     private BufferedWriter bw;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
-    String n = new String();
     Konsol ks1 = new Konsol();
-    String name;
-    String s ;
+    String name, s;
     public void xod(boolean bol)throws IOException{
         String ok = "error";
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
         while(!ok.equals("yes")){
-            bw = new BufferedWriter(new OutputStreamWriter(System.out));
-            int x1, y1, x2, y2;
-            x1 = x2 = y1 = y2 = 0;
             s = br.readLine();
             if(s.equals("exit")) System.exit(0);
+
             String[]s1 = s.split("-");
             String[]s2 = s1[0].split("");
             String[]s3 = s1[1].split("");
-            if(s2[1].equals("a")) y1 = 0;
-            if(s2[1].equals("b")) y1 = 1;
-            if(s2[1].equals("c")) y1 = 2;
-            if(s3[1].equals("a")) y2 = 0;
-            if(s3[1].equals("b")) y2 = 1;
-            if(s3[1].equals("c")) y2 = 2;
-            x1 = Integer.valueOf(s2[2]) - 1;
-            x2 = Integer.valueOf(s3[2]) - 1;
+
+            int y1 = make_y(s2[1]);
+            int y2 = make_y(s3[1]);
+            int x1 = make_x(s2[2]);
+            int x2 = make_x(s3[2]);
+
             ks1.readField("now.txt");
             if(x1<3&&x2<3&&y1<3&&y2<3){
                 if(x1>=0&&x2>=0&&y1>=0&&y2>=0){
@@ -118,4 +113,14 @@ class HP{
         }
         
     }  
+    private int make_y(String m){
+        int y=0;
+        if(m.equals("a"))     y = 0;
+        if(m.equals("b"))     y = 1;
+        if(m.equals("c"))     y = 2;
+        return y;
+    }
+    private int make_x(String m){
+        return Integer.valueOf(m)-1;
+    }
 }

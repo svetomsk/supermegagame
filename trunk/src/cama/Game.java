@@ -32,28 +32,23 @@ class Game
             h1.name = s[0];
             h2.name = s[1];
         }
-        w.write("\r\n");
-        String online = "none";        
+        w.write("\r\n");     
         int i = 0;
-        while(!online.equals("exit")){           
-            if(!online.equals("exit")){
-                if(i == 0){
-                    ks.who(h1);                    
-                    h1.xod(true);
-                    ks.readField("now.txt");
-                    ks.check(true);
-                    i = 1;
-                }else if(i == 1){
-                    ks.who(h2); 
-                    h2.xod(false);
-                    ks.readField("now.txt");
-                    ks.check(false);
-                    i = 0;
-                }
-            }else{                
-                System.exit(1);
+        for(;;){
+            if(i == 0){
+                ks.who(h1);
+                h1.xod(true);
+                ks.readField("now.txt");
+                ks.check(true);
+                i = 1;
+            }else{
+                ks.who(h2); 
+                h2.xod(false);
+                ks.readField("now.txt");
+                ks.check(false);
+                i = 0;
             }
         }
-        w.close();
     }
 }
+
