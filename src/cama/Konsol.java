@@ -63,9 +63,10 @@ class Konsol {
         }        
     }
     public void check(boolean cb)throws IOException{
+        badpos();
         b = true;
-        
-            for(int i = 0; i < 3; i++){                     // отсюда
+        // ПРОВЕРКА НА НАЛИЧИЕ ПЕШЕК
+            for(int i = 0; i < 3; i++){                     
                 for(int g = 0; g < 3; g++){
                     if(field[i][g].equals("W")) b = false;
                 }
@@ -84,9 +85,10 @@ class Konsol {
             if(b == true){
                 kw.write("While win!");
                 kw.flush();
-                System.exit(0);                             //досюда проверка на наличие пешек противника
+                System.exit(0);                             
             }
-            b = true;                                       //отсюда
+            //ПРОВЕРКА НА НАЛИЧИЕ ПЕШКИ В ПОСЛЕДНЕМ РЯДУ
+            b = true;                                       
             for(int i = 0 ; i < 3; i++){
                 if(field[0][i].equals("B")) b = false;                
             }
@@ -102,8 +104,9 @@ class Konsol {
             if(b == false){
                 kw.write("White win!");
                 kw.flush();
-                System.exit(0);                                 //досюда проверка на наличие пешки в полследнем ряду
+                System.exit(0);                                 
             }
+            //ПРОВЕРКА НА ПАТ
             b = false;
             boolean wh[] = new boolean[6];
             boolean bl[] = new boolean[6];
@@ -137,7 +140,7 @@ class Konsol {
                     iw++;
                 }
             }else if (field[1][0].equals("B")){
-                if(!field[2][0].equals("E")&&!field[2][1].equals("W")){
+                if(!field[0][0].equals("E")&&!field[0][1].equals("W")){
                     bl[ib] = false;
                     ib++;
                 }
@@ -148,7 +151,7 @@ class Konsol {
                     iw++;
                 }
             }else if(field[1][1].equals("B")){
-                if(!field[2][0].equals("W")&&!field[2][2].equals("W")&&!field[2][1].equals("E")){
+                if(!field[0][0].equals("W")&&!field[0][2].equals("W")&&!field[0][1].equals("E")){
                     bl[ib] = false;
                     ib++;
                 }
@@ -159,7 +162,7 @@ class Konsol {
                     iw++;
                 }
             }else if(field[1][2].equals("B")){
-                if(!field[2][2].equals("E")&&!field[2][1].equals("B")){
+                if(!field[0][2].equals("E")&&!field[0][1].equals("W")){
                     bl[ib] = false;
                     ib++;
                 }
@@ -182,8 +185,9 @@ class Konsol {
                     ib++;
                 }
             }
-            if(cb = false){
-                for(int i = 0; i<iw;i++){
+            if(cb == false){
+                b=false;
+                for(int i = 0; i<wh_q();i++){
                     if(wh[i]!=false){
                         b = true;
                     }
@@ -193,8 +197,9 @@ class Konsol {
                     kw.flush();
                     System.exit(0);
                 }
-            }else if(cb == true){
-                for(int i = 0; i<ib;i++){
+            }else{
+                b=false;
+                for(int i = 0; i<bl_q();i++){
                     if(bl[i]!=false){
                         b = true;
                     }
@@ -207,5 +212,37 @@ class Konsol {
             }
 
 
+    }
+    private int wh_q(){
+        int count =0;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(field[i][j].equals("W")) count++;
+            }
+        }
+       // System.out.println("White: "+count);
+        return count;
+    }
+    private int bl_q(){
+        int count =0;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(field[i][j].equals("B")) count++;
+            }
+        }
+        //System.out.println("Black is: "+count);
+        return count;
+    }
+    private void badpos (){
+        int count=0;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(!field[i][j].equals("E")) count++;
+            }
+        }
+        if (count==2){
+            System.out.println("White win!");
+            System.exit(0);
+        }
     }
 }
