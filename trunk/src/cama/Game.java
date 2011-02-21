@@ -7,7 +7,7 @@ class Game
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter now = new BufferedWriter(new FileWriter("now.txt"));
-        String[]nowstr ={"W W W","E E E","B B B"};
+        String[]nowstr ={"o o o","▫ ▫ ▫","• • •"};
         for(int i =0; i < 3; i++){
             now.write(nowstr[i]+"\r\n");
         }
@@ -16,14 +16,12 @@ class Game
         HP h2 = new HP();
         Konsol ks = new Konsol();
         ks.start();       
-        w.write("\r\n"+"Enter your names: ");
+        w.write(Texts.NAME);
         w.flush();        
-        h1.b = true;
-        h2.b = false;
         String s[] = r.readLine().split(" ");
         if(s.length!=2){
             while(s.length!=2){
-                w.write("Try again!\r\n");
+                w.write(Texts.TRY);
                 w.flush();
                 s = r.readLine().split(" ");
             }
