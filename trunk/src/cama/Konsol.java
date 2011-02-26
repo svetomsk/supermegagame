@@ -3,34 +3,39 @@ import java.io.*;
 class Konsol {
     private BufferedWriter kw;
     private BufferedReader kr;
-    private String[][] field = new String [3][3];
-    public boolean b;
+    private int SIZE = 3;
+    private int[][] field = new int [SIZE][SIZE];
+    private boolean b;
     public void start()throws IOException{
-        kr = new BufferedReader(new FileReader("kwtext.txt"));
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
+        start_field();
         kw.write(Texts.GREETING);
-        for(int i = 0; i <5; i++){
-            kw.write(kr.readLine()+"\r\n");
-        }
+        kw.write("  a b c\r\n"+
+                 "1 o o o\r\n"+
+                 "2 ▫ ▫ ▫\r\n"+
+                 "3 • • •\r\n"+
+                 "Пример: a1-a2");
         kw.flush();
-        kr.close();
     }
     public void getField() throws IOException{
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        kr  = new BufferedReader(new FileReader("now.txt"));
         kw.write("  a b c\r\n");
-        for(int i =0;i<3;i++){
+        for(int i=0;i<SIZE;i++){
             kw.write((i+1)+" ");
-            String[]k = kr.readLine().split(" ");
-            for(int g = 0;g<3;g++){
-                kw.write(k[g]+" ");
-                field[i][g] = k[g];
+            for(int j=0;j<SIZE;j++){
+                if(field[i][j]==Texts.W){
+                    kw.write(Texts.Wh+" ");
+                }else if(field[i][j]==Texts.B){
+                    kw.write(Texts.Bl+" ");
+                }else{
+                    kw.write(Texts.Em+" ");
+                }
             }
             kw.write("\r\n");
-            kw.flush();
         }
+            kw.flush();
     }
-    public String getCh(int i, int g){
+    public int getCh(int i, int g){
         return field[i][g];
     }
     public void who(HP player)throws IOException{
@@ -38,24 +43,8 @@ class Konsol {
         kw.write(Texts.DO_STEP(player.name));
         kw.flush();
     }
-    public void readField(String fname)throws IOException{
-        kr = new BufferedReader(new FileReader(fname));
-        for(int i = 0; i < 3; i++){
-            String str[] = kr.readLine().split(" ");
-            System.arraycopy(str, 0, field[i], 0, 3);
-        }
-    }
-    public void rewrite(int i, int g, String s)throws IOException{
-        kw = new BufferedWriter(new FileWriter("now.txt"));
-        field[i][g]  = s;
-        for(int f = 0;f<3;f++){
-            for(int t =0;t<3;t++){
-                kw.write(field[f][t]+" ");
-                kw.flush();
-            }
-            kw.write("\r\n");
-            kw.flush();
-        }        
+    public void rewrite(int i, int g, int s)throws IOException{
+        field[i][g] = s;
     }
     public void check(boolean cb)throws IOException{
         badpos();
@@ -64,28 +53,28 @@ class Konsol {
         pat(cb);
     }
     private int wh_q(){
-        int count =0;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(field[i][j].equals("o")) count++;
+        int count=0;
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                if(field[i][j]==Texts.W) count++;
             }
         }
         return count;
     }
     private int bl_q(){
-        int count =0;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(field[i][j].equals("•")) count++;
+        int count=0;
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                if(field[i][j]==Texts.B) count++;
             }
         }
         return count;
     }
     private void badpos (){
         int count=0;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(!field[i][j].equals("▫")) count++;
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                if(field[i][j]!=Texts.E) count++;
             }
         }
         if (count==2){
@@ -95,9 +84,9 @@ class Konsol {
     }
     private void non_chekers(){
         b = true;
-            for(int i = 0; i < 3; i++){                     
-                for(int g = 0; g < 3; g++){
-                    if(field[i][g].equals("o")) b = false;
+            for(int i=0; i<SIZE;i++){
+                for(int g=0;g<SIZE;g++){
+                    if(field[i][g]==Texts.W) b = false;
                 }
             }
             if(b == true){
@@ -105,9 +94,9 @@ class Konsol {
                 System.exit(0);
             }
             b = true;
-            for(int i = 0; i < 3; i++){
-                for(int g = 0; g < 3; g++){
-                    if(field[i][g].equals("•")) b = false;
+            for(int i = 0; i < SIZE; i++){
+                for(int g = 0; g < SIZE; g++){
+                    if(field[i][g]==Texts.B) b = false;
                 }
             }
             if(b == true){
@@ -117,16 +106,16 @@ class Konsol {
     }
     private void last_number(){
          b = true;                                       
-            for(int i = 0 ; i < 3; i++){
-                if(field[0][i].equals("•")) b = false;
+            for(int i = 0 ; i < SIZE; i++){
+                if(field[0][i]==Texts.B) b = false;
             }
             if(b == false){
                 System.out.println(Texts.BlWin);
                 System.exit(0);
             }
             b = true;
-            for(int i=0; i<3; i++){
-                if(field[2][i].equals("o")) b = false;
+            for(int i=0; i<SIZE; i++){
+                if(field[2][i]==Texts.W) b = false;
             }
             if(b == false){
                 System.out.println(Texts.WhWin);
@@ -135,79 +124,79 @@ class Konsol {
     }
     private void pat(boolean cb){
         b = false;
-            boolean wh[] = new boolean[3];
-            boolean bl[] = new boolean[3];
-            for(int i=0 ; i<3 ;i++){
+            boolean wh[] = new boolean[SIZE];
+            boolean bl[] = new boolean[SIZE];
+            for(int i=0 ; i<SIZE ;i++){
                 wh[i] = true;
                 bl[i] = true;
             }
             int iw = 0;
             int ib = 0;
-            if(field[0][0].equals("o")){
-                if(!field[1][1].equals("•")&&!field[1][0].equals("▫")){
+            if(field[0][0]==Texts.W){
+                if(field[1][1]!=Texts.B&&field[1][0]!=Texts.W){
                     wh[iw]=false;
                     iw++;
                 }
             }
-            if(field[0][1].equals("o")){
-                if(!field[1][0].equals("•")&&!field[1][1].equals("▫")&&!field[1][2].equals("•")){
+            if(field[0][1]==Texts.W){
+                if(field[1][0]!=Texts.B&&field[1][1]!=Texts.E&&field[1][2]!=Texts.B){
                     wh[iw]= false;
                     iw++;
                 }
             }
-            if(field[0][2].equals("o")){
-                if(!field[1][1].equals("•")&&!field[1][2].equals("▫")){
+            if(field[0][2]==Texts.W){
+                if(field[1][1]!=Texts.B&&field[1][2]!=Texts.E){
                     wh[iw]=false;
                     iw++;
                 }
             }
-            if(field[1][0].equals("o")){
-                if(!field[2][0].equals("▫")&&!field[2][1].equals("•")){
+            if(field[1][0]==Texts.W){
+                if(field[2][0]!=Texts.E&&field[2][1]!=Texts.B){
                     wh[iw]=false;
                     iw++;
                 }
-            }else if (field[1][0].equals("•")){
-                if(!field[0][0].equals("▫")&&!field[0][1].equals("o")){
+            }else if (field[1][0]==Texts.B){
+                if(field[0][0]!=Texts.E&&field[0][1]!=Texts.W){
                     bl[ib] = false;
                     ib++;
                 }
             }
-            if(field[1][1].equals("o")){
-                if(!field[2][0].equals("•")&&!field[2][2].equals("•")&&!field[2][1].equals("▫")){
+            if(field[1][1]==Texts.W){
+                if(field[2][0]!=Texts.B&&field[2][2]!=Texts.B&&field[2][1]!=Texts.E){
                     wh[iw]=false;
                     iw++;
                 }
-            }else if(field[1][1].equals("•")){
-                if(!field[0][0].equals("o")&&!field[0][2].equals("o")&&!field[0][1].equals("▫")){
+            }else if(field[1][1]==Texts.B){
+                if(field[0][0]!=Texts.W&&field[0][2]!=Texts.W&&field[0][1]!=Texts.E){
                     bl[ib] = false;
                     ib++;
                 }
             }
-            if(field[1][2].equals("o")){
-                if(!field[2][2].equals("▫")&&!field[2][1].equals("•")){
+            if(field[1][2]==Texts.W){
+                if(field[2][2]!=Texts.E&&field[2][1]!=Texts.B){
                     wh[iw]=false;
                     iw++;
                 }
-            }else if(field[1][2].equals("•")){
-                if(!field[0][2].equals("▫")&&!field[0][1].equals("o")){
+            }else if(field[1][2]==Texts.B){
+                if(field[0][2]!=Texts.E&&field[0][1]!=Texts.W){
                     bl[ib] = false;
                     ib++;
                 }
             }
-            if(field[2][0].equals("•")){
-                if(!field[1][0].equals("▫")&&!field[1][1].equals("o")){
+            if(field[2][0]==Texts.B){
+                if(field[1][0]!=Texts.E&&field[1][1]!=Texts.W){
                     bl[ib] = false;
                     ib++;
                 }
             }
-            if(field[2][1].equals("•")){
-                if(!field[1][0].equals("o")&&!field[1][2].equals("o")&&field[1][1].equals("▫")){
+            if(field[2][1]==Texts.B){
+                if(field[1][0]!=Texts.W&&field[1][2]!=Texts.W&&field[1][1]!=Texts.E){
                     bl[ib] = false;
                     ib++;
                 }
             }
-            if(field[2][2].equals("•")){
-                if(!field[1][1].equals("o")&&!field[1][2].equals("▫")){
+            if(field[2][2]==Texts.B){
+                if(field[1][1]!=Texts.W&&field[1][2]!=Texts.E){
                     bl[ib] = false;
                     ib++;
                 }
@@ -235,5 +224,19 @@ class Konsol {
                     System.exit(0);
                 }
             }
+    }
+    private void start_field(){
+        field[0][0]=field[0][1]=field[0][2]=Texts.W;
+        field[1][0]=field[1][1]=field[1][2]=Texts.E;
+        field[2][0]=field[2][1]=field[2][2]=Texts.B;
+    }
+    public void show_field()throws IOException{
+        kw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                kw.write(field[i][j]+" ");
+                kw.flush();
+            }
+        }
     }
 }

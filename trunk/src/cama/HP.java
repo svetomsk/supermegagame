@@ -4,7 +4,10 @@ class HP{
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
-    Konsol ks1 = new Konsol();
+    private Konsol ks1;
+    HP(Konsol ks_from_main) {
+        ks1 = ks_from_main;
+    }
     String name, s;
     public void xod(boolean bol)throws IOException{
         Boolean ok = false;
@@ -36,34 +39,31 @@ class HP{
                 continue;
             }
 
-
-            ks1.readField("now.txt");
-
             if(x1<3 && x2<3 && y1<3 && y2<3 && x1>=0 && x2>=0 && y1>=0 && y2>=0){
-                    String cell = ks1.getCh(x1, y1);
-                    String cellch = ks1.getCh(x2, y2);
+                    int cell = ks1.getCh(x1, y1);
+                    int cellch = ks1.getCh(x2, y2);
                     if(bol == true){
-                        if(cell.equals("▫")){
+                        if(cell==Texts.E){
                             bw.write(Texts.EMPTY);
                             bw.flush();
-                        }else if(cell.equals("o")){
-                            if(cellch.equals("o")){
+                        }else if(cell==Texts.W){
+                            if(cellch==Texts.W){
                                 bw.write(Texts.YOUR_CELL);
                                 bw.flush();
-                            }else if(cellch.equals("•")){
+                            }else if(cellch==Texts.B){
                                 if((x2-x1==1&&y2-y1==1)||(x2-x1==1&&y1-y2==1)){
-                                    ks1.rewrite(x2, y2, "o");
-                                    ks1.rewrite(x1, y1, "▫");
+                                    ks1.rewrite(x2, y2, Texts.W);
+                                    ks1.rewrite(x1, y1, Texts.E);
                                     ks1.getField();
                                     ok = true;
                                 }else{
                                     bw.write(Texts.Er_Xod);
                                     bw.flush();
                                 }
-                            }else if(cellch.equals("▫")){
+                            }else if(cellch==Texts.E){
                                 if(x2-x1==1&&y2-y1==0){
-                                    ks1.rewrite(x2, y2, "o");
-                                    ks1.rewrite(x1, y1, "▫");
+                                    ks1.rewrite(x2, y2, Texts.W);
+                                    ks1.rewrite(x1, y1, Texts.E);
                                     ks1.getField();
                                     ok = true;
                                 }else{
@@ -71,32 +71,32 @@ class HP{
                                     bw.flush();
                                 }
                             }
-                        }else if(cell.equals("•")){
+                        }else if(cell==Texts.B){
                                   bw.write(Texts.NOT_YOUR_CELL);
                                    bw.flush();
                         }
                     }else{
-                         if(cell.equals("▫")){
+                         if(cell==Texts.E){
                              bw.write(Texts.EMPTY);
                              bw.flush();
-                         }else if(cell.equals("•")){
-                             if(cellch.equals("•")){
+                         }else if(cell==Texts.B){
+                             if(cellch==Texts.B){
                                 bw.write(Texts.YOUR_CELL);
                                 bw.flush();
-                              }else if(cellch.equals("o")){
+                              }else if(cellch==Texts.W){
                                  if((x2-x1==-1&&y2-y1==-1)||(x2-x1==-1&&y1-y2==-1)){
-                                    ks1.rewrite(x2, y2, "•");
-                                    ks1.rewrite(x1, y1, "▫");
+                                    ks1.rewrite(x2, y2, Texts.B);
+                                    ks1.rewrite(x1, y1, Texts.E);
                                     ks1.getField();
                                     ok = true;
                                  }else{
                                     bw.write(Texts.Er_Xod);
                                     bw.flush();
                                  }
-                              }else if(cellch.equals("▫")){
+                              }else if(cellch==Texts.E){
                                  if(x2-x1==-1&&y2-y1==0){
-                                    ks1.rewrite(x2, y2, "•");
-                                    ks1.rewrite(x1, y1, "▫");
+                                    ks1.rewrite(x2, y2, Texts.B);
+                                    ks1.rewrite(x1, y1, Texts.E);
                                     ks1.getField();
                                     ok = true;
                                  }else{
@@ -104,7 +104,7 @@ class HP{
                                     bw.flush();
                                  }
                               }
-                          }else if(cell.equals("o")){
+                          }else if(cell==Texts.W){
                                    bw.write(Texts.NOT_YOUR_CELL);
                                    bw.flush();
                          }
