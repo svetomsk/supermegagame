@@ -14,6 +14,7 @@ public class Texts {
     static public String YOUR_CELL = "Вы хотите срубить свою же пешку!";
     static public String Er_Xod = "Вы неправильно походили пешкой!\r\n";
     static public String NOT_YOUR_CELL = "Это не ваша пешка!\r\n";
+    static public String IOException = "Ошибка ввода-вывода!";
     static public String Wh = "o";
     static public String Bl = "•";
     static public String Em = "▫";

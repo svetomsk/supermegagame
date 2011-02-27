@@ -7,8 +7,8 @@ class Game
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         Konsol ks = new Konsol();
-        HP h1 = new HP(ks);
-        HP h2 = new HP(ks);
+        IPlayer h1 = new Model(ks);
+        IPlayer h2 = new HP(ks);
         ks.start();
         w.write(Texts.NAME);
         w.flush();        
@@ -20,8 +20,8 @@ class Game
                 s = r.readLine().split(" ");
             }
         }
-            h1.name = s[0];
-            h2.name = s[1];
+            h1.setName(s[0]);
+            h2.setName(s[1]);
         w.write("\r\n");
         int i = 0;
         for(;;){

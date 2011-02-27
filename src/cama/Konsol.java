@@ -3,7 +3,7 @@ import java.io.*;
 class Konsol {
     private BufferedWriter kw;
     private BufferedReader kr;
-    private int SIZE = 3;
+    public int SIZE = 3;
     private int[][] field = new int [SIZE][SIZE];
     private boolean b;
     public void start()throws IOException{
@@ -38,9 +38,9 @@ class Konsol {
     public int getCh(int i, int g){
         return field[i][g];
     }
-    public void who(HP player)throws IOException{
+    public void who(IPlayer player)throws IOException{
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        kw.write(Texts.DO_STEP(player.name));
+        kw.write(Texts.DO_STEP(player.getName()));
         kw.flush();
     }
     public void rewrite(int i, int g, int s)throws IOException{
