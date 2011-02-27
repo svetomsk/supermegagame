@@ -7,9 +7,25 @@ class Game
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         Konsol ks = new Konsol();
-        IPlayer h1 = new Model(ks);
-        IPlayer h2 = new HP(ks);
+        IPlayer h1 = null;
+        IPlayer h2 = null;
+        String str="";
         ks.start();
+        w.write("\r\n"+Texts.CHOISE);
+        w.flush();
+        while(!str.equals("1")&&!str.equals("2")){
+            str = r.readLine();
+            if(str.equals("1")){
+                h1 = new HPlayer(ks);
+                h2 = new MPlayer(ks);
+            }else if(str.equals("2")){
+                h1 = new HPlayer(ks);
+                h2 = new HPlayer(ks);
+            }else{
+                w.write(Texts.TRY);
+                w.flush();
+            }
+        }
         w.write(Texts.NAME);
         w.flush();        
         String s[] = r.readLine().split(" ");
@@ -22,7 +38,6 @@ class Game
         }
             h1.setName(s[0]);
             h2.setName(s[1]);
-        w.write("\r\n");
         int i = 0;
         for(;;){
             if(i == 0){

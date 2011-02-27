@@ -1,13 +1,13 @@
 package cama;
 import java.io.*;
-class HP extends Player
+class HPlayer extends Player
 {
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
     private Konsol ks1;
 
-    HP(Konsol ks_from_main) {
+    HPlayer(Konsol ks_from_main) {
         ks1 = ks_from_main;
     }
     
@@ -24,7 +24,7 @@ class HP extends Player
                 System.exit(0);
             }
             if(s.equals("exit")) System.exit(0);
-            if(s.equals("GK")){System.out.println("Поздравляем господин!!!! Вы выиграли!!"); System.exit(0);}
+            if(s.equals("GK")){System.out.println("Поздравляем господин Кудык!!!! Вы выиграли!!"); System.exit(0);}
 
             String s1[],s2[],s3[];
             int x1,x2,y1,y2;

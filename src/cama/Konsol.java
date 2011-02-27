@@ -3,7 +3,7 @@ import java.io.*;
 class Konsol {
     private BufferedWriter kw;
     private BufferedReader kr;
-    public int SIZE = 3;
+    private int SIZE = 3;
     private int[][] field = new int [SIZE][SIZE];
     private boolean b;
     public void start()throws IOException{
@@ -51,6 +51,18 @@ class Konsol {
         non_chekers();
         last_number();
         pat(cb);
+    }
+    public int getSize(){
+        return SIZE;
+    }
+    public void show_field()throws IOException{
+        kw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                kw.write(field[i][j]+" ");
+                kw.flush();
+            }
+        }
     }
     private int wh_q(){
         int count=0;
@@ -229,14 +241,5 @@ class Konsol {
         field[0][0]=field[0][1]=field[0][2]=Texts.W;
         field[1][0]=field[1][1]=field[1][2]=Texts.E;
         field[2][0]=field[2][1]=field[2][2]=Texts.B;
-    }
-    public void show_field()throws IOException{
-        kw = new BufferedWriter(new OutputStreamWriter(System.out));
-        for(int i=0;i<SIZE;i++){
-            for(int j=0;j<SIZE;j++){
-                kw.write(field[i][j]+" ");
-                kw.flush();
-            }
-        }
     }
 }
