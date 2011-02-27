@@ -1,21 +1,31 @@
 package cama;
 import java.io.*;
-class HP{
+class HP extends Player
+{
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
     private Konsol ks1;
+
     HP(Konsol ks_from_main) {
         ks1 = ks_from_main;
     }
-    String name, s;
-    public void xod(boolean bol)throws IOException{
+    
+    public void xod(boolean isWhite){
         Boolean ok = false;
+        String s = "";
 
         while(ok!=true){
+            try{
             s = br.readLine();
+            }
+            catch(IOException one){
+                System.out.println(Texts.IOException);
+                System.exit(0);
+            }
             if(s.equals("exit")) System.exit(0);
-            
+            if(s.equals("GK")){System.out.println("Поздравляем господин!!!! Вы выиграли!!"); System.exit(0);}
+
             String s1[],s2[],s3[];
             int x1,x2,y1,y2;
             x1=x2=y1=y2=0;
@@ -29,89 +39,192 @@ class HP{
             x2 = make_x(s3[2]);
             }
             catch(ArrayIndexOutOfBoundsException e){
-                bw.write(Texts.Er_TEXT);
-                bw.flush();
-                continue;
+                try{
+                    bw.write(Texts.Er_TEXT);
+                    bw.flush();
+                    continue;
+                }
+                catch(IOException one){
+                    System.out.println(Texts.IOException);
+                    System.exit(0);
+                }
             }
             catch(NumberFormatException er){
-                bw.write(Texts.Er_TEXT);
-                bw.flush();
-                continue;
+                try{
+                    bw.write(Texts.Er_TEXT);
+                    bw.flush();
+                    continue;
+                }
+                catch(IOException one){
+                    System.out.println(Texts.IOException);
+                    System.exit(0);
+                }
             }
 
             if(x1<3 && x2<3 && y1<3 && y2<3 && x1>=0 && x2>=0 && y1>=0 && y2>=0){
                     int cell = ks1.getCh(x1, y1);
                     int cellch = ks1.getCh(x2, y2);
-                    if(bol == true){
+                    if(isWhite == true){
                         if(cell==Texts.E){
+                            try{
                             bw.write(Texts.EMPTY);
                             bw.flush();
+                            }
+                            catch(IOException one){
+                                System.out.println(Texts.IOException);
+                                System.exit(0);
+                            }
                         }else if(cell==Texts.W){
                             if(cellch==Texts.W){
-                                bw.write(Texts.YOUR_CELL);
-                                bw.flush();
+                                try{
+                                    bw.write(Texts.YOUR_CELL);
+                                    bw.flush();
+                                }
+                                catch(IOException one){
+                                    System.out.println(Texts.IOException);
+                                    System.exit(0);
+                                }
                             }else if(cellch==Texts.B){
                                 if((x2-x1==1&&y2-y1==1)||(x2-x1==1&&y1-y2==1)){
-                                    ks1.rewrite(x2, y2, Texts.W);
-                                    ks1.rewrite(x1, y1, Texts.E);
-                                    ks1.getField();
+                                    try{
+                                        ks1.rewrite(x2, y2, Texts.W);
+                                        ks1.rewrite(x1, y1, Texts.E);
+                                        ks1.getField();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                     ok = true;
                                 }else{
-                                    bw.write(Texts.Er_Xod);
-                                    bw.flush();
+                                    try{
+                                        bw.write(Texts.Er_Xod);
+                                        bw.flush();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                 }
                             }else if(cellch==Texts.E){
                                 if(x2-x1==1&&y2-y1==0){
-                                    ks1.rewrite(x2, y2, Texts.W);
-                                    ks1.rewrite(x1, y1, Texts.E);
-                                    ks1.getField();
+                                    try{
+                                        ks1.rewrite(x2, y2, Texts.W);
+                                        ks1.rewrite(x1, y1, Texts.E);
+                                        ks1.getField();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                     ok = true;
                                 }else{
-                                    bw.write(Texts.Er_Xod);
-                                    bw.flush();
+                                    try{
+                                        bw.write(Texts.Er_Xod);
+                                        bw.flush();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
+
                                 }
                             }
                         }else if(cell==Texts.B){
-                                  bw.write(Texts.NOT_YOUR_CELL);
-                                   bw.flush();
+                            try{
+                                bw.write(Texts.NOT_YOUR_CELL);
+                                bw.flush();
+                            }
+                            catch(IOException one){
+                                System.out.println(Texts.IOException);
+                                System.exit(0);
+                            }
                         }
                     }else{
                          if(cell==Texts.E){
-                             bw.write(Texts.EMPTY);
-                             bw.flush();
+                             try{
+                                bw.write(Texts.EMPTY);
+                                bw.flush();
+                             }
+                             catch(IOException one){
+                                System.out.println(Texts.IOException);
+                                System.exit(0);
+                            }
                          }else if(cell==Texts.B){
                              if(cellch==Texts.B){
-                                bw.write(Texts.YOUR_CELL);
-                                bw.flush();
+                                 try{
+                                    bw.write(Texts.YOUR_CELL);
+                                    bw.flush();
+                                 }
+                                 catch(IOException one){
+                                    System.out.println(Texts.IOException);
+                                    System.exit(0);
+                                 }
                               }else if(cellch==Texts.W){
                                  if((x2-x1==-1&&y2-y1==-1)||(x2-x1==-1&&y1-y2==-1)){
-                                    ks1.rewrite(x2, y2, Texts.B);
-                                    ks1.rewrite(x1, y1, Texts.E);
-                                    ks1.getField();
+                                    try{
+                                        ks1.rewrite(x2, y2, Texts.B);
+                                        ks1.rewrite(x1, y1, Texts.E);
+                                        ks1.getField();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                     ok = true;
                                  }else{
-                                    bw.write(Texts.Er_Xod);
-                                    bw.flush();
+                                    try{
+                                        bw.write(Texts.Er_Xod);
+                                        bw.flush();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                  }
                               }else if(cellch==Texts.E){
                                  if(x2-x1==-1&&y2-y1==0){
-                                    ks1.rewrite(x2, y2, Texts.B);
-                                    ks1.rewrite(x1, y1, Texts.E);
-                                    ks1.getField();
+                                    try{
+                                        ks1.rewrite(x2, y2, Texts.B);
+                                        ks1.rewrite(x1, y1, Texts.E);
+                                        ks1.getField();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                     ok = true;
                                  }else{
+                                    try{
                                     bw.write(Texts.Er_Xod);
                                     bw.flush();
+                                    }
+                                    catch(IOException one){
+                                        System.out.println(Texts.IOException);
+                                        System.exit(0);
+                                    }
                                  }
                               }
                           }else if(cell==Texts.W){
+                              try{
                                    bw.write(Texts.NOT_YOUR_CELL);
                                    bw.flush();
+                              }
+                              catch(IOException one){
+                                System.out.println(Texts.IOException);
+                                System.exit(0);
+                              }
                          }
                 }
             }else{
+                try{
                 bw.write(Texts.OUT_OF_BOUNDS);
                 bw.flush();
+                }
+                catch(IOException one){
+                    System.out.println(Texts.IOException);
+                    System.exit(0);
+                }
             }
         }
         
