@@ -6,7 +6,8 @@ public class Texts {
     static public String DO_STEP (String name){
         return name+" ходит: \r\n";
     }
-    static public String NAME = "\r\n"+"Введите ваши имена: ";
+    static public String NAME = "Введите ваши имена: ";
+    static public String NAME1 = "Введите ваше имя: ";
     static public String TRY = "Попробуйте снова!\r\n";
     static public String Er_TEXT = "Вы написали текст, загляните в правила и попробуйте еще раз!";
     static public String OUT_OF_BOUNDS = "Вы зашли за границы таблицы! Попробуйте еще раз!";
@@ -15,7 +16,7 @@ public class Texts {
     static public String Er_Xod = "Вы неправильно походили пешкой!\r\n";
     static public String NOT_YOUR_CELL = "Это не ваша пешка!\r\n";
     static public String IOException = "Ошибка ввода-вывода!";
-    static public String CHOISE = "Если выхотите играть с другим человеком - нажмите 1, если с компьютером - нажмите 2";
+    static public String CHOISE = "Игра с компьютером - 1\r\nДва игрока - 2\r\n";
     static public String Wh = "o";
     static public String Bl = "•";
     static public String Em = "▫";
