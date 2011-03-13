@@ -262,4 +262,7 @@ class Konsol {
         field[1][0]=field[1][1]=field[1][2]=Texts.E;
         field[2][0]=field[2][1]=field[2][2]=Texts.B;
     }
+    public int[][] field(){
+        return field;
+    }
 }

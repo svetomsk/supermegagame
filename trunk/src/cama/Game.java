@@ -10,47 +10,47 @@ class Game
         IPlayer h1 = null;
         IPlayer h2 = null;
         String str="";
-        String name;
+        String name= "";
         ks.start();
-        w.write("\r\n"+Texts.CHOISE);
-        w.flush();
-        while(!str.equals("1")&&!str.equals("2")){
-             str = r.readLine();
-             if(str.equals("exit")) System.exit(0);
-             if(str.equals("1")){
+    //    w.write("\r\n"+Texts.CHOISE);
+    //    w.flush();
+   //     while(!str.equals("1")&&!str.equals("2")){
+   //          str = r.readLine();
+  //           if(str.equals("exit")) System.exit(0);
+  //           if(str.equals("1")){
                 h1 = new MPlayer(ks);
                 h2 = new MPlayer(ks);
 
-                w.write(Texts.NAME1);
-               w.flush();
-                name=r.readLine();
-                if(name.equals("exit")) System.exit(0);
+  //              w.write(Texts.NAME1);
+  //             w.flush();
+   //             name=r.readLine();
+ //               if(name.equals("exit")) System.exit(0);
                   h1.setName("CPU");
                   h2.setName(name);
-              }else if(str.equals("2")){
-                h1 = new HPlayer(ks);
-               h2 = new HPlayer(ks);
+//              }else if(str.equals("2")){
+     //           h1 = new HPlayer(ks);
+     //          h2 = new HPlayer(ks);
 
-               w.write(Texts.NAME);
-                w.flush();
-                name=r.readLine();
-                if(name.equals("exit")) System.exit(0);
-                String s[] = str.split(" ");
-                if(s.length!=2){
-                    while(s.length!=2){
-                       w.write(Texts.TRY);
-                       w.flush();
-                       s = r.readLine().split(" ");
-                    }
-                }
+   //            w.write(Texts.NAME);
+  //              w.flush();
+  //              name=r.readLine();
+  //              if(name.equals("exit")) System.exit(0);
+  //              String s[] = str.split(" ");
+  //              if(s.length!=2){
+  //                  while(s.length!=2){
+    //                   w.write(Texts.TRY);
+    //                   w.flush();
+   //                    s = r.readLine().split(" ");
+    //                }
+    //            }
 
-               h1.setName(s[0]);
-                h2.setName(s[1]);
-           }else{
-               w.write(Texts.TRY);
-                w.flush();
-            }
-        }
+ //              h1.setName(s[0]);
+  //              h2.setName(s[1]);
+    //      }else{
+   //            w.write(Texts.TRY);
+   //             w.flush();
+  //          }
+  //      }
         
         int i = 0;
         for(;;){
