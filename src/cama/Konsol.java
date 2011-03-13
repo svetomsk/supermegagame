@@ -14,7 +14,8 @@ class Konsol {
                  "1 o o o\r\n"+
                  "2 ▫ ▫ ▫\r\n"+
                  "3 • • •\r\n"+
-                 "Пример: a1-a2");
+                 "Пример: a1-a2\r\n"+
+                 "Для выхода введите exit");
         kw.flush();
     }
     public void getField() throws IOException{
@@ -46,11 +47,20 @@ class Konsol {
     public void rewrite(int i, int g, int s)throws IOException{
         field[i][g] = s;
     }
-    public void check(boolean cb)throws IOException{
-        badpos();
-        non_chekers();
-        last_number();
-        pat(cb);
+    public boolean check(boolean cb)throws IOException{
+        if((b=badpos())==true){
+            return true;
+        }
+        if((b=non_chekers())==true){
+            return true;
+        }
+        if((b=last_number())==true){
+            return true;
+        }
+        if((b=pat(cb))==true){
+            return true;
+        }
+        return false;
     }
     public int getSize(){
         return SIZE;
@@ -82,7 +92,7 @@ class Konsol {
         }
         return count;
     }
-    private void badpos (){
+    private boolean badpos (){
         int count=0;
         for(int i=0;i<SIZE;i++){
             for(int j=0;j<SIZE;j++){
@@ -90,11 +100,13 @@ class Konsol {
             }
         }
         if (count==2){
-            System.out.println("White win!");
-            System.exit(0);
+            System.out.println(Texts.WhWin);
+            return true;
+        }else{
+            return false;
         }
     }
-    private void non_chekers(){
+    private boolean non_chekers(){
         b = true;
             for(int i=0; i<SIZE;i++){
                 for(int g=0;g<SIZE;g++){
@@ -113,10 +125,12 @@ class Konsol {
             }
             if(b == true){
                 System.out.println(Texts.WhWin);
-                System.exit(0);                             
+                return true;
+            }else{
+                return false;
             }
     }
-    private void last_number(){
+    private boolean last_number(){
          b = true;                                       
             for(int i = 0 ; i < SIZE; i++){
                 if(field[0][i]==Texts.B) b = false;
@@ -131,10 +145,12 @@ class Konsol {
             }
             if(b == false){
                 System.out.println(Texts.WhWin);
-                System.exit(0);                                 
+                return true;
+            }else{
+                return false;
             }
     }
-    private void pat(boolean cb){
+    private boolean pat(boolean cb){
         b = false;
             boolean wh[] = new boolean[SIZE];
             boolean bl[] = new boolean[SIZE];
@@ -222,7 +238,9 @@ class Konsol {
                 }
                 if(b == false){
                     System.out.println(Texts.BlWin);
-                    System.exit(0);
+                    return true;
+                }else{
+                    return false;
                 }
             }else{
                 b=false;
@@ -233,11 +251,13 @@ class Konsol {
                 }
                 if(b == false){
                     System.out.println(Texts.WhWin);
-                    System.exit(0);
+                    return true;
+                }else{
+                    return false;
                 }
             }
     }
-    private void start_field(){
+    public void start_field(){
         field[0][0]=field[0][1]=field[0][2]=Texts.W;
         field[1][0]=field[1][1]=field[1][2]=Texts.E;
         field[2][0]=field[2][1]=field[2][2]=Texts.B;
