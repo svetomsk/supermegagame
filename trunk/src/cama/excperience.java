@@ -1,20 +1,25 @@
-package excperience;
+package cama;
 import java.io.*;
-public class Main {
-    public static void main(String[] args) {
+import java.util.Random;
+class Excp {
+    private Konsol ks;
+    Excp(Konsol ks_from_main) {
+        ks = ks_from_main;
     }
-}
-
-class Cama {
     private BufferedReader br;
-    //Получение поля field
-    //Получение size
+    private int len = ks.getSize();
+    private int field[][] = ks.field();
+    int [][] field1 = new int[len][len];
     public void analyze(int num_xod) throws IOException {
         br = new BufferedReader(new FileReader("xod.txt"));
-        int len = 3;
-        String[][] field = new String[len][len];
-        String[][] field1 = new String[len][len];
+        for(int i=0;i<7;i++){               //прогон курсора до нужного места
+            br.readLine();
+        }
+        Random r = new Random();
         String arr[] = new String[len];
+        String ar[] = null;
+        int dl=0;
+        
         while (true) {                                          //Нахождение нужного поля
             if (br.readLine().equals("" + num_xod)) {
                 for (int i = 0; i < len; i++) {
@@ -30,25 +35,30 @@ class Cama {
                 }
             }
         }
-        String bus[] = br.readLine().split(" ");
-        String xod[] = br.readLine().split(" ");
-        int dl = 0;
-        for(int i=0;i<bus.length;i++){
-            dl+=Integer.valueOf(bus[i]);
+        
+        int[] bus = setArrayBus(br.readLine(), ar);
+        String [] xod = setArrayXod(br.readLine(), ar);
+        for(int i=0;i<ar.length;i++){   
+            dl+=bus[i];
         }
-        String choise[] = new String[dl];
-       /* for(int i=0;i<dl;i++){
-            for(int j=0;j<Integer.valueOf(bus[i]);j++){
-                choise[j]
+        int choise[] = new int [dl];
+        int count = 0;
+        for(int i=0;i<bus.length;i++){
+            for(int j=0;j<bus[i];j++){
+                choise[count]=i;
+                count++;
             }
-        }*/
+        }
+        int ind = r.nextInt(dl);//!!! ВАЖНО dl или dl-1?? !!!
+        String[] hod = xod[ind].split("-");
+        
     }
 
-    private boolean equalsFields(String[][] field, String[][] field1, int len) {
+    private boolean equalsFields(int[][] field, int[][] field1, int len) {
         int count = 0;
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if (field[i][j].equals(field1[i][j])) {
+                if (field[i][j]==field1[i][j]) {
                     count++;
                 }
             }
@@ -59,5 +69,17 @@ class Cama {
             }
         }
         return false;
+    }
+    private int[] setArrayBus(String s, String ar[]){
+        ar = s.split(" ");
+        int bus[] = new int [ar.length];
+        System.arraycopy(ar, 0, bus, 0, ar.length);
+        return bus;
+    }
+    private String[] setArrayXod(String s, String[] ar){
+        ar = s.split(" ");
+        String xod[] = new String [ar.length];
+        System.arraycopy(ar, 0, xod, 0, ar.length);
+        return xod;
     }
 }
