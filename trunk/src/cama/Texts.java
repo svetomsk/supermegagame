@@ -17,10 +17,9 @@ public class Texts {
     static public String NOT_YOUR_CELL = "Это не ваша пешка!\r\n";
     static public String IOException = "Ошибка ввода-вывода!";
     static public String CHOISE = "Игра с компьютером - 1\r\nДва игрока - 2\r\n";
+    static public String CHEAT1 = "Поздравляем господин Кудык!!!! Вы выиграли!!";
+    static public String START =  " a b c\r\n1 o o o\r\n2 ▫ ▫ ▫\r\n3 • • •\r\nПример: a1-a2\r\nДля выхода введите exit";
     static public String Wh = "o";
     static public String Bl = "•";
     static public String Em = "▫";
-    static public int W = 1;
-    static public int B = 2;
-    static public int E = 0;
 }
