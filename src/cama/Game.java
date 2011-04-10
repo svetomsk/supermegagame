@@ -9,7 +9,7 @@ class Game
         Konsol ks = new Konsol();
         IPlayer h1 = null;
         IPlayer h2 = null;
-        String str="";
+        String str= "";
         String name= "";
         ks.start();
     //    w.write("\r\n"+Texts.CHOISE);
@@ -51,13 +51,15 @@ class Game
    //             w.flush();
   //          }
   //      }
+        w.close();
+        r.close();
         
         int i = 0;
         for(;;){
             if(i == 0){
                 ks.who(h1);
                 h1.xod(true);
-                if(ks.check(true)==true){
+                if(ks.check(true)){
                     break;
                 }
                 i = 1;
@@ -70,6 +72,7 @@ class Game
                 i = 0;
             }   
          }
+        ks.finish();
     }
 }
 

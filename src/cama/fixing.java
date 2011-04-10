@@ -1,63 +1,129 @@
 package cama;
 import java.io.*;
-public class fixing {
+public class Fixing {
     private BufferedWriter bw;
-
-    public void fix(int[][] ar, int x_num) throws IOException {
+    private BufferedReader br;
+    Konsol ks;
+    Fixing(Konsol ks_from_main) throws IOException {
+        ks = ks_from_main;
+        br = new BufferedReader(new FileReader("xod.txt"));
+    }
+    public void fix(int[][] ar, int x_num) throws IOException { //нужно получить обработанный массив
         int count = 0;
         bw = new BufferedWriter(new FileWriter("xod.txt", true));
         bw.write("################\r\n");
-        bw.write("" + x_num+"\r\n");
+        bw.write("" + x_num + "\r\n");
 
         for (int i = 0; i < ar.length; i++) {
             for (int j = 0; j < ar.length; j++) {
-                bw.write("" + ar[i][j]);
+                bw.write("" + ar[i + 1][j + 1]);
             }
-            bw.write("\n");
+            bw.write("\r\n");
         }
 
-        
-        for (int i = 0; i < ar.length; i++){            //суммирование всех возможных ходов
-            for (int j = 0; j < ar.length; j++){
-                if (ar[i][j] == Texts.B){
-                    count += ability(ar[i-1][j-1],ar[i-1][j+1],ar[i-1][j],i ,j ,ar.length);//Надо будет сделать массив с рамкой!!!!!!
+        for (int i = 0; i < ar.length; i++) {
+            for (int j = 0; j < ar.length; j++) {
+                if (ar[i + 1][j + 1] == ks.B) {
+                    count += HodQuantity(ar[i][j], ar[i][j + 2], ar[i][j + 1]);
                 }
             }
         }
-        int[] bus = new int [count];
-        for(int i = 0; i< bus.length;i++){
-            bus[i]=7;
-            bw.write(bus[i]+" ");
+
+        int[] businki = new int[count];
+        String[] xod = new String[count];
+        for (int i = 0; i < businki.length; i++) {
+            businki[i] = 7;
+            bw.write(businki[i] + " ");
+        }
+        bw.write("\r\n");
+
+
+        for (int i = 0; i < ar.length; i++) {
+            for (int j = 0; j < ar.length; j++) {
+                if (ar[i + 1][j + 1] == ks.B) {
+                    xod = setHod(xod, i + 1, j + 1, ar[i][j], ar[i][j + 2], ar[i][j + 1]);
+                }
+            }
+        }
+
+        for (int i = 0; i < xod.length; i++) {
+            bw.write(xod[i] + " ");
+        }
+        bw.write("\r\n");
+        bw.close();
+    }
+    public int check(int hod_num) throws IOException {
+        int[][] ar = new int[ks.getSize()][ks.getSize()];
+        for (int i = 0; i < ar.length; i++) {
+            for (int j = 0; j < ar.length; j++) {
+                ar[i][j] = ks.getCh(i, j);
+            }
+        }
+        for (int i =0;;i++) {
+            br.readLine();
+            try{
+                if(br.readLine().equals(""+hod_num)){
+                    if(checking(ar)){
+                        return i;
+                    }
+                }
+            }
+            catch(NullPointerException e){
+                return -1;
+            }
+            br.readLine(); br.readLine();
         }
     }
 
-    private int ability(int left, int right, int straight, int i, int j, int length) {
+    private boolean checking(int ar[][]) throws IOException {
         int count = 0;
-        if (j == 0) {
-            if (straight == Texts.E) {
-                count++;
+        String s = "";
+        for (int i = 0; i < ks.getSize(); i++) {
+            for (int j = 0; j < ks.getSize(); j++) {
+                s += ar[i][j];
             }
-            if (right == Texts.W) {
-                count++;
-            }
-        }else if(j ==length-1){
-            if(left == Texts.W){
-                count++;
-            }
-            if(straight == Texts.E){
-                count++;
-            }
-        }else{
-            if(left == Texts.W){
-                count++;
-            }
-            if(straight == Texts.E){
-                count++;
-            }
-            if(right == Texts.W){
+            if (br.readLine().equals(s)) {
                 count++;
             }
         }
+        if (count == ks.getSize()) {
+            return true;
+        }
+        return false;
+    }
+    private int HodQuantity(int left, int right, int straight) {
+        int count = 0;
+        if (straight == ks.E) {
+            count++;
+        }
+        if (right == ks.W) {
+            count++;
+        }
+        if (left == ks.W) {
+            count++;
+        }
         return count;
+    }
+    private String[] setHod(String[] xod, int i, int j, int left, int right, int straight) {
+        int count = 0;
+        if (straight == ks.E) {
+            while (xod[count] != null) {
+                count++;
+            }
+            xod[count] = (i - 1) + "" + (j - 1) + "-" + (i - 2) + "" + (j - 1);
+        }
+        if (right == ks.W) {
+            while (xod[count] != null) {
+                count++;
+            }
+            xod[count] = (i - 1) + "" + (j - 1) + "-" + (i - 2) + (j);
+        }
+        if (left == ks.W) {
+            while (xod[count] != null) {
+                count++;
+            }
+            xod[count] = (i - 1) + "" + (j - 1) + "-" + (i - 2) + (j - 2);
+        }
+        return xod;
     }
 }

@@ -2,21 +2,21 @@ package cama;
 import java.io.*;
 import java.util.Random;
 public class MPlayer extends Player{
-    private Konsol ks2;
+    private Konsol ks;
     private int n_left=0, n_right=0, n_straight=0, numb=0;
     MPlayer(Konsol ks_from_main) {
-        ks2 = ks_from_main;
+        ks = ks_from_main;
     }
     public void xod(boolean isWhite){
         Random r =new Random();
         int count = 0, num, x, y;
-        String[] coord = new String [ks2.getSize()], ar=new String[2];
+        String[] coord = new String [ks.getSize()], ar=new String[2];
         boolean make_xod;
         if(isWhite==true){
-            for(int i=0;i<ks2.getSize();i++){
-                for(int j=0;j<ks2.getSize();j++){
-                   numb = ks2.getCh(i, j);
-                   if(numb==Texts.W){
+            for(int i=0;i<ks.getSize();i++){
+                for(int j=0;j<ks.getSize();j++){
+                   numb = ks.getCh(i, j);
+                   if(numb==ks.W){
                       coord[count]=i+" "+j;
                       count++;
                    }
@@ -27,7 +27,7 @@ public class MPlayer extends Player{
                 ar = coord[num].split(" ");
                 x = Integer.valueOf(ar[0]);
                 y = Integer.valueOf(ar[1]);
-                if(y!=0&&y!=(ks2.getSize())-1){
+                if(y!=0&&y!=(ks.getSize())-1){
                     make_xod = white_middle(x,y);
                     if(make_xod==true){
                         break one;
@@ -41,10 +41,10 @@ public class MPlayer extends Player{
 
             }
         }else{
-            for(int i=0;i<ks2.getSize();i++){
-                for(int j=0;j<ks2.getSize();j++){
-                    numb = ks2.getCh(i, j);
-                    if(numb==Texts.B){
+            for(int i=0;i<ks.getSize();i++){
+                for(int j=0;j<ks.getSize();j++){
+                    numb = ks.getCh(i, j);
+                    if(numb==ks.B){
                         coord[count]=i+" "+j;
                         count++;
                    }
@@ -55,7 +55,7 @@ public class MPlayer extends Player{
                 ar = coord[num].split(" ");
                 x = Integer.valueOf(ar[0]);
                 y = Integer.valueOf(ar[1]);
-                if(y!=0&&y!=(ks2.getSize())-1){
+                if(y!=0&&y!=(ks.getSize())-1){
                     make_xod = black_middle(x,y);
                     if(make_xod==true){
                         break two;
@@ -71,38 +71,38 @@ public class MPlayer extends Player{
         }
     }
     private boolean white_middle(int i, int j){
-      n_left = ks2.getCh(i+1, j-1);
-      n_right = ks2.getCh(i+1, j+1);
-      n_straight = ks2.getCh(i+1, j);
+      n_left = ks.getCh(i+1, j-1);
+      n_right = ks.getCh(i+1, j+1);
+      n_straight = ks.getCh(i+1, j);
 
-      if(n_left==Texts.B&&n_right==Texts.B&&n_straight==Texts.E);
-        if(n_left == Texts.B){
+      if(n_left==ks.B&&n_right==ks.B&&n_straight==ks.E);
+        if(n_left == ks.B){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i+1, j-1, Texts.W);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i+1, j-1, ks.W);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
                 System.exit(0);
             }
             return true;
-        }else if(n_right == Texts.B){
+        }else if(n_right == ks.B){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i+1, j+1, Texts.W);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i+1, j+1, ks.W);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
                 System.exit(0);
             }
             return true;
-        }else if(n_straight == Texts.E){
+        }else if(n_straight == ks.E){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i+1, j, Texts.W);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i+1, j, ks.W);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
@@ -117,41 +117,41 @@ public class MPlayer extends Player{
         Random r =new Random();
         int n;
         if(j==0){
-           n_right = ks2.getCh(i+1, j+1);
-           n_straight = ks2.getCh(i+1, j);
-           if(n_right==Texts.B&&n_straight==Texts.E){
+           n_right = ks.getCh(i+1, j+1);
+           n_straight = ks.getCh(i+1, j);
+           if(n_right==ks.B&&n_straight==ks.E){
                n=r.nextInt(2);
                if(n==0){
-                   n_step(i,j,i+1,j,Texts.W);//straight
+                   n_step(i,j,i+1,j,ks.W);//straight
                }else{
-                   n_step(i,j,i+1,j+1,Texts.W);//right
+                   n_step(i,j,i+1,j+1,ks.W);//right
                }
                return true;
-           }else if(n_right==Texts.B){
-              n_step(i,j,i+1,j+1,Texts.W);
+           }else if(n_right==ks.B){
+              n_step(i,j,i+1,j+1,ks.W);
               return true;
-           }else if(n_straight==Texts.E){
-               n_step(i,j,i+1,j,Texts.W);
+           }else if(n_straight==ks.E){
+               n_step(i,j,i+1,j,ks.W);
                return true;
            }else{
                return false;
            }
         }else{
-            n_left = ks2.getCh(i+1, j-1);
-            n_straight = ks2.getCh(i+1, j);
-            if(n_left==Texts.B&&n_straight==Texts.E){
+            n_left = ks.getCh(i+1, j-1);
+            n_straight = ks.getCh(i+1, j);
+            if(n_left==ks.B&&n_straight==ks.E){
                n=r.nextInt(2);
                if(n==0){
-                   n_step(i,j,i+1,j,Texts.W);//straight
+                   n_step(i,j,i+1,j,ks.W);//straight
                }else{
-                   n_step(i,j,i+1,j-1,Texts.W);//left
+                   n_step(i,j,i+1,j-1,ks.W);//left
                }
                return true;
-            }else if(n_straight==Texts.E){
-                n_step(i,j,i+1,j,Texts.W);
+            }else if(n_straight==ks.E){
+                n_step(i,j,i+1,j,ks.W);
                 return true;
-            }else if(n_left==Texts.B){
-                n_step(i,j,i+1,j-1,Texts.W);
+            }else if(n_left==ks.B){
+                n_step(i,j,i+1,j-1,ks.W);
                 return true;
             }else{
                 return false;
@@ -160,36 +160,36 @@ public class MPlayer extends Player{
     }
     private boolean black_middle(int i, int j){
         System.out.println(i+" "+j);
-      n_left = ks2.getCh(i-1, j-1);
-      n_right = ks2.getCh(i-1, j+1);
-      n_straight = ks2.getCh(i-1, j);
-        if(n_left == Texts.W){
+      n_left = ks.getCh(i-1, j-1);
+      n_right = ks.getCh(i-1, j+1);
+      n_straight = ks.getCh(i-1, j);
+        if(n_left == ks.W){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i-1, j-1, Texts.B);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i-1, j-1, ks.B);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
                 System.exit(0);
             }
             return true;
-        }else if(n_right == Texts.W){
+        }else if(n_right == ks.W){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i-1, j-1, Texts.B);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i-1, j-1, ks.B);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
                 System.exit(0);
             }
             return true;
-        }else if(n_straight == Texts.E){
+        }else if(n_straight == ks.E){
             try{
-                ks2.rewrite(i, j, Texts.E);
-                ks2.rewrite(i-1, j, Texts.B);
-                ks2.getField();
+                ks.rewrite(i, j, ks.E);
+                ks.rewrite(i-1, j, ks.B);
+                ks.printField();
             }
             catch(IOException one){
                 System.out.println(Texts.IOException);
@@ -202,24 +202,24 @@ public class MPlayer extends Player{
     }
     private boolean black_bok(int i, int j){
         if(j==0){
-           n_right = ks2.getCh(i-1, j+1);
-           n_straight = ks2.getCh(i-1, j);
-           if(n_right==Texts.W){
+           n_right = ks.getCh(i-1, j+1);
+           n_straight = ks.getCh(i-1, j);
+           if(n_right==ks.W){
                try{
-                    ks2.rewrite(i, j, Texts.E);
-                    ks2.rewrite(i-1, j+1, Texts.B);
-                    ks2.getField();
+                    ks.rewrite(i, j, ks.E);
+                    ks.rewrite(i-1, j+1, ks.B);
+                    ks.printField();
                 }
                 catch(IOException one){
                     System.out.println(Texts.IOException);
                     System.exit(0);
                 }
                 return true;
-           }else if(n_straight==Texts.E){
+           }else if(n_straight==ks.E){
                try{
-                    ks2.rewrite(i, j, Texts.E);
-                    ks2.rewrite(i-1, j, Texts.B);
-                    ks2.getField();
+                    ks.rewrite(i, j, ks.E);
+                    ks.rewrite(i-1, j, ks.B);
+                    ks.printField();
                 }
                 catch(IOException one){
                     System.out.println(Texts.IOException);
@@ -230,24 +230,24 @@ public class MPlayer extends Player{
                return false;
            }
         }else{
-            n_left = ks2.getCh(i-1, j-1);
-            n_straight = ks2.getCh(i-1, j);
-            if(n_left==Texts.W){
+            n_left = ks.getCh(i-1, j-1);
+            n_straight = ks.getCh(i-1, j);
+            if(n_left == ks.W){
                 try{
-                    ks2.rewrite(i, j, Texts.E);
-                    ks2.rewrite(i-1, j-1, Texts.B);
-                    ks2.getField();
+                    ks.rewrite(i, j, ks.E);
+                    ks.rewrite(i-1, j-1, ks.B);
+                    ks.printField();
                 }
                 catch(IOException one){
                     System.out.println(Texts.IOException);
                     System.exit(0);
                 }
                 return true;
-            }else if(n_straight == Texts.E){
+            }else if(n_straight == ks.E){
                 try{
-                    ks2.rewrite(i, j, Texts.E);
-                    ks2.rewrite(i-1, j, Texts.B);
-                    ks2.getField();
+                    ks.rewrite(i, j, ks.E);
+                    ks.rewrite(i-1, j, ks.B);
+                    ks.printField();
                 }
                 catch(IOException one){
                     System.out.println(Texts.IOException);
@@ -261,9 +261,9 @@ public class MPlayer extends Player{
     }
     private void n_step (int x, int y, int x1, int y1, int cell){
         try{
-                    ks2.rewrite(x, y, Texts.E);
-                    ks2.rewrite(x1, y1, cell);
-                    ks2.getField();
+                    ks.rewrite(x, y, ks.E);
+                    ks.rewrite(x1, y1, cell);
+                    ks.printField();
                 }
                 catch(IOException one){
                     System.out.println(Texts.IOException);
