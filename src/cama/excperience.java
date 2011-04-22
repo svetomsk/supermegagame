@@ -14,7 +14,7 @@ class Excp {
         int[][] ar = setArray();
         if(checkFields(num_xod, ar)>0){
         }else{
-            fixField(ks.getField(), num_xod);
+            fixField(ks.getFullField(), num_xod);
         }
     }
     private int[][] setArray(){
