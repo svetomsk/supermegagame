@@ -1,8 +1,0 @@
-0 - ok
-1 - Er_Text
-2 - EMPTY
-3 - YOUR_CELL
-4 - Er_Xod
-5 - NOT_YOUR_CELL
-6 - EMPTY
-7 - OUT_OF_BOUNDS
