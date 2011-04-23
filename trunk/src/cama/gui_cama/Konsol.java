@@ -27,9 +27,6 @@ class Konsol {
         }
         return ar;
     }
-
-
-
     public int[][] getFullField(){
         return field;
     }
@@ -39,7 +36,7 @@ class Konsol {
     public void rewrite(int i, int g, int s){
         field[i+1][g+1] = s;
     }
-    public boolean check(boolean cb){
+    public boolean check(boolean isWhite){
         if(isBadPosition()){
             return true;
         }
@@ -49,14 +46,14 @@ class Konsol {
         if(isLastNumber()){
             return true;
         }
-        if(isStalemate(cb)){
+        if(isStalemate(isWhite)){
             return true;
         }
         return false;
-    } //сделано!!
+    }
     public int getSize(){
         return SIZE;
-    } //сделано!!
+    }
     private void startField(){
         for(int j = 0; j<field.length;j++){
             field[0][j]=-1;
@@ -78,7 +75,7 @@ class Konsol {
             }
         }
 
-    } //сделано!
+    }
     private int WhQuantity(){
         int count=0;
         for(int i=0;i<SIZE;i++){
@@ -87,7 +84,7 @@ class Konsol {
             }
         }
         return count;
-    } //сделано!
+    }
     private int BlQuantity(){
         int count=0;
         for(int i=0;i<SIZE;i++){
@@ -96,7 +93,7 @@ class Konsol {
             }
         }
         return count;
-    } //сделано!
+    }
     private boolean isBadPosition (){
         int count=0;
         for(int i=0;i<SIZE;i++){
@@ -105,7 +102,6 @@ class Konsol {
             }
         }
         if (count==2){
-            System.out.println(Texts.WhWin);
             return true;
         }else{
             return false;
@@ -119,8 +115,7 @@ class Konsol {
                 }
             }
             if(b == true){
-                System.out.println(Texts.BlWin);
-                System.exit(0);
+                return true;
             }
             b = true;
             for(int i = 0; i < SIZE; i++){
@@ -129,7 +124,6 @@ class Konsol {
                 }
             }
             if(b == true){
-                System.out.println(Texts.WhWin);
                 return true;
             }else{
                 return false;
@@ -141,21 +135,19 @@ class Konsol {
                 if(field[0+1][i+1]==B) b = false;
             }
             if(b == false){
-                System.out.println(Texts.BlWin);
-                System.exit(0);
+                return true;
             }
             b = true;
             for(int i=0; i<SIZE; i++){
                 if(field[2+1][i+1]==W) b = false;
             }
             if(b == false){
-                System.out.println(Texts.WhWin);
                 return true;
             }else{
                 return false;
             }
     }
-    private boolean isStalemate (boolean cb){
+    private boolean isStalemate (boolean isWhite){
         b = false;
             boolean wh[] = new boolean[SIZE];
             boolean bl[] = new boolean[SIZE];
@@ -234,7 +226,7 @@ class Konsol {
                     ib++;
                 }
             }
-            if(cb == false){
+            if(isWhite == false){
                 b=false;
                 for(int i = 0; i<WhQuantity();i++){
                     if(wh[i]!=false){
@@ -242,7 +234,6 @@ class Konsol {
                     }
                 }
                 if(b == false){
-                    System.out.println(Texts.BlWin);
                     return true;
                 }else{
                     return false;
@@ -255,7 +246,6 @@ class Konsol {
                     }
                 }
                 if(b == false){
-                    System.out.println(Texts.WhWin);
                     return true;
                 }else{
                     return false;

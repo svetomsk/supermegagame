@@ -1,13 +1,12 @@
 package gui_cama;
 import java.util.Random;
-
 public class MPlayer extends Player {
-
     private Konsol ks;
     private int n_left = 0, n_right = 0, n_straight = 0, numb = 0;
 
     MPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
+        isMPlayer = true;
     }
 
     public void doStep(boolean isWhite) {
@@ -75,7 +74,6 @@ public class MPlayer extends Player {
             }
         }
     }
-
     private boolean white_middle(int i, int j) {
         n_left = ks.getCh(i + 1, j - 1);
         n_right = ks.getCh(i + 1, j + 1);
@@ -84,20 +82,22 @@ public class MPlayer extends Player {
         if (n_left == ks.B) {
             ks.rewrite(i, j, ks.E);
             ks.rewrite(i + 1, j - 1, ks.W);
+            setIsWhite();
             return true;
         } else if (n_right == ks.B) {
             ks.rewrite(i, j, ks.E);
             ks.rewrite(i + 1, j + 1, ks.W);
+            setIsWhite();
             return true;
         } else if (n_straight == ks.E) {
             ks.rewrite(i, j, ks.E);
             ks.rewrite(i + 1, j, ks.W);
+            setIsWhite();
             return true;
         } else {
             return false;
         }
     }
-
     private boolean white_bok(int i, int j) {
         Random r = new Random();
         int n;
@@ -108,15 +108,19 @@ public class MPlayer extends Player {
                 n = r.nextInt(2);
                 if (n == 0) {
                     n_step(i, j, i + 1, j, ks.W);//straight
+                    setIsWhite();
                 } else {
                     n_step(i, j, i + 1, j + 1, ks.W);//right
+                    setIsWhite();
                 }
                 return true;
             } else if (n_right == ks.B) {
                 n_step(i, j, i + 1, j + 1, ks.W);
+                setIsWhite();
                 return true;
             } else if (n_straight == ks.E) {
                 n_step(i, j, i + 1, j, ks.W);
+                setIsWhite();
                 return true;
             } else {
                 return false;
@@ -127,45 +131,49 @@ public class MPlayer extends Player {
             if (n_left == ks.B && n_straight == ks.E) {
                 n = r.nextInt(2);
                 if (n == 0) {
-                    n_step(i, j, i + 1, j, ks.W);//straight
+                    n_step(i, j, i + 1, j, ks.W);
+                    setIsWhite();
                 } else {
                     n_step(i, j, i + 1, j - 1, ks.W);//left
+                    setIsWhite();
                 }
                 return true;
             } else if (n_straight == ks.E) {
                 n_step(i, j, i + 1, j, ks.W);
+                setIsWhite();
                 return true;
             } else if (n_left == ks.B) {
                 n_step(i, j, i + 1, j - 1, ks.W);
+                setIsWhite();
                 return true;
             } else {
                 return false;
             }
         }
     }
-
     private boolean black_middle(int i, int j) {
-        System.out.println(i + " " + j);
         n_left = ks.getCh(i - 1, j - 1);
         n_right = ks.getCh(i - 1, j + 1);
         n_straight = ks.getCh(i - 1, j);
         if (n_left == ks.W) {
                 ks.rewrite(i, j, ks.E);
                 ks.rewrite(i - 1, j - 1, ks.B);
+                setIsWhite();
             return true;
         } else if (n_right == ks.W) {
                 ks.rewrite(i, j, ks.E);
                 ks.rewrite(i - 1, j - 1, ks.B);
+                setIsWhite();
             return true;
         } else if (n_straight == ks.E) {
                 ks.rewrite(i, j, ks.E);
                 ks.rewrite(i - 1, j, ks.B);
+                setIsWhite();
             return true;
         } else {
             return false;
         }
     }
-
     private boolean black_bok(int i, int j) {
         if (j == 0) {
             n_right = ks.getCh(i - 1, j + 1);
@@ -173,10 +181,12 @@ public class MPlayer extends Player {
             if (n_right == ks.W) {
                     ks.rewrite(i, j, ks.E);
                     ks.rewrite(i - 1, j + 1, ks.B);
+                    setIsWhite();
                 return true;
             } else if (n_straight == ks.E) {
                     ks.rewrite(i, j, ks.E);
                     ks.rewrite(i - 1, j, ks.B);
+                    setIsWhite();
                 return true;
             } else {
                 return false;
@@ -187,19 +197,27 @@ public class MPlayer extends Player {
             if (n_left == ks.W) {
                     ks.rewrite(i, j, ks.E);
                     ks.rewrite(i - 1, j - 1, ks.B);
+                    setIsWhite();
                 return true;
             } else if (n_straight == ks.E) {
                     ks.rewrite(i, j, ks.E);
                     ks.rewrite(i - 1, j, ks.B);
+                    setIsWhite();
                 return true;
             } else {
                 return false;
             }
         }
     }
-
     private void n_step(int x, int y, int x1, int y1, int cell) {
             ks.rewrite(x, y, ks.E);
             ks.rewrite(x1, y1, cell);
+    }
+    private void setIsWhite(){
+        if(Main.isWhite){
+            Main.isWhite = false;
+        }else{
+            Main.isWhite = true;
+        }
     }
 }
