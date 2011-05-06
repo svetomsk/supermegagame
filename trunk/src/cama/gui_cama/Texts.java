@@ -16,7 +16,7 @@ public class Texts {
     static public String OUT_OF_BOUNDS = "<html>Вы зашли за границы таблицы!<br> Попробуйте еще раз!";
     static public String EMPTY = "Вы хотите передвинуть пустое место!";
     static public String YOUR_CELL = "Вы хотите срубить свою же пешку!";
-    static public String ER_STEP = "Вы неправильно походили пешкой!";
+    static public String ER_STEP = "Вы неправильно походили!";
     static public String NOT_YOUR_CELL = "        Это не ваша пешка!     ";
     static public String CHOISE = "Игра с компьютером - 1\r\nДва игрока - 2\r\n";
     static public String CHEAT1 = "Поздравляем господин Кудык!!!! Вы выиграли!!";
