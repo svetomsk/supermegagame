@@ -2,7 +2,7 @@ package gui_cama;
 import java.util.Random;
 public class MPlayer extends Player {
     private Konsol ks;
-    private int n_left = 0, n_right = 0, n_straight = 0, numb = 0;
+    private int n_left = 0, n_right = 0, n_straight = 0;
 
     MPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
@@ -11,205 +11,90 @@ public class MPlayer extends Player {
 
     public void doStep(boolean isWhite) {
         Random r = new Random();
-        int count = 0, num, x, y;
+        int count = 0, x, y;
         String[] coord = new String[ks.getSize()], ar = new String[2];
-        boolean make_xod;
         if (isWhite == true) {
             for (int i = 0; i < ks.getSize(); i++) {
                 for (int j = 0; j < ks.getSize(); j++) {
-                    numb = ks.getCh(i, j);
-                    if (numb == ks.W) {
+                    if (ks.getCh(i, j) == ks.W) {
                         coord[count] = i + " " + j;
                         count++;
                     }
                 }
             }
-            one:
+            
             for (;;) {
-                num = r.nextInt(count);
-                ar = coord[num].split(" ");
+                ar = coord[r.nextInt(count)].split(" ");
                 x = Integer.valueOf(ar[0]);
                 y = Integer.valueOf(ar[1]);
-                if (y != 0 && y != (ks.getSize()) - 1) {
-                    make_xod = white_middle(x, y);
-                    if (make_xod == true) {
-                        break one;
-                    }
-                } else {
-                    make_xod = white_bok(x, y);
-                    if (make_xod == true) {
-                        break one;
-                    }
+
+                if(whiteDoStep(x,y)){
+                    break;
                 }
 
             }
         } else {
             for (int i = 0; i < ks.getSize(); i++) {
                 for (int j = 0; j < ks.getSize(); j++) {
-                    numb = ks.getCh(i, j);
-                    if (numb == ks.B) {
+                    if (ks.getCh(i, j) == ks.B) {
                         coord[count] = i + " " + j;
                         count++;
                     }
                 }
             }
-            two:
             for (;;) {
-                num = r.nextInt(count);
-                ar = coord[num].split(" ");
+                ar = coord[r.nextInt(count)].split(" ");
                 x = Integer.valueOf(ar[0]);
                 y = Integer.valueOf(ar[1]);
-                if (y != 0 && y != (ks.getSize()) - 1) {
-                    make_xod = black_middle(x, y);
-                    if (make_xod == true) {
-                        break two;
-                    }
-                } else {
-                    make_xod = black_bok(x, y);
-                    if (make_xod == true) {
-                        break two;
-                    }
-                }
 
+                if(doStepBlack(x,y)){
+                    break;
+                }
             }
         }
     }
-    private boolean white_middle(int i, int j) {
+    private boolean whiteDoStep(int i, int j) {
         n_left = ks.getCh(i + 1, j - 1);
         n_right = ks.getCh(i + 1, j + 1);
         n_straight = ks.getCh(i + 1, j);
 
         if (n_left == ks.B) {
-            ks.rewrite(i, j, ks.E);
-            ks.rewrite(i + 1, j - 1, ks.W);
+            doStep(i, j, i+1, j-1, ks.W);
             setIsWhite();
             return true;
         } else if (n_right == ks.B) {
-            ks.rewrite(i, j, ks.E);
-            ks.rewrite(i + 1, j + 1, ks.W);
+            doStep(i, j, i+1, j+1, ks.W);
             setIsWhite();
             return true;
         } else if (n_straight == ks.E) {
-            ks.rewrite(i, j, ks.E);
-            ks.rewrite(i + 1, j, ks.W);
+            doStep(i, j, i+1, j, ks.W);
             setIsWhite();
             return true;
         } else {
             return false;
         }
     }
-    private boolean white_bok(int i, int j) {
-        Random r = new Random();
-        int n;
-        if (j == 0) {
-            n_right = ks.getCh(i + 1, j + 1);
-            n_straight = ks.getCh(i + 1, j);
-            if (n_right == ks.B && n_straight == ks.E) {
-                n = r.nextInt(2);
-                if (n == 0) {
-                    n_step(i, j, i + 1, j, ks.W);//straight
-                    setIsWhite();
-                } else {
-                    n_step(i, j, i + 1, j + 1, ks.W);//right
-                    setIsWhite();
-                }
-                return true;
-            } else if (n_right == ks.B) {
-                n_step(i, j, i + 1, j + 1, ks.W);
-                setIsWhite();
-                return true;
-            } else if (n_straight == ks.E) {
-                n_step(i, j, i + 1, j, ks.W);
-                setIsWhite();
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            n_left = ks.getCh(i + 1, j - 1);
-            n_straight = ks.getCh(i + 1, j);
-            if (n_left == ks.B && n_straight == ks.E) {
-                n = r.nextInt(2);
-                if (n == 0) {
-                    n_step(i, j, i + 1, j, ks.W);
-                    setIsWhite();
-                } else {
-                    n_step(i, j, i + 1, j - 1, ks.W);//left
-                    setIsWhite();
-                }
-                return true;
-            } else if (n_straight == ks.E) {
-                n_step(i, j, i + 1, j, ks.W);
-                setIsWhite();
-                return true;
-            } else if (n_left == ks.B) {
-                n_step(i, j, i + 1, j - 1, ks.W);
-                setIsWhite();
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    private boolean black_middle(int i, int j) {
+    private boolean doStepBlack(int i, int j) {
         n_left = ks.getCh(i - 1, j - 1);
         n_right = ks.getCh(i - 1, j + 1);
         n_straight = ks.getCh(i - 1, j);
         if (n_left == ks.W) {
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i - 1, j - 1, ks.B);
+                doStep(i, j, i-1, j-1, ks.B);
                 setIsWhite();
             return true;
         } else if (n_right == ks.W) {
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i - 1, j - 1, ks.B);
+                doStep(i, j, i-1, j+1, ks.B);
                 setIsWhite();
             return true;
         } else if (n_straight == ks.E) {
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i - 1, j, ks.B);
+                doStep(i, j, i-1, j, ks.B);
                 setIsWhite();
             return true;
         } else {
             return false;
         }
     }
-    private boolean black_bok(int i, int j) {
-        if (j == 0) {
-            n_right = ks.getCh(i - 1, j + 1);
-            n_straight = ks.getCh(i - 1, j);
-            if (n_right == ks.W) {
-                    ks.rewrite(i, j, ks.E);
-                    ks.rewrite(i - 1, j + 1, ks.B);
-                    setIsWhite();
-                return true;
-            } else if (n_straight == ks.E) {
-                    ks.rewrite(i, j, ks.E);
-                    ks.rewrite(i - 1, j, ks.B);
-                    setIsWhite();
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            n_left = ks.getCh(i - 1, j - 1);
-            n_straight = ks.getCh(i - 1, j);
-            if (n_left == ks.W) {
-                    ks.rewrite(i, j, ks.E);
-                    ks.rewrite(i - 1, j - 1, ks.B);
-                    setIsWhite();
-                return true;
-            } else if (n_straight == ks.E) {
-                    ks.rewrite(i, j, ks.E);
-                    ks.rewrite(i - 1, j, ks.B);
-                    setIsWhite();
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    private void n_step(int x, int y, int x1, int y1, int cell) {
+    private void doStep(int x, int y, int x1, int y1, int cell) {
             ks.rewrite(x, y, ks.E);
             ks.rewrite(x1, y1, cell);
     }

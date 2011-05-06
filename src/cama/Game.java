@@ -18,15 +18,15 @@ class Game
    //          str = r.readLine();
   //           if(str.equals("exit")) System.exit(0);
   //           if(str.equals("1")){
-                h1 = new MPlayer(ks);
-                h2 = new MPlayer(ks);
+                h1 = new HPlayer(ks);
+                h2 = new HPlayer(ks);
 
   //              w.write(Texts.NAME1);
   //             w.flush();
    //             name=r.readLine();
  //               if(name.equals("exit")) System.exit(0);
                   h1.setName("CPU");
-                  h2.setName(name);
+                  h2.setName("not_cpu");
 //              }else if(str.equals("2")){
      //           h1 = new HPlayer(ks);
      //          h2 = new HPlayer(ks);
@@ -51,8 +51,8 @@ class Game
    //             w.flush();
   //          }
   //      }
-        w.close();
-        r.close();
+     //   w.close();
+    //    r.close();
         
         int i = 0;
         for(;;){
