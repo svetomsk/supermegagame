@@ -1,4 +1,4 @@
-package cama;
+package cama.core;
 public class Texts {
     static public String GREETING = "Добро пожаловать в игру \"Пешки 3х3\"!\nДля того, чтобы сделать ход, выберите\nкоординаты пешки, поставьте тире\nи выберите координаты места, куда\nхотите поставить пешку. Удачи!\n";
     static public String BlWin = "Черные выиграли!";

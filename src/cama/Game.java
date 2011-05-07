@@ -1,5 +1,8 @@
 package cama;
 import java.io.*;
+import cama.core.IPlayer;
+import cama.core.Konsol;
+
 public class Game
 {
     static public void main(String[]args) throws IOException

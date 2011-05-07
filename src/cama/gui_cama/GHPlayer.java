@@ -1,8 +1,8 @@
 package cama.gui_cama;
 
-import cama.Konsol;
-import cama.Player;
-import cama.Texts;
+import cama.core.Konsol;
+import cama.core.Player;
+import cama.core.Texts;
 
 class GHPlayer extends Player {
 

@@ -1,5 +1,9 @@
 package cama;
 import java.io.*;
+import cama.core.Player;
+import cama.core.Texts;
+import cama.core.Konsol;
+
 public class HPlayer extends Player
 {
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
