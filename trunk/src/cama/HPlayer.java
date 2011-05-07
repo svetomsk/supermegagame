@@ -1,17 +1,17 @@
 package cama;
 import java.io.*;
-class HPlayer extends Player
+public class HPlayer extends Player
 {
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
     private Konsol ks;
 
-    HPlayer(Konsol ks_from_main) {
+    public HPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
     }
     
-    public void xod(boolean isWhite){
+    public void doStep(boolean isWhite){
         Boolean ok = false;
         String s = "";
 
@@ -44,7 +44,7 @@ class HPlayer extends Player
             }
             catch(ArrayIndexOutOfBoundsException e){
                 try{
-                    bw.write(Texts.Er_TEXT);
+                    bw.write(Texts.ER_TEXT);
                     bw.flush();
                     continue;
                 }
@@ -55,7 +55,7 @@ class HPlayer extends Player
             }
             catch(NumberFormatException er){
                 try{
-                    bw.write(Texts.Er_TEXT);
+                    bw.write(Texts.ER_TEXT);
                     bw.flush();
                     continue;
                 }
@@ -72,7 +72,7 @@ class HPlayer extends Player
                     if(isWhite == true){
                         if(cell==ks.E){
                             try{
-                            bw.write(Texts.EMPTY);
+                            bw.write(Texts.EMPTY_LN);
                             bw.flush();
                             }
                             catch(IOException one){
@@ -137,7 +137,7 @@ class HPlayer extends Player
                             }
                         }else if(cell==ks.B){
                             try{
-                                bw.write(Texts.NOT_YOUR_CELL);
+                                bw.write(Texts.NOT_YOUR_CELL_LN);
                                 bw.flush();
                             }
                             catch(IOException one){
@@ -148,7 +148,7 @@ class HPlayer extends Player
                     }else{
                          if(cell==ks.E){
                              try{
-                                bw.write(Texts.EMPTY);
+                                bw.write(Texts.EMPTY_LN);
                                 bw.flush();
                              }
                              catch(IOException one){
@@ -212,7 +212,7 @@ class HPlayer extends Player
                               }
                           }else if(cell==ks.W){
                               try{
-                                   bw.write(Texts.NOT_YOUR_CELL);
+                                   bw.write(Texts.NOT_YOUR_CELL_LN);
                                    bw.flush();
                               }
                               catch(IOException one){

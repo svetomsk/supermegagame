@@ -1,5 +1,9 @@
-package gui_cama;
+package cama.gui_cama;
 
+import cama.HPlayer;
+import cama.IPlayer;
+import cama.Konsol;
+import cama.Texts;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -36,7 +40,7 @@ class Main implements ActionListener, ItemListener {
     IPlayer p2;
 
     Main() {
-        jfrm = new JFrame("Игра \"Пешки 3х3\"");
+        jfrm = new JFrame("�?гра \"Пешки 3х3\"");
         jfrm.setLayout(new FlowLayout());
         jfrm.setBounds(500, 300, 400, 150);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,7 +52,7 @@ class Main implements ActionListener, ItemListener {
         JMenu jmNewGame = new JMenu("Новая игра");
         JMenuItem jmiExit = new JMenuItem("Выход");
         JMenuItem jmiHP = new JMenuItem("Два игрока");
-        JMenuItem jmiMP = new JMenuItem("Игра с компьютером");
+        JMenuItem jmiMP = new JMenuItem("�?гра с компьютером");
         JMenuItem jmi2MP = new JMenuItem("Рубилище двух компьютеров");
 
         JMenuItem jmiRules = new JMenuItem("Правила");
@@ -137,7 +141,7 @@ class Main implements ActionListener, ItemListener {
     }
     private void MPFrame() {
         jfrm.setVisible(false);
-        final JFrame frm = new JFrame("Игрок с CPU");
+        final JFrame frm = new JFrame("�?грок с CPU");
         frm.setLayout(new FlowLayout());
         frm.setBounds(500, 300, 190, 190);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,13 +162,13 @@ class Main implements ActionListener, ItemListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        p1 = new HPlayer(ks);
+                        p1 = new GHPlayer(ks);
                         p2 = new MPlayer(ks);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
                         p1 = new MPlayer(ks);
-                        p2 = new HPlayer(ks);
+                        p2 = new GHPlayer(ks);
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
                     }
@@ -178,13 +182,13 @@ class Main implements ActionListener, ItemListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        p1 = new HPlayer(ks);
+                        p1 = new GHPlayer(ks);
                         p2 = new MPlayer(ks);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
                         p1 = new MPlayer(ks);
-                        p2 = new HPlayer(ks);
+                        p2 = new GHPlayer(ks);
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
                     }
@@ -212,7 +216,7 @@ class Main implements ActionListener, ItemListener {
         helplab = new JLabel();
         JButton example = new JButton("А можно пример?");
         JButton MPlayer = new JButton("А как играть с компьютером?");
-        lab.setText(Texts.GREETING);
+        lab.setText(Texts.HTML_GREETING);
 
         example.addActionListener(new ActionListener() {
 
@@ -223,7 +227,7 @@ class Main implements ActionListener, ItemListener {
         MPlayer.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
-                helplab.setText("Файл->Новая игра->Игра с компьютером");
+                helplab.setText("Файл->Новая игра->�?гра с компьютером");
             }
         });
 
@@ -236,7 +240,7 @@ class Main implements ActionListener, ItemListener {
     }
 
     private void StartGame(String s1, String s2) {
-        //НАЧИНАЕМ ИСПОЛЬЗОВАТЬ TOGGLE BUTTON!!!
+        //НАЧ�?НАЕМ �?СПОЛЬЗОВАТЬ TOGGLE BUTTON!!!
         isWhite = true;
         isFirst = true;
         ar = ks.getField();
@@ -245,7 +249,7 @@ class Main implements ActionListener, ItemListener {
         p2.setName(s2);
         jfrm.setVisible(false);
 
-        JFrame frm = new JFrame("Игра");
+        JFrame frm = new JFrame("�?гра");
         frm.setLayout(new FlowLayout());
         frm.setBounds(500, 300, 200, 330);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -262,7 +266,7 @@ class Main implements ActionListener, ItemListener {
         jlab3.setText("                 " + p1.getName() + " ходит:                     ");
 
         //Пошел ToggleButton!!!!!!!!
-        // И ОТЛАДИТЬ ЩЕДРО!!1
+        // �? ОТЛАД�?ТЬ ЩЕДРО!!1
 
         //field[0] = new JToggleButton(Texts.Wh);
         field[0] = new JToggleButton(Texts.Wh);
@@ -493,7 +497,7 @@ class Main implements ActionListener, ItemListener {
             p1 = new MPlayer(ks);
             p2 = new MPlayer(ks);
             StartGame("CPU1", "CPU2");
-        } else if (ae.getActionCommand().equals("Игра с компьютером")) {
+        } else if (ae.getActionCommand().equals("�?гра с компьютером")) {
             MPFrame();
         } else if (ae.getActionCommand().equals("Два игрока")) {
             p1 = new HPlayer(ks);
@@ -502,7 +506,7 @@ class Main implements ActionListener, ItemListener {
         } else if (ae.getActionCommand().equals("Харе болтать, давай игру с компом за белых!!")) {
             p1 = new HPlayer(ks);
             p2 = new MPlayer(ks);
-            StartGame("Игрок 1", "CPU");
+            StartGame("�?грок 1", "CPU");
         }
     }
 

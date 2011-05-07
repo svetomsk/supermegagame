@@ -1,10 +1,8 @@
 package cama;
 import java.io.*;
-class Konsol {
-    Konsol(){
-        kw = new BufferedWriter(new OutputStreamWriter(System.out));
-    }
-    private BufferedWriter kw;
+public class Konsol {
+
+	private BufferedWriter kw;
     private int SIZE = 3;
     private int[][] field = new int [SIZE+2][SIZE+2]; //Сменил на рамку!!!
     private boolean b;
@@ -13,12 +11,34 @@ class Konsol {
     public int B = 2;
     public int E = 0;
 
-    public void start()throws IOException{
+    public Konsol(){
+        kw = new BufferedWriter(new OutputStreamWriter(System.out));
+    }
+
+	public void start()throws IOException{
         startField();
         kw.write(Texts.GREETING);
         kw.write(Texts.START);
         kw.flush();
-    } //сделано!
+    }//сделано!
+
+	public String[][] getField(){
+        String ar[][] = new String[SIZE][SIZE];
+        for(int i=0;i<ar.length;i++){
+            for(int j=0;j<ar.length;j++){
+                if(getCh(i,j)==W){
+                    ar[i][j]=Texts.Wh;
+                }else if(getCh(i,j)==B){
+                    ar[i][j]=Texts.Bl;
+                }else{
+                    ar[i][j]=Texts.Em;
+                }
+
+            }
+        }
+        return ar;
+    }
+	
     public void printField() throws IOException{
         kw.write("  a b c\r\n");
         for(int i=0;i<SIZE;i++){
@@ -46,10 +66,10 @@ class Konsol {
         kw.write(Texts.DO_STEP(player.getName()));
         kw.flush();
     } //сделано!
-    public void rewrite(int i, int g, int s)throws IOException{
+    public void rewrite(int i, int g, int s) {
         field[i+1][g+1] = s;
     }//сделано!
-    public boolean check(boolean cb)throws IOException{
+    public boolean check(boolean cb){
         if(isBadPosition()){
             return true;
         }

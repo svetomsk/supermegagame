@@ -1,15 +1,18 @@
-package gui_cama;
+package cama.gui_cama;
+import cama.Konsol;
+import cama.Player;
 import java.util.Random;
+
 public class MPlayer extends Player {
     private Konsol ks;
     private int n_left = 0, n_right = 0, n_straight = 0;
 
     MPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
-        isMPlayer = true;
+		setModulePlayer(true);
     }
 
-    public void doStep(boolean isWhite) {
+    public void doStep(boolean isWhite)  {
         Random r = new Random();
         int count = 0, x, y;
         String[] coord = new String[ks.getSize()], ar = new String[2];
@@ -94,7 +97,8 @@ public class MPlayer extends Player {
             return false;
         }
     }
-    private void doStep(int x, int y, int x1, int y1, int cell) {
+    private void doStep(int x, int y, int x1, int y1, int cell)
+	{
             ks.rewrite(x, y, ks.E);
             ks.rewrite(x1, y1, cell);
     }
