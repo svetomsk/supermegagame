@@ -1,10 +1,10 @@
 package cama;
 import java.io.*;
-public class Fixing {
+public class fixing {
     private BufferedWriter bw;
     private BufferedReader br;
     Konsol ks;
-    Fixing(Konsol ks_from_main) throws IOException {
+   fixing(Konsol ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
     }

@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-class Main implements ActionListener, ItemListener {
+public class Main implements ActionListener, ItemListener {
     private int number;
     private JRadioButton jrbwhite;
     private JRadioButton jrbblack;
@@ -18,17 +18,17 @@ class Main implements ActionListener, ItemListener {
     private JLabel jlab1;
     private JLabel jlab2;
     private JLabel jlab3;
-    //private JLabel jlab4;
+    private JLabel jlab4;
     private JLabel helplab;
-    //private JLabel field1;
-    //private JLabel field2;
-    //private JLabel field3;
-    //private JButton doStep;
+    private JLabel field1;
+    private JLabel field2;
+    private JLabel field3;
+    private JButton doStep;
     //Включаем JToggleButton
-    private JToggleButton butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9;
-    private JToggleButton[] field = {butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9};
+    //private JToggleButton butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9;
+    //private JToggleButton[] field = {butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9};
     private boolean isFirst;
-    //static public JTextField coord;
+    static public JTextField coord;
     static public String s1 = null;
     static public String s2 = null;
     static public JLabel ErLab1;
@@ -258,7 +258,7 @@ class Main implements ActionListener, ItemListener {
         jlab1 = new JLabel();
         jlab2 = new JLabel();
         jlab3 = new JLabel();
-        //jlab4 = new JLabel();
+        jlab4 = new JLabel();
 
         jlab1.setText("Белые: " + p1.getName());
         jlab2.setText("Черные: " + p2.getName());
@@ -269,44 +269,44 @@ class Main implements ActionListener, ItemListener {
         // �? ОТЛАД�?ТЬ ЩЕДРО!!1
 
         //field[0] = new JToggleButton(Texts.Wh);
-        field[0] = new JToggleButton(Texts.Wh);
-        field[1] = new JToggleButton(Texts.Wh);
-        field[2] = new JToggleButton(Texts.Wh);
-        field[3] = new JToggleButton(" ");
-        field[4] = new JToggleButton(" ");
-        field[5] = new JToggleButton(" ");
-        field[6] = new JToggleButton(Texts.Bl);
-        field[7] = new JToggleButton(Texts.Bl);
-        field[8] = new JToggleButton(Texts.Bl);
+        //field[0] = new JToggleButton(Texts.Wh);
+        //field[1] = new JToggleButton(Texts.Wh);
+        //field[2] = new JToggleButton(Texts.Wh);
+        //field[3] = new JToggleButton(" ");
+        //field[4] = new JToggleButton(" ");
+        //field[5] = new JToggleButton(" ");
+        //field[6] = new JToggleButton(Texts.Bl);
+        //field[7] = new JToggleButton(Texts.Bl);
+        //field[8] = new JToggleButton(Texts.Bl);
 
-        for (int i = 0; i < 9; i++) {
-            field[i].setPreferredSize(new Dimension(45, 45));
-            field[i].addItemListener(this);
-        }
-
-
-        SetActionCommands();
+//        for (int i = 0; i < 9; i++) {
+//            field[i].setPreferredSize(new Dimension(45, 45));
+//            field[i].addItemListener(this);
+//        }
 
 
+        //SetActionCommands();
 
 
-        //jlab4.setText("                             a b c                           ");
-        //field1 = new JLabel();
-        //field1 = new JLabel(space+"1 "+ar[0][0]+" "+ar[0][1]+" "+ar[0][2]+space);
-        //field2 = new JLabel(space+"2 "+ar[1][0]+" "+ar[1][1]+" "+ar[1][2]+space);
-        //field3 = new JLabel(space+" 3 "+ar[2][0]+" "+ar[2][1]+" "+ar[2][2]+space);
+
+
+        jlab4.setText("                             a b c                           ");
+        field1 = new JLabel();
+        field1 = new JLabel(space+"1 "+ar[0][0]+" "+ar[0][1]+" "+ar[0][2]+space);
+        field2 = new JLabel(space+"2 "+ar[1][0]+" "+ar[1][1]+" "+ar[1][2]+space);
+        field3 = new JLabel(space+" 3 "+ar[2][0]+" "+ar[2][1]+" "+ar[2][2]+space);
       /*  field1.setText("<html>  a b c<br>"
         + "1 "+ks.getCh(0,0)+" "+ks.getCh(0, 1)+" "+ks.getCh(0, 2)+"<br>"
         + "2 "+ks.getCh(1,0)+" "+ks.getCh(1, 1)+" "+ks.getCh(1, 2)+"<br>"
         + "3 "+ks.getCh(2,0)+" "+ks.getCh(2, 1)+" "+ks.getCh(2, 2)+"<br>");*/
 
-        //  coord = new JTextField(3);
+          coord = new JTextField(3);
         ErLab1 = new JLabel("");
         JLabel space1 = new JLabel("                       ");
         JLabel space2 = new JLabel("                       ");
-        // doStep = new JButton("Хожу!");
+         doStep = new JButton("Хожу!");
 
-        /*   doStep.addActionListener(new ActionListener() {
+           doStep.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
         doGame();
         }
@@ -315,32 +315,32 @@ class Main implements ActionListener, ItemListener {
         public void actionPerformed(ActionEvent evt) {
         doGame();
         }
-        });*/
+        });
 
         frm.add(jlab1);
         frm.add(jlab2);
         frm.add(jlab3);
 
-        frm.add(field[0]);
-        frm.add(field[1]);
-        frm.add(field[2]);
-        frm.add(field[3]);
-        frm.add(field[4]);
-        frm.add(field[5]);
-        frm.add(field[6]);
-        frm.add(field[7]);
-        frm.add(field[8]);
+//        frm.add(field[0]);
+//        frm.add(field[1]);
+//        frm.add(field[2]);
+//        frm.add(field[3]);
+//        frm.add(field[4]);
+//        frm.add(field[5]);
+//        frm.add(field[6]);
+//        frm.add(field[7]);
+//        frm.add(field[8]);
 
 
 
-        //frm.add(jlab4);
-        //frm.add(field1);
-        //frm.add(field2);
-        //frm.add(field3);
+        frm.add(jlab4);
+        frm.add(field1);
+        frm.add(field2);
+        frm.add(field3);
         frm.add(space1);
-        //frm.add(coord);
+        frm.add(coord);
         frm.add(space2);
-        //frm.add(doStep);
+        frm.add(doStep);
         frm.add(ErLab1);
 
 
@@ -356,9 +356,9 @@ class Main implements ActionListener, ItemListener {
                 System.out.println("win!");
                 updateField();
                 ErLab1.setText("            " + p1.getName() + " выиграл!      ");
-                //coord.setText("");
-                //doStep.setEnabled(false);
-                //coord.setEnabled(false);
+                coord.setText("");
+                doStep.setEnabled(false);
+                coord.setEnabled(false);
             } else {
                 if (isWhite == false) {
                     updateField();
@@ -369,16 +369,16 @@ class Main implements ActionListener, ItemListener {
                 } else {
                     System.out.println("ошибка!");
                 }
-                //coord.setText("");
+                coord.setText("");
             }
         } else {
             p2.doStep(false);
             if (ks.check(false)) {
                 updateField();
                 ErLab1.setText("             " + p2.getName() + " выиграл!      ");
-                //coord.setText("");
-                //doStep.setEnabled(false);
-                //coord.setEnabled(false);
+                coord.setText("");
+                doStep.setEnabled(false);
+                coord.setEnabled(false);
             } else {
                 if (isWhite) {
                     updateField();
@@ -389,72 +389,72 @@ class Main implements ActionListener, ItemListener {
                 } else {
                     System.out.println("ошибка!");
                 }
-                //coord.setText("");
+                coord.setText("");
             }
         }
     }
     private void updateField() {
-        ar = ks.getField();
-        int cnt=0;
-        for(int i=0; i<ks.getSize();i++){
-            for(int j=0; j<ks.getSize();j++){
-                if(ks.getCh(i, j)==ks.W){
-                    field[cnt].setText(Texts.Wh);
-                }else if(ks.getCh(i, j) == ks.B){
-                    field[cnt].setText(Texts.Bl);
-                }else{
-                    field[cnt].setText(" ");
-                }
-                cnt++;
-            }
-        }
-        //field1.setText(space+"1 "+ar[0][0]+" "+ar[0][1]+" "+ar[0][2]+space);
-        //field2.setText(space+"2 "+ar[1][0]+" "+ar[1][1]+" "+ar[1][2]+space);
-        //field3.setText(space+" 3 "+ar[2][0]+" "+ar[2][1]+" "+ar[2][2]+space);
-      /*  field1.setText("<html>  a b c<br>"
+//        ar = ks.getField();
+//        int cnt=0;
+//        for(int i=0; i<ks.getSize();i++){
+//            for(int j=0; j<ks.getSize();j++){
+//                if(ks.getCh(i, j)==ks.W){
+//                    field[cnt].setText(Texts.Wh);
+//                }else if(ks.getCh(i, j) == ks.B){
+//                    field[cnt].setText(Texts.Bl);
+//                }else{
+//                    field[cnt].setText(" ");
+//                }
+//                cnt++;
+//            }
+//        }
+        field1.setText(space+"1 "+ar[0][0]+" "+ar[0][1]+" "+ar[0][2]+space);
+        field2.setText(space+"2 "+ar[1][0]+" "+ar[1][1]+" "+ar[1][2]+space);
+        field3.setText(space+" 3 "+ar[2][0]+" "+ar[2][1]+" "+ar[2][2]+space);
+        field1.setText("<html>  a b c<br>"
         + "1 "+ks.getCh(0,0)+" "+ks.getCh(0, 1)+" "+ks.getCh(0, 2)+"<br>"
         + "2 "+ks.getCh(1,0)+" "+ks.getCh(1, 1)+" "+ks.getCh(1, 2)+"<br>"
-        + "3 "+ks.getCh(2,0)+" "+ks.getCh(2, 1)+" "+ks.getCh(2, 2)+"<br>");*/
+        + "3 "+ks.getCh(2,0)+" "+ks.getCh(2, 1)+" "+ks.getCh(2, 2)+"<br>");
     }
     private void SetActionCommands() { //1-ое - х, 2-ое - у
-        field[0].setActionCommand("00");
-        field[1].setActionCommand("01");
-        field[2].setActionCommand("02");
-        field[3].setActionCommand("10");
-        field[4].setActionCommand("11");
-        field[5].setActionCommand("12");
-        field[6].setActionCommand("20");
-        field[7].setActionCommand("21");
-        field[8].setActionCommand("22");
+//        field[0].setActionCommand("00");
+//        field[1].setActionCommand("01");
+//        field[2].setActionCommand("02");
+//        field[3].setActionCommand("10");
+//        field[4].setActionCommand("11");
+//        field[5].setActionCommand("12");
+//        field[6].setActionCommand("20");
+//        field[7].setActionCommand("21");
+//        field[8].setActionCommand("22");
 
     }
 
     public void itemStateChanged(ItemEvent ie) {
-        if(isFirst){
-            System.out.println("THIS1");
-            for(int i=0; i<field.length;i++){
-                if(field[i].isSelected()){
-                    s1 = field[i].getActionCommand();
-                   // isFirst = false;
-                    //break;
-                }
-            }
-        }else{
-            System.out.println("THIS2");
-            for(int i=0; i<field.length;i++){
-                if(field[i].isSelected() && !field[i].getActionCommand().equals(s1)){
-                    s2 = field[i].getActionCommand();
-                    isFirst = true;
-                    break;
-                }
-            }
-            field[0].setSelected(false);
-            System.out.println("s1: "+s1);
-            System.out.println("s2: "+s2);
-          //  for(int i=0; i<field.length;i++){
-           //     field[i].setSelected(false);
-          //  }
-            doGame();
+//        if(isFirst){
+//            System.out.println("THIS1");
+//            for(int i=0; i<field.length;i++){
+//                if(field[i].isSelected()){
+//                    s1 = field[i].getActionCommand();
+//                   // isFirst = false;
+//                    //break;
+//                }
+//            }
+//        }else{
+//            System.out.println("THIS2");
+//            for(int i=0; i<field.length;i++){
+//                if(field[i].isSelected() && !field[i].getActionCommand().equals(s1)){
+//                    s2 = field[i].getActionCommand();
+//                    isFirst = true;
+//                    break;
+//                }
+//            }
+//            field[0].setSelected(false);
+//            System.out.println("s1: "+s1);
+//            System.out.println("s2: "+s2);
+//          //  for(int i=0; i<field.length;i++){
+//           //     field[i].setSelected(false);
+//          //  }
+//            doGame();
         }
 
 
@@ -487,7 +487,7 @@ class Main implements ActionListener, ItemListener {
             System.out.println("one time!");
             doGame();
         }*/
-    }
+    //}
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals("Выход")) {
             System.exit(0);

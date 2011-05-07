@@ -3,7 +3,6 @@ package cama.gui_cama;
 import cama.Konsol;
 import cama.Player;
 import cama.Texts;
-import java.io.IOException;
 
 class GHPlayer extends Player {
 
@@ -13,7 +12,7 @@ class GHPlayer extends Player {
         ks = ks_from_main;
 		setModulePlayer(false);
    }
-    public void doStep(boolean isWhite) throws IOException {
+    public void doStep(boolean isWhite) {
         //String s = Main.coord.getText();
 
 
