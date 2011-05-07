@@ -13,39 +13,41 @@ class GHPlayer extends Player {
 		setModulePlayer(false);
    }
     public void doStep(boolean isWhite) {
-        //String s = Main.coord.getText();
+        
 
 
         /*if (s.equals("GK")) {  //  <- доработать!!!!
             System.out.println("Texts.CHEAT1");
             System.exit(0);
         }*/
-        String[] s1 = Main.s1.split("");
-        String[] s2 = Main.s2.split("");
 
-        int x1 = Integer.valueOf(s1[1]);
-        int y1 = Integer.valueOf(s1[2]);
-        int x2 = Integer.valueOf(s2[1]);
-        int y2 = Integer.valueOf(s2[2]);
+        String s = Main.coord.getText();
+//        String[] s1 = Main.s1.split("");
+//        String[] s2 = Main.s2.split("");
+
+//        int x1 = Integer.valueOf(s1[1]);
+//        int y1 = Integer.valueOf(s1[2]);
+//        int x2 = Integer.valueOf(s2[1]);
+//        int y2 = Integer.valueOf(s2[2]);
 
 
 
-        //int x1, x2, y1, y2;
-        //String[] s1, s2, s3;
-        //x1 = x2 = y1 = y2 = -1;
-        //try {
-            //s1 = s.split("-");
-            //s2 = s1[0].split("");
-            //s3 = s1[1].split("");
-            //y1 = makeY(s2[1]);
-            //y2 = makeY(s3[1]);
-            //x1 = makeX(s2[2]);
-            //x2 = makeX(s3[2]);
-        //} catch (ArrayIndexOutOfBoundsException e) {
-        //    Main.ErLab1.setText(Texts.ER_TEXT);
-        //} catch (NumberFormatException er) {
-        //    Main.ErLab1.setText(Texts.ER_TEXT);
-        //}
+        int x1, x2, y1, y2;
+        String[] s1, s2, s3;
+        x1 = x2 = y1 = y2 = -1;
+        try {
+            s1 = s.split("-");
+            s2 = s1[0].split("");
+            s3 = s1[1].split("");
+            y1 = makeY(s2[1]);
+            y2 = makeY(s3[1]);
+            x1 = makeX(s2[2]);
+            x2 = makeX(s3[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Main.ErLab1.setText(Texts.ER_TEXT);
+        } catch (NumberFormatException er) {
+            Main.ErLab1.setText(Texts.ER_TEXT);
+        }
 
 
 
