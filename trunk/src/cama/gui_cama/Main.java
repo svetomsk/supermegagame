@@ -1,9 +1,8 @@
 package cama.gui_cama;
 
-import cama.HPlayer;
-import cama.IPlayer;
-import cama.Konsol;
-import cama.Texts;
+import cama.core.IPlayer;
+import cama.core.Konsol;
+import cama.core.Texts;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

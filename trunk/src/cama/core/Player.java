@@ -1,4 +1,4 @@
-package cama;
+package cama.core;
 abstract public class Player implements IPlayer {
     private String name;
     private boolean isMPlayer;

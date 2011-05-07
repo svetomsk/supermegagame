@@ -1,6 +1,7 @@
 package cama;
 import java.io.*;
 import java.util.Random;
+import cama.core.Konsol;
 
 class Excp {
     private Konsol ks;

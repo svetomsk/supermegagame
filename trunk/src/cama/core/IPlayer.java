@@ -1,4 +1,4 @@
-package cama;
+package cama.core;
 
 public interface IPlayer {
     public void doStep(boolean isWhite);

@@ -1,6 +1,6 @@
 package cama.gui_cama;
-import cama.Konsol;
-import cama.Player;
+import cama.core.Konsol;
+import cama.core.Player;
 import java.util.Random;
 
 public class MPlayer extends Player {

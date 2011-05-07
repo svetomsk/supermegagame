@@ -1,6 +1,10 @@
 package cama;
 import java.io.*;
 import java.util.Random;
+import cama.core.Player;
+import cama.core.Texts;
+import cama.core.Konsol;
+
 public class MPlayer extends Player{
     private Konsol ks;
     private int n_left=0, n_right=0, n_straight=0, numb=0;

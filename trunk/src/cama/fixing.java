@@ -1,5 +1,7 @@
 package cama;
 import java.io.*;
+import cama.core.Konsol;
+
 public class fixing {
     private BufferedWriter bw;
     private BufferedReader br;

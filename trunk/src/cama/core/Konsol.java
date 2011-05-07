@@ -1,4 +1,4 @@
-package cama;
+package cama.core;
 
 import java.io.*;
 
