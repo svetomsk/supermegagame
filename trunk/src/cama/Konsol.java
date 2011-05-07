@@ -13,6 +13,7 @@ public class Konsol {
 
     public Konsol(){
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
+		startField();
     }
 
 	public void start()throws IOException{
