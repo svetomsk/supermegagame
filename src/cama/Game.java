@@ -18,8 +18,10 @@ class Game
    //          str = r.readLine();
   //           if(str.equals("exit")) System.exit(0);
   //           if(str.equals("1")){
-                h1 = new HPlayer(ks);
-                h2 = new HPlayer(ks);
+
+		h1 = new HPlayer(ks);
+//		h1 = new MPlayer(ks);
+		h2 = new HPlayer(ks);
 
   //              w.write(Texts.NAME1);
   //             w.flush();
@@ -58,14 +60,14 @@ class Game
         for(;;){
             if(i == 0){
                 ks.who(h1);
-                h1.xod(true);
+                h1.doStep(true);
                 if(ks.check(true)){
                     break;
                 }
                 i = 1;
             }else{
                 ks.who(h2);
-                h2.xod(false);
+                h2.doStep(false);
                 if(ks.check(false)==true){
                     break;
                 }

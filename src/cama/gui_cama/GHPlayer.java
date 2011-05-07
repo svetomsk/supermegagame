@@ -1,14 +1,19 @@
-package gui_cama;
+package cama.gui_cama;
 
-class HPlayer extends Player {
+import cama.Konsol;
+import cama.Player;
+import cama.Texts;
+import java.io.IOException;
+
+class GHPlayer extends Player {
 
     public boolean b;
     private Konsol ks;
-    HPlayer(Konsol ks_from_main) {
+    GHPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
-        isMPlayer = false;
-    }
-    public void doStep(boolean isWhite) {
+		setModulePlayer(false);
+   }
+    public void doStep(boolean isWhite) throws IOException {
         //String s = Main.coord.getText();
 
 
@@ -102,79 +107,6 @@ class HPlayer extends Player {
                     Main.ErLab1.setText(Texts.ER_STEP);
                 }
             }
-        //} else{
-        //    Main.ErLab1.setText(Texts.ER_STEP);
-        //}
-        
-
-
-
-            /*************СТАРЫЙ HPLAYER**************/
-
-        
-   /*
-        if (x1 < ks.getSize() && x2 < ks.getSize() && y1 < ks.getSize() && y2 < ks.getSize()
-                && x1 >= 0 && x2 >= 0 && y1 >= 0 && y2 >= 0) {
-            int cell = ks.getCh(x1, y1);
-            int cellch = ks.getCh(x2, y2);
-            if (isWhite == true) {
-                if (cell == ks.E) {
-                    Main.ErLab1.setText(Texts.EMPTY);
-                } else if (cell == ks.W) {
-                    if (cellch == ks.W) {
-                       Main.ErLab1.setText(Texts.YOUR_CELL);
-                    } else if (cellch == ks.B) {
-                        if ((x2 - x1 == 1 && y2 - y1 == 1) || (x2 - x1 == 1 && y1 - y2 == 1)) {
-                            ks.rewrite(x2, y2, ks.W);
-                            ks.rewrite(x1, y1, ks.E);
-                            setIsWhite();
-                        } else {
-                            Main.ErLab1.setText(Texts.ER_STEP);
-                        }
-                    } else {
-                        if (x2 - x1 == 1 && y2 - y1 == 0) {
-                            ks.rewrite(x2, y2, ks.W);
-                            ks.rewrite(x1, y1, ks.E);
-                            setIsWhite();
-                        } else {
-                            Main.ErLab1.setText(Texts.ER_STEP);
-                        }
-                    }
-                } else {
-                   Main.ErLab1.setText(Texts.NOT_YOUR_CELL);
-                }
-            } else {
-                if (cell == ks.E) {
-                   Main.ErLab1.setText(Texts.EMPTY);
-                } else if (cell == ks.B) {
-                    if (cellch == ks.B) {
-                      Main.ErLab1.setText(Texts.YOUR_CELL);
-                    } else if (cellch == ks.W) {
-                        if ((x2 - x1 == -1 && y2 - y1 == -1) || (x2 - x1 == -1 && y1 - y2 == -1)) {
-                            ks.rewrite(x2, y2, ks.B);
-                            ks.rewrite(x1, y1, ks.E);
-                            setIsWhite();
-                        } else {
-                          Main.ErLab1.setText(Texts.ER_STEP);
-                        }
-                    } else {
-                        if (x2 - x1 == -1 && y2 - y1 == 0) {
-                            ks.rewrite(x2, y2, ks.B);
-                            ks.rewrite(x1, y1, ks.E);
-                            setIsWhite();
-                        } else {
-                           Main.ErLab1.setText(Texts.ER_STEP);
-                        }
-                    }
-                } else {
-                  Main.ErLab1.setText(Texts.NOT_YOUR_CELL);
-                }
-            }
-        } else {
-           Main.ErLab1.setText(Texts.OUT_OF_BOUNDS);
-        }
-            */
-
     }
 
     private int makeY(String m) {

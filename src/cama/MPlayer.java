@@ -7,7 +7,7 @@ public class MPlayer extends Player{
     MPlayer(Konsol ks_from_main) {
         ks = ks_from_main;
     }
-    public void xod(boolean isWhite){
+    public void doStep(boolean isWhite){
         Random r =new Random();
         int count = 0, num, x, y;
         String[] coord = new String [ks.getSize()], ar=new String[2];
