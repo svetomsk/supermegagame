@@ -3,13 +3,15 @@ import java.io.*;
 import java.util.Random;
 import cama.core.Player;
 import cama.core.Texts;
-import cama.core.Konsol;
+import cama.core.Judge;
 
 public class MPlayer extends Player{
-    private Konsol ks;
+    private Judge ks;
     private int n_left=0, n_right=0, n_straight=0, numb=0;
-    MPlayer(Konsol ks_from_main) {
+    boolean isGuiGame;
+    MPlayer(Judge ks_from_main, boolean isGuiGame) {
         ks = ks_from_main;
+        this.isGuiGame = isGuiGame;
     }
     public void doStep(boolean isWhite){
         Random r =new Random();
@@ -81,37 +83,19 @@ public class MPlayer extends Player{
 
       if(n_left==ks.B&&n_right==ks.B&&n_straight==ks.E);
         if(n_left == ks.B){
-            try{
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i+1, j-1, ks.W);
-                ks.printField();
-            }
-            catch(IOException one){
-                System.out.println(Texts.IOException);
-                System.exit(0);
-            }
+            ks.rewrite(i, j, ks.E);
+            ks.rewrite(i+1, j-1, ks.W);
+            //ks.printField();
             return true;
         }else if(n_right == ks.B){
-            try{
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i+1, j+1, ks.W);
-                ks.printField();
-            }
-            catch(IOException one){
-                System.out.println(Texts.IOException);
-                System.exit(0);
-            }
+            ks.rewrite(i, j, ks.E);
+            ks.rewrite(i+1, j+1, ks.W);
+            //ks.printField();
             return true;
         }else if(n_straight == ks.E){
-            try{
-                ks.rewrite(i, j, ks.E);
-                ks.rewrite(i+1, j, ks.W);
-                ks.printField();
-            }
-            catch(IOException one){
-                System.out.println(Texts.IOException);
-                System.exit(0);
-            }
+            ks.rewrite(i, j, ks.E);
+            ks.rewrite(i+1, j, ks.W);
+            //ks.printField();
             return true;
         }else{
           return false;
@@ -168,15 +152,9 @@ public class MPlayer extends Player{
       n_right = ks.getCh(i-1, j+1);
       n_straight = ks.getCh(i-1, j);
         if(n_left == ks.W){
-            try{
                 ks.rewrite(i, j, ks.E);
                 ks.rewrite(i-1, j-1, ks.B);
-                ks.printField();
-            }
-            catch(IOException one){
-                System.out.println(Texts.IOException);
-                System.exit(0);
-            }
+                //ks.printField();
             return true;
         }else if(n_right == ks.W){
             try{

@@ -1,7 +1,9 @@
 package cama;
 import java.io.*;
 import cama.core.IPlayer;
-import cama.core.Konsol;
+import cama.core.Judge;
+import cama.core.Console;
+import cama.gui_cama.MPlayer;
 
 public class Game
 {
@@ -9,12 +11,13 @@ public class Game
     {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        Konsol ks = new Konsol();
+        Judge jd = new Judge();
+        Console cs = new Console(jd);
         IPlayer h1 = null;
         IPlayer h2 = null;
         String str= "";
         String name= "";
-        ks.start();
+        jd.start();
     //    w.write("\r\n"+Texts.CHOISE);
     //    w.flush();
    //     while(!str.equals("1")&&!str.equals("2")){
@@ -22,9 +25,9 @@ public class Game
   //           if(str.equals("exit")) System.exit(0);
   //           if(str.equals("1")){
 
-		h1 = new HPlayer(ks);
-//		h1 = new MPlayer(ks);
-		h2 = new HPlayer(ks);
+		h1 = new HPlayer(jd);
+//		h1 = new MPlayer(jd, false);
+		h2 = new HPlayer(jd);
 
   //              w.write(Texts.NAME1);
   //             w.flush();
@@ -62,22 +65,24 @@ public class Game
         int i = 0;
         for(;;){
             if(i == 0){
-                ks.who(h1);
+                cs.who(h1);
                 h1.doStep(true);
-                if(ks.check(true)){
+                cs.printField();
+                if(jd.check(true)){
                     break;
                 }
                 i = 1;
             }else{
-                ks.who(h2);
+                cs.who(h2);
                 h2.doStep(false);
-                if(ks.check(false)==true){
+                cs.printField();
+                if(jd.check(false)==true){
                     break;
                 }
                 i = 0;
             }   
          }
-        ks.finish();
+        jd.finish();
     }
 }
 

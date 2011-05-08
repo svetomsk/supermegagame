@@ -1,7 +1,7 @@
 package cama.gui_cama;
 
 import cama.core.IPlayer;
-import cama.core.Konsol;
+import cama.core.Judge;
 import cama.core.Texts;
 import java.awt.*;
 import javax.swing.*;
@@ -35,7 +35,7 @@ public class Main implements ActionListener, ItemListener {
     static public boolean isWhite;
     static public String space = "                         ";
     private String[][] ar;
-    Konsol ks = new Konsol();
+    Judge ks = new Judge();
     IPlayer p1;
     IPlayer p2;
 
@@ -165,11 +165,11 @@ public class Main implements ActionListener, ItemListener {
                 } else {
                     if (jrbwhite.isSelected()) {
                         p1 = new GHPlayer(ks);
-                        p2 = new MPlayer(ks);
+                        p2 = new MPlayer(ks, true);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
-                        p1 = new MPlayer(ks);
+                        p1 = new MPlayer(ks, true);
                         p2 = new GHPlayer(ks);
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
@@ -185,11 +185,11 @@ public class Main implements ActionListener, ItemListener {
                 } else {
                     if (jrbwhite.isSelected()) {
                         p1 = new GHPlayer(ks);
-                        p2 = new MPlayer(ks);
+                        p2 = new MPlayer(ks, true);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
-                        p1 = new MPlayer(ks);
+                        p1 = new MPlayer(ks, true);
                         p2 = new GHPlayer(ks);
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
@@ -494,8 +494,8 @@ public class Main implements ActionListener, ItemListener {
         } else if (ae.getActionCommand().equals("Правила")) {
             showRules();
         } else if (ae.getActionCommand().equals("Рубилище двух компьютеров")) {
-            p1 = new MPlayer(ks);
-            p2 = new MPlayer(ks);
+            p1 = new MPlayer(ks, true);
+            p2 = new MPlayer(ks, true);
             StartGame("CPU1", "CPU2");
         } else if (ae.getActionCommand().equals("�?гра с компьютером")) {
             MPFrame();
@@ -505,7 +505,7 @@ public class Main implements ActionListener, ItemListener {
             HP2Frame();
         } else if (ae.getActionCommand().equals("Харе болтать, давай игру с компом за белых!!")) {
             p1 = new GHPlayer(ks);
-            p2 = new MPlayer(ks);
+            p2 = new MPlayer(ks, true);
             StartGame("�?грок 1", "CPU");
         }
     }

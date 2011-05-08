@@ -2,7 +2,7 @@ package cama.core;
 
 import java.io.*;
 
-public class Konsol {
+public class Judge {
 
     private BufferedWriter kw;
     private int SIZE = 3;
@@ -12,7 +12,7 @@ public class Konsol {
     public int B = 2;
     public int E = 0;
 
-    public Konsol() {
+    public Judge() {
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
         startField();
     }
@@ -22,7 +22,7 @@ public class Konsol {
         kw.write(Texts.GREETING);
         kw.write(Texts.START);
         kw.flush();
-    }//сделано!
+    }
 
     public String[][] getField() {
         String ar[][] = new String[SIZE][SIZE];
@@ -41,23 +41,6 @@ public class Konsol {
         return ar;
     }
 
-    public void printField() throws IOException {
-        kw.write("  a b c\r\n");
-        for (int i = 0; i < SIZE; i++) {
-            kw.write((i + 1) + " ");
-            for (int j = 0; j < SIZE; j++) {
-                if (field[i + 1][j + 1] == W) {
-                    kw.write(Texts.Wh + " ");
-                } else if (field[i + 1][j + 1] == B) {
-                    kw.write(Texts.Bl + " ");
-                } else {
-                    kw.write(Texts.Em + " ");
-                }
-            }
-            kw.write("\r\n");
-        }
-        kw.flush();
-    } //сделано!
 
     public int[][] getFullField() {
         return field;
@@ -65,16 +48,16 @@ public class Konsol {
 
     public int getCh(int i, int g) {
         return field[i + 1][g + 1];
-    } //сделано!
+    } 
 
     public void who(IPlayer player) throws IOException {
         kw.write(Texts.DO_STEP(player.getName()));
         kw.flush();
-    } //сделано!
+    } 
 
     public void rewrite(int i, int g, int s) {
         field[i + 1][g + 1] = s;
-    }//сделано!
+    }
 
     public boolean check(boolean cb) {
         if (isBadPosition()) {
@@ -90,11 +73,11 @@ public class Konsol {
             return true;
         }
         return false;
-    } //сделано!!
+    } 
 
     public int getSize() {
         return SIZE;
-    } //сделано!!
+    } 
 
     public void finish() throws IOException {
         kw.close();
@@ -121,7 +104,7 @@ public class Konsol {
             }
         }
 
-    } //сделано!
+    }
 
     private int WhQuantity() {
         int count = 0;
@@ -133,7 +116,7 @@ public class Konsol {
             }
         }
         return count;
-    } //сделано!
+    } 
 
     private int BlQuantity() {
         int count = 0;
@@ -145,7 +128,7 @@ public class Konsol {
             }
         }
         return count;
-    } //сделано!
+    }
 
     private boolean isBadPosition() {
         int count = 0;
