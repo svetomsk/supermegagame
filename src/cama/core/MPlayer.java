@@ -11,7 +11,7 @@ public class MPlayer extends Player {
     private int n_left = 0, n_right = 0, n_straight = 0;
     boolean isGuiGame;
 
-    MPlayer(Judge ks_from_main, boolean isGui) {
+    public MPlayer(Judge ks_from_main, boolean isGui) {
         ks = ks_from_main;
         setModulePlayer(true);
         this.isGuiGame = isGuiGame;
