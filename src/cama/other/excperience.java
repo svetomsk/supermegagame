@@ -1,16 +1,69 @@
-package cama;
+package cama.other;
 import java.io.*;
+import java.util.Random;
 import cama.core.Judge;
 
-public class fixing {
-    private BufferedWriter bw;
+class Excp {
+    private Judge ks;
     private BufferedReader br;
-    Judge ks;
-   fixing(Judge ks_from_main) throws IOException {
+    private BufferedWriter bw;
+    Excp(Judge ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
+    }  
+    public void analyze(int num_xod) throws IOException {
+        int[][] ar = setArray();
+        if(checkFields(num_xod, ar)>0){
+        }else{
+            fixField(ks.getFullField(), num_xod);
+        }
     }
-    public void fix(int[][] ar, int x_num) throws IOException { //нужно получить обработанный массив
+    private int[][] setArray(){
+        int[][] ar = new int[ks.getSize()][ks.getSize()];
+        for (int i = 0; i < ar.length; i++) {
+            for (int j = 0; j < ar.length; j++) {
+                ar[i][j] = ks.getCh(i, j);
+            }
+        }
+        return ar;
+    }
+    private int checkFields(int hod_num, int ar[][]) throws IOException {
+        for (int i = 0;; i++) {
+            br.readLine();
+            try {
+                if (br.readLine().equals("" + hod_num)) {
+                    if (equalsFields(ar)) {
+                        return i;
+                    }
+                }else{
+                    for(int j = 0; j<ks.getSize();j++){
+                        br.readLine();
+                    }
+                }
+            } catch (NullPointerException e) {
+                return -1;
+            }
+            br.readLine();
+            br.readLine();
+        }
+    } //проверить
+    private boolean equalsFields(int ar[][]) throws IOException {
+        int count = 0;
+        String s = "";
+        for (int i = 0; i < ks.getSize(); i++) {
+            for (int j = 0; j < ks.getSize(); j++) {
+                s += ar[i][j];
+            }
+            if (br.readLine().equals(s)) {
+                count++;
+            }
+        }
+        if (count == ks.getSize()) {
+            return true;
+        }
+        return false;
+    }  
+    private void fixField(int[][] ar, int x_num) throws IOException {
         int count = 0;
         bw = new BufferedWriter(new FileWriter("xod.txt", true));
         bw.write("################\r\n");
@@ -54,45 +107,6 @@ public class fixing {
         bw.write("\r\n");
         bw.close();
     }
-    public int check(int hod_num) throws IOException {
-        int[][] ar = new int[ks.getSize()][ks.getSize()];
-        for (int i = 0; i < ar.length; i++) {
-            for (int j = 0; j < ar.length; j++) {
-                ar[i][j] = ks.getCh(i, j);
-            }
-        }
-        for (int i =0;;i++) {
-            br.readLine();
-            try{
-                if(br.readLine().equals(""+hod_num)){
-                    if(checking(ar)){
-                        return i;
-                    }
-                }
-            }
-            catch(NullPointerException e){
-                return -1;
-            }
-            br.readLine(); br.readLine();
-        }
-    }
-
-    private boolean checking(int ar[][]) throws IOException {
-        int count = 0;
-        String s = "";
-        for (int i = 0; i < ks.getSize(); i++) {
-            for (int j = 0; j < ks.getSize(); j++) {
-                s += ar[i][j];
-            }
-            if (br.readLine().equals(s)) {
-                count++;
-            }
-        }
-        if (count == ks.getSize()) {
-            return true;
-        }
-        return false;
-    }
     private int HodQuantity(int left, int right, int straight) {
         int count = 0;
         if (straight == ks.E) {
@@ -126,6 +140,44 @@ public class fixing {
             }
             xod[count] = (i - 1) + "" + (j - 1) + "-" + (i - 2) + (j - 2);
         }
+        return xod;
+    }
+
+
+    private int[][] makeHod(int [][]ar){
+        return ar;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private int[] setArrayBus(String s, String ar[]) {
+        ar = s.split(" ");
+        int bus[] = new int[ar.length];
+        System.arraycopy(ar, 0, bus, 0, ar.length);
+        return bus;
+    }
+
+    private String[] setArrayXod(String s, String[] ar) {
+        ar = s.split(" ");
+        String xod[] = new String[ar.length];
+        System.arraycopy(ar, 0, xod, 0, ar.length);
         return xod;
     }
 }

@@ -1,4 +1,4 @@
-package cama;
+package cama.console_cama;
 import java.io.*;
 import cama.core.Player;
 import cama.core.Texts;
