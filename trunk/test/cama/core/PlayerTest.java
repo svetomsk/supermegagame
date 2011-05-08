@@ -1,4 +1,4 @@
-package cama;
+package cama.core;
 
 import org.junit.After;
 import org.junit.AfterClass;
