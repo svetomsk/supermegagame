@@ -41,7 +41,7 @@ public class Main implements ActionListener, ItemListener {
     IPlayer p2;
 
     Main() {
-        jfrm = new JFrame("�?гра \"Пешки 3х3\"");
+        jfrm = new JFrame("Игра \"Пешки 3х3\"");
         jfrm.setLayout(new FlowLayout());
         jfrm.setBounds(500, 300, 400, 150);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

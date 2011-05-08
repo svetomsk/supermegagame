@@ -13,7 +13,7 @@ public class Console {
         SIZE = jd.getSize();
     }
     
-    public void who(IPlayer player) throws IOException {
+    public void printDoStep(IPlayer player) throws IOException {
         kw.write(Texts.DO_STEP(player.getName()));
         kw.flush();
     }

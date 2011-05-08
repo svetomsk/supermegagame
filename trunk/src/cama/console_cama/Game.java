@@ -11,13 +11,13 @@ public class Game
     {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        Judge jd = new Judge();
-        Console cs = new Console(jd);
+        Judge judge = new Judge();
+        Console console = new Console(judge);
         IPlayer h1 = null;
         IPlayer h2 = null;
         String str= "";
         String name= "";
-        jd.start();
+        judge.start();
     //    w.write("\r\n"+Texts.CHOISE);
     //    w.flush();
    //     while(!str.equals("1")&&!str.equals("2")){
@@ -25,9 +25,9 @@ public class Game
   //           if(str.equals("exit")) System.exit(0);
   //           if(str.equals("1")){
 
-		h1 = new HPlayer(jd);
+		h1 = new HPlayer(judge);
 //		h1 = new MPlayer(jd, false);
-		h2 = new HPlayer(jd);
+		h2 = new HPlayer(judge);
 
   //              w.write(Texts.NAME1);
   //             w.flush();
@@ -65,24 +65,23 @@ public class Game
         int i = 0;
         for(;;){
             if(i == 0){
-                cs.who(h1);
+                console.printDoStep(h1);
                 h1.doStep(true);
-                cs.printField();
-                if(jd.check(true)){
+                console.printField();
+                if(judge.check(true)){
                     break;
                 }
                 i = 1;
             }else{
-                cs.who(h2);
+                console.printDoStep(h2);
                 h2.doStep(false);
-                cs.printField();
-                if(jd.check(false)==true){
+                console.printField();
+                if(judge.check(false)==true){
                     break;
                 }
                 i = 0;
             }   
          }
-        jd.finish();
+        judge.finish();
     }
 }
-
