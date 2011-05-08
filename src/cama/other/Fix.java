@@ -2,11 +2,11 @@ package cama.other;
 import java.io.*;
 import cama.core.Judge;
 
-public class fixing {
+public class Fix {
     private BufferedWriter bw;
     private BufferedReader br;
     Judge ks;
-   fixing(Judge ks_from_main) throws IOException {
+   Fix(Judge ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
     }
