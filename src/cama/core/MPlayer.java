@@ -1,7 +1,8 @@
-package cama.gui_cama;
+package cama.core;
 
 import cama.core.Judge;
 import cama.core.Player;
+import cama.gui_cama.Main;
 import java.util.Random;
 
 public class MPlayer extends Player {

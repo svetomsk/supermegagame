@@ -1,5 +1,6 @@
 package cama.gui_cama;
 
+import cama.core.MPlayer;
 import cama.core.IPlayer;
 import cama.core.Judge;
 import cama.core.Texts;
