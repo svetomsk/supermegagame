@@ -1,14 +1,14 @@
 package cama.gui_cama;
 
-import cama.core.Konsol;
+import cama.core.Judge;
 import cama.core.Player;
 import cama.core.Texts;
 
 class GHPlayer extends Player {
 
     public boolean b;
-    private Konsol ks;
-    GHPlayer(Konsol ks_from_main) {
+    private Judge ks;
+    GHPlayer(Judge ks_from_main) {
         ks = ks_from_main;
 		setModulePlayer(false);
    }

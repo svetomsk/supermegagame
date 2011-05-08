@@ -1,13 +1,13 @@
 package cama;
 import java.io.*;
 import java.util.Random;
-import cama.core.Konsol;
+import cama.core.Judge;
 
 class Excp {
-    private Konsol ks;
+    private Judge ks;
     private BufferedReader br;
     private BufferedWriter bw;
-    Excp(Konsol ks_from_main) throws IOException {
+    Excp(Judge ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
     }  

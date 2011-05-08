@@ -1,12 +1,12 @@
 package cama;
 import java.io.*;
-import cama.core.Konsol;
+import cama.core.Judge;
 
 public class fixing {
     private BufferedWriter bw;
     private BufferedReader br;
-    Konsol ks;
-   fixing(Konsol ks_from_main) throws IOException {
+    Judge ks;
+   fixing(Judge ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
     }

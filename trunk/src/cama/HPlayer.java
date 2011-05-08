@@ -2,16 +2,16 @@ package cama;
 import java.io.*;
 import cama.core.Player;
 import cama.core.Texts;
-import cama.core.Konsol;
+import cama.core.Judge;
 
 public class HPlayer extends Player
 {
     private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
-    private Konsol ks;
+    private Judge ks;
 
-    public HPlayer(Konsol ks_from_main) {
+    public HPlayer(Judge ks_from_main) {
         ks = ks_from_main;
     }
     
@@ -95,15 +95,9 @@ public class HPlayer extends Player
                                 }
                             }else if(cellch==ks.B){
                                 if((x2-x1==1&&y2-y1==1)||(x2-x1==1&&y1-y2==1)){
-                                    try{
-                                        ks.rewrite(x2, y2, ks.W);
-                                        ks.rewrite(x1, y1, ks.E);
-                                        ks.printField();
-                                    }
-                                    catch(IOException one){
-                                        System.out.println(Texts.IOException);
-                                        System.exit(0);
-                                    }
+                                    ks.rewrite(x2, y2, ks.W);
+                                    ks.rewrite(x1, y1, ks.E);
+                                    //ks.printField();
                                     ok = true;
                                 }else{
                                     try{
@@ -117,15 +111,9 @@ public class HPlayer extends Player
                                 }
                             }else if(cellch==ks.E){
                                 if(x2-x1==1&&y2-y1==0){
-                                    try{
-                                        ks.rewrite(x2, y2, ks.W);
-                                        ks.rewrite(x1, y1, ks.E);
-                                        ks.printField();
-                                    }
-                                    catch(IOException one){
-                                        System.out.println(Texts.IOException);
-                                        System.exit(0);
-                                    }
+                                    ks.rewrite(x2, y2, ks.W);
+                                    ks.rewrite(x1, y1, ks.E);
+                                    //ks.printField();
                                     ok = true;
                                 }else{
                                     try{
@@ -171,15 +159,9 @@ public class HPlayer extends Player
                                  }
                               }else if(cellch==ks.W){
                                  if((x2-x1==-1&&y2-y1==-1)||(x2-x1==-1&&y1-y2==-1)){
-                                    try{
-                                        ks.rewrite(x2, y2, ks.B);
-                                        ks.rewrite(x1, y1, ks.E);
-                                        ks.printField();
-                                    }
-                                    catch(IOException one){
-                                        System.out.println(Texts.IOException);
-                                        System.exit(0);
-                                    }
+                                    ks.rewrite(x2, y2, ks.B);
+                                    ks.rewrite(x1, y1, ks.E);
+                                    //ks.printField();
                                     ok = true;
                                  }else{
                                     try{
@@ -193,15 +175,9 @@ public class HPlayer extends Player
                                  }
                               }else if(cellch==ks.E){
                                  if(x2-x1==-1&&y2-y1==0){
-                                    try{
-                                        ks.rewrite(x2, y2, ks.B);
-                                        ks.rewrite(x1, y1, ks.E);
-                                        ks.printField();
-                                    }
-                                    catch(IOException one){
-                                        System.out.println(Texts.IOException);
-                                        System.exit(0);
-                                    }
+                                    ks.rewrite(x2, y2, ks.B);
+                                    ks.rewrite(x1, y1, ks.E);
+                                    //ks.printField();
                                     ok = true;
                                  }else{
                                     try{
