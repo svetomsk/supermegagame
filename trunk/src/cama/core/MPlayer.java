@@ -1,18 +1,17 @@
 package cama.core;
 
-import cama.core.Judge;
-import cama.core.Player;
 import cama.gui_cama.Main;
 import java.util.Random;
 
 public class MPlayer extends Player {
 
-    private Judge ks;
+    private Judge judge;
+    private Step step;
     private int n_left = 0, n_right = 0, n_straight = 0;
     boolean isGuiGame;
 
     public MPlayer(Judge ks_from_main, boolean isGui) {
-        ks = ks_from_main;
+        judge = ks_from_main;
         setModulePlayer(true);
         this.isGuiGame = isGuiGame;
     }
@@ -20,11 +19,11 @@ public class MPlayer extends Player {
     public void doStep(boolean isWhite) {
         Random r = new Random();
         int count = 0, x, y;
-        String[] coord = new String[ks.getSize()], ar = new String[2];
+        String[] coord = new String[judge.getSize()], ar = new String[2];
         if (isWhite == true) {
-            for (int i = 0; i < ks.getSize(); i++) {
-                for (int j = 0; j < ks.getSize(); j++) {
-                    if (ks.getCh(i, j) == ks.W) {
+            for (int i = 0; i < judge.getSize(); i++) {
+                for (int j = 0; j < judge.getSize(); j++) {
+                    if (judge.getCh(i, j) == judge.W) {
                         coord[count] = i + " " + j;
                         count++;
                     }
@@ -42,9 +41,9 @@ public class MPlayer extends Player {
 
             }
         } else {
-            for (int i = 0; i < ks.getSize(); i++) {
-                for (int j = 0; j < ks.getSize(); j++) {
-                    if (ks.getCh(i, j) == ks.B) {
+            for (int i = 0; i < judge.getSize(); i++) {
+                for (int j = 0; j < judge.getSize(); j++) {
+                    if (judge.getCh(i, j) == judge.B) {
                         coord[count] = i + " " + j;
                         count++;
                     }
@@ -63,24 +62,24 @@ public class MPlayer extends Player {
     }
 
     private boolean doStepWhite(int i, int j) {
-        n_left = ks.getCh(i + 1, j - 1);
-        n_right = ks.getCh(i + 1, j + 1);
-        n_straight = ks.getCh(i + 1, j);
+        n_left = judge.getCh(i + 1, j - 1);
+        n_right = judge.getCh(i + 1, j + 1);
+        n_straight = judge.getCh(i + 1, j);
 
-        if (n_left == ks.B) {
-            doStep(i, j, i + 1, j - 1, ks.W);
+        if (n_left == judge.B) {
+            doStep(i, j, i + 1, j - 1, true);
             if (isGuiGame) {
                 setIsWhite();
             }
             return true;
-        } else if (n_right == ks.B) {
-            doStep(i, j, i + 1, j + 1, ks.W);
+        } else if (n_right == judge.B) {
+            doStep(i, j, i + 1, j + 1, true);
             if (isGuiGame) {
                 setIsWhite();
             }
             return true;
-        } else if (n_straight == ks.E) {
-            doStep(i, j, i + 1, j, ks.W);
+        } else if (n_straight == judge.E) {
+            doStep(i, j, i + 1, j, true);
             if (isGuiGame) {
                 setIsWhite();
             }
@@ -90,23 +89,24 @@ public class MPlayer extends Player {
         }
     }
     private boolean doStepBlack(int i, int j) {
-        n_left = ks.getCh(i - 1, j - 1);
-        n_right = ks.getCh(i - 1, j + 1);
-        n_straight = ks.getCh(i - 1, j);
-        if (n_left == ks.W) {
-            doStep(i, j, i - 1, j - 1, ks.B);
+        n_left = judge.getCh(i - 1, j - 1);
+        n_right = judge.getCh(i - 1, j + 1);
+        n_straight = judge.getCh(i - 1, j);
+        if (n_left == judge.W) {
+            doStep(i, j, i - 1, j - 1, false);
             if (isGuiGame) {
                 setIsWhite();
             }
             return true;
-        } else if (n_right == ks.W) {
-            doStep(i, j, i - 1, j + 1, ks.B);
+        } else if (n_right == judge.W) {
+            doStep(i, j, i - 1, j + 1, false);
             if (isGuiGame) {
                 setIsWhite();
             }
             return true;
-        } else if (n_straight == ks.E) {
-            doStep(i, j, i - 1, j, ks.B);
+        } else if (n_straight == judge.E) {
+            doStep(i, j, i - 1, j, false);
+
             if (isGuiGame) {
                 setIsWhite();
             }
@@ -116,9 +116,9 @@ public class MPlayer extends Player {
         }
     }
 
-    private void doStep(int x, int y, int x1, int y1, int cell) {
-        ks.rewrite(x, y, ks.E);
-        ks.rewrite(x1, y1, cell);
+    private void doStep(int x, int y, int x1, int y1, boolean isWhite) {
+        step = new Step(y, x, y1, x1);
+        judge.handleStep(step, isWhite);
     }
 
     private void setIsWhite() {

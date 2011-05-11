@@ -1,7 +1,5 @@
 package cama.core;
-
 import java.io.*;
-
 public class Judge {
 
     private BufferedWriter kw;
@@ -17,72 +15,15 @@ public class Judge {
         startField();
     }
 
+
+
+    //start
     public void start() throws IOException {
         startField();
         kw.write(Texts.GREETING);
         kw.write(Texts.START);
         kw.flush();
     }
-
-    public String[][] getField() {
-        String ar[][] = new String[SIZE][SIZE];
-        for (int i = 0; i < ar.length; i++) {
-            for (int j = 0; j < ar.length; j++) {
-                if (getCh(i, j) == W) {
-                    ar[i][j] = Texts.Wh;
-                } else if (getCh(i, j) == B) {
-                    ar[i][j] = Texts.Bl;
-                } else {
-                    ar[i][j] = Texts.Em;
-                }
-
-            }
-        }
-        return ar;
-    }
-
-
-    public int[][] getFullField() {
-        return field;
-    }
-
-    public int getCh(int i, int g) {
-        return field[i + 1][g + 1];
-    } 
-
-    public void who(IPlayer player) throws IOException {
-        kw.write(Texts.DO_STEP(player.getName()));
-        kw.flush();
-    } 
-
-    public void rewrite(int i, int g, int s) {
-        field[i + 1][g + 1] = s;
-    }
-
-    public boolean check(boolean cb) {
-        if (isBadPosition()) {
-            return true;
-        }
-        if (isNonChekers()) {
-            return true;
-        }
-        if (isLastNumber()) {
-            return true;
-        }
-        if (isStalemate(cb)) {
-            return true;
-        }
-        return false;
-    } 
-
-    public int getSize() {
-        return SIZE;
-    } 
-
-    public void finish() throws IOException {
-        kw.close();
-    }
-
     private void startField() {
         for (int j = 0; j < field.length; j++) {
             field[0][j] = -1;
@@ -106,6 +47,100 @@ public class Judge {
 
     }
 
+    //getSomething
+    public int getCh(int i, int g) {
+        return field[i + 1][g + 1];
+    }
+    public int getSize() {
+        return SIZE;
+    } 
+    public String[][] getField() {
+        String ar[][] = new String[SIZE][SIZE];
+        for (int i = 0; i < ar.length; i++) {
+            for (int j = 0; j < ar.length; j++) {
+                if (getCh(i, j) == W) {
+                    ar[i][j] = Texts.Wh;
+                } else if (getCh(i, j) == B) {
+                    ar[i][j] = Texts.Bl;
+                } else {
+                    ar[i][j] = Texts.Em;
+                }
+
+            }
+        }
+        return ar;
+    }
+    
+    //проверка на корректность хода и выполнение хода
+    public boolean handleStep(Step step, boolean isWhite){ // а зачем булеан??
+      if(!isStepCorrect(step, isWhite)){
+         return false;
+      }
+      int temp = field[step.row1+1][step.col1+1];
+      field[step.row1+1][step.col1+1] = 0;
+      field[step.row2+1][step.col2+1] = temp;
+      return true;
+   }
+    public boolean isStepCorrect(Step st, boolean isWhite){
+        int x1 = st.row1;
+        int x2 = st.row2;
+        int y1 = st.col1;
+        int y2 = st.col2;
+
+
+        int cell1 = getCh(x1,y1);
+        int cell2 = getCh(x2,y2);
+
+        if (isWhite) {
+            if (cell1 == W && cell2 == B) {
+                if ((x2 - x1 == 1 && y2 - y1 == 1) || (x2 - x1 == 1 && y1 - y2 == 1)) {
+                    return true;
+                }
+                return false;
+            } else if (cell1 == W && cell2 == E) {
+                if (x2 - x1 == 1 && y2 - y1 == 0) {
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        }else{
+            if(cell1 == B && cell2 == W){
+                if ((x2 - x1 == -1 && y2 - y1 == -1) || (x2 - x1 == -1 && y1 - y2 == -1)) {
+                    return true;
+                }
+                return false;
+            }else if(cell1 == B && cell2 == E){
+                if (x2 - x1 == -1 && y2 - y1 == 0) {
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+
+
+    //проверка на выигрыш/проигрыш
+    public boolean check(boolean cb) {
+        if (isBadPosition()) {
+            return true;
+        }
+        if (isNonChekers()) {
+            return true;
+        }
+        if (isLastNumber()) {
+            return true;
+        }
+        if (isStalemate(cb)) {
+            return true;
+        }
+        return false;
+    }
     private int WhQuantity() {
         int count = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -117,7 +152,6 @@ public class Judge {
         }
         return count;
     } 
-
     private int BlQuantity() {
         int count = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -129,7 +163,6 @@ public class Judge {
         }
         return count;
     }
-
     private boolean isBadPosition() {
         int count = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -146,7 +179,6 @@ public class Judge {
             return false;
         }
     }
-
     private boolean isNonChekers() {
         b = true;
         for (int i = 0; i < SIZE; i++) {
@@ -175,7 +207,6 @@ public class Judge {
             return false;
         }
     }
-
     private boolean isLastNumber() {
         b = true;
         for (int i = 0; i < SIZE; i++) {
@@ -200,7 +231,6 @@ public class Judge {
             return false;
         }
     }
-
     private boolean isStalemate(boolean cb) {
         b = false;
         boolean wh[] = new boolean[SIZE];
@@ -307,5 +337,9 @@ public class Judge {
                 return false;
             }
         }
+    }
+
+    public void finish() throws IOException {
+        kw.close();
     }
 }

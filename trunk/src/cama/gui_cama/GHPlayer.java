@@ -13,9 +13,6 @@ class GHPlayer extends Player {
 		setModulePlayer(false);
    }
     public void doStep(boolean isWhite) {
-        
-
-
         /*if (s.equals("GK")) {  //  <- доработать!!!!
             System.out.println("Texts.CHEAT1");
             System.exit(0);
