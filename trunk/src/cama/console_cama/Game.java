@@ -17,6 +17,7 @@ public class Game
         IPlayer h2 = null;
         String str= "";
         String name= "";
+
         judge.start();
     //    w.write("\r\n"+Texts.CHOISE);
     //    w.flush();
@@ -61,27 +62,9 @@ public class Game
   //      }
      //   w.close();
     //    r.close();
-        
-        int i = 0;
-        for(;;){
-            if(i == 0){
-                console.printDoStep(h1);
-                h1.doStep(true);
-                console.printField();
-                if(judge.check(true)){
-                    break;
-                }
-                i = 1;
-            }else{
-                console.printDoStep(h2);
-                h2.doStep(false);
-                console.printField();
-                if(judge.check(false)==true){
-                    break;
-                }
-                i = 0;
-            }   
-         }
-        judge.finish();
+                  
+                  
+         ConsoleApp consoleapp = new ConsoleApp(judge, console, h1, h2);
+         consoleapp.run();
     }
 }

@@ -41,13 +41,8 @@ public class HPlayer extends Player
           }
 
           if(!judge.isStepCorrect(st, isWhite)){
-              System.out.println("st.col1 "+st.col1);
-              System.out.println("st.col2 "+st.col2);
-              System.out.println("st.row1 "+st.row1);
-              System.out.println("st.row2 "+st.row2);
               st = null;
-                      System.out.println("here!!");
-              bw.write(Texts.ER_STEP);
+              bw.write(Texts.ER_STEP_LN);
               bw.flush();
           }
        }

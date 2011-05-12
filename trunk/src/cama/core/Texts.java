@@ -7,7 +7,7 @@ public class Texts {
     static public String NAME1 = "Введите ваше имя: ";
     static public String TRY = "Попробуйте снова!\r\n";
     static public String EMPTY = "Вы хотите передвинуть пустое место!";
-    static public String ER_STEP = "Вы неправильно походили!";
+    static public String ER_STEP_LN = "Вы неправильно походили!\r\n";
     static public String ER_TEXT = "Вы написали текст, загляните в правила и попробуйте еще раз!";
     static public String OUT_OF_BOUNDS = "Вы зашли за границы таблицы! Попробуйте еще раз!";
     static public String EMPTY_LN = "Вы хотите передвинуть пустое место!\r\n";
