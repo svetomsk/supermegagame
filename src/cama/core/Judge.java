@@ -6,9 +6,9 @@ public class Judge {
     private int SIZE = 3;
     private int[][] field = new int[SIZE + 2][SIZE + 2]; //Сменил на рамку!!!
     private boolean b;
-    public int W = 1;
-    public int B = 2;
-    public int E = 0;
+    public final int W = 1;
+    public final int B = 2;
+    public final int E = 0;
 
     public Judge() {
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -87,9 +87,16 @@ public class Judge {
         int y1 = st.col1;
         int y2 = st.col2;
 
+        int cell1;
+        int cell2;
 
-        int cell1 = getCh(x1,y1);
-        int cell2 = getCh(x2,y2);
+        try{
+            cell1 = getCh(x1,y1);
+            cell2 = getCh(x2,y2);
+        }catch(ArrayIndexOutOfBoundsException e){
+           return false;
+        }
+        
 
         if (isWhite) {
             if (cell1 == W && cell2 == B) {
@@ -126,7 +133,7 @@ public class Judge {
 
 
     //проверка на выигрыш/проигрыш
-    public boolean check(boolean cb) {
+    public boolean checkIfSomeoneWon(boolean cb) {
         if (isBadPosition()) {
             return true;
         }

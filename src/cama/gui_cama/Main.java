@@ -357,7 +357,7 @@ public class Main implements ActionListener, ItemListener {
     private void doGame() {
         if (isWhite) {
             p1.doStep(true);
-            if (ks.check(true)) {
+            if (ks.checkIfSomeoneWon(true)) {
                 System.out.println("win!");
                 updateField();
                 ErLab1.setText("            " + p1.getName() + " выиграл!      ");
@@ -378,7 +378,7 @@ public class Main implements ActionListener, ItemListener {
             }
         } else {
             p2.doStep(false);
-            if (ks.check(false)) {
+            if (ks.checkIfSomeoneWon(false)) {
                 updateField();
                 ErLab1.setText("             " + p2.getName() + " выиграл!      ");
                 coord.setText("");

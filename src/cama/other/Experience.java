@@ -3,11 +3,11 @@ import java.io.*;
 import java.util.Random;
 import cama.core.Judge;
 
-class Excp {
+class Experience {
     private Judge ks;
     private BufferedReader br;
     private BufferedWriter bw;
-    Excp(Judge ks_from_main) throws IOException {
+    Experience(Judge ks_from_main) throws IOException {
         ks = ks_from_main;
         br = new BufferedReader(new FileReader("xod.txt"));
     }  
