@@ -1,4 +1,5 @@
 package cama.console_cama;
+import cama.core.ITextSource;
 import java.io.*;
 import cama.core.Player;
 import cama.core.Texts;
@@ -97,8 +98,53 @@ public class HPlayer extends Player
     private int makeY(String m){
         return Integer.valueOf(m)-1;
     }
-    public void finish() throws IOException{
-        bw.close();
-        br.close();
+
+    private ITextSource textSource;
+
+    public void NEWDoStep(boolean isWhite) {
+        Boolean isOk = false;
+        while (!isOk) {
+            String text = textSource.getStepText(); //Получаем строку с ходом игрока: a1-a2;
+            int[] ar = validateText(text);
+            if(ar!=null){
+                isOk = applyStep(ar, isWhite);
+            }
+        }
+    }
+
+    private int[] validateText(String text){
+        int[] ar = new int[4];
+        String s1[], s2[], s3[];
+        int x1, x2, y1, y2;
+        x1 = x2 = y1 = y2 = 0;
+        try {
+            s1 = text.split("-");
+            s2 = s1[0].split("");
+            s3 = s1[1].split("");
+            y1 = makeX(s2[1]);
+            y2 = makeX(s3[1]);
+            x1 = makeY(s2[2]);
+            x2 = makeY(s3[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            try {
+                bw.write(Texts.ER_TEXT);
+                bw.flush();
+                return null;
+            } catch (IOException one) {
+                System.out.println(Texts.IOException);
+                return null;
+            }
+        }
+
+        ar[0]=x1;
+        ar[1]=x2;
+        ar[2]=y1;
+        ar[3]=y2;
+
+        return ar;
+    }
+
+    private boolean applyStep(int[] ar, boolean isWhite){
+        return true; //НЕПРАВИЛЬНО!!!!
     }
 }
