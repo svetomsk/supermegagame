@@ -6,9 +6,9 @@ public class Judge {
     private int SIZE = 3;
     private int[][] field = new int[SIZE + 2][SIZE + 2]; //Сменил на рамку!!!
     private boolean b;
-    public final int W = 1;
-    public final int B = 2;
-    public final int E = 0;
+    public static final int W = 1;
+    public static final int B = 2;
+    public static final int E = 0;
 
     public Judge() {
         kw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -72,15 +72,13 @@ public class Judge {
     }
     
     //проверка на корректность хода и выполнение хода
-    public boolean handleStep(Step step, boolean isWhite){ // а зачем булеан??
-      if(!isStepCorrect(step, isWhite)){
-         return false;
-      }
-      int temp = field[step.row1+1][step.col1+1];
-      field[step.row1+1][step.col1+1] = 0;
-      field[step.row2+1][step.col2+1] = temp;
-      return true;
-   }
+    public void handleStep(Step step, boolean isWhite) { // а зачем булеан??
+        if (isStepCorrect(step, isWhite)) {
+            int temp = field[step.row1 + 1][step.col1 + 1];
+            field[step.row1 + 1][step.col1 + 1] = 0;
+            field[step.row2 + 1][step.col2 + 1] = temp;
+        }
+    }
     public boolean isStepCorrect(Step st, boolean isWhite){
         int x1 = st.row1;
         int x2 = st.row2;
