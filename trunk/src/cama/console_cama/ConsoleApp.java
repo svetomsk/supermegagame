@@ -23,24 +23,28 @@ public class ConsoleApp {
     }
 
     public void run() throws IOException{
-        while (!isSomebodyWon) {
-            if (i == 0) {
-                console.printDoStep(pl1);
-                pl1.doStep(true);
-                console.printField();
-                if (judge.checkIfSomeoneWon(true)) {
-                    isSomebodyWon = true;
+        try {
+            while (!isSomebodyWon) {
+                if (i == 0) {
+                    console.printDoStep(pl1);
+                    pl1.doStep(true);
+                    console.printField();
+                    if (judge.checkIfSomeoneWon(true)) {
+                        isSomebodyWon = true;
+                    }
+                    i = 1;
+                } else {
+                    console.printDoStep(pl2);
+                    pl2.doStep(false);
+                    console.printField();
+                    if (judge.checkIfSomeoneWon(false) == true) {
+                        isSomebodyWon = true;
+                    }
+                    i = 0;
                 }
-                i = 1;
-            } else {
-                console.printDoStep(pl2);
-                pl2.doStep(false);
-                console.printField();
-                if (judge.checkIfSomeoneWon(false) == true) {
-                    isSomebodyWon = true;
-                }
-                i = 0;
             }
+        } catch (IOException e) {
+            System.out.println("FATAL ERROR!");
         }
 
 

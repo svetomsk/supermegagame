@@ -15,8 +15,9 @@ public class HPlayer extends Player
     private Judge judge;
     private Step step;
 
-    public HPlayer(Judge ks_from_main) {
+    public HPlayer(Judge ks_from_main, ITextSource value) {
         judge = ks_from_main;
+        textSource = value;
     }
 
     public void doStep(boolean isWhite) {
@@ -104,14 +105,10 @@ public class HPlayer extends Player
     /*************************************/
     private ITextSource textSource;
 
-    public void setTextSource(ITextSource value){
-        textSource = value;
-    }
-
-    public void NEWDoStep(boolean isWhite) {
+    public void NEWDoStep(boolean isWhite) throws IOException {
         Boolean isOk = false;
         while (!isOk) {
-            String text = textSource.getStepText(); //Получаем строку с ходом игрока: a1-a2;
+            String text = textSource.getStepText();
             int[] ar = validateText(text);
             if(ar!=null){
                 isOk = applyStep(ar, isWhite);
