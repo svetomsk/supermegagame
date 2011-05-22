@@ -1,4 +1,5 @@
 package cama.console_cama;
+
 import cama.core.ITextSource;
 import java.io.*;
 import cama.core.Player;
@@ -12,13 +13,14 @@ public class HPlayer extends Player
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
     private Judge judge;
+    private Step step;
 
     public HPlayer(Judge ks_from_main) {
         judge = ks_from_main;
     }
 
     public void doStep(boolean isWhite) {
-        Step step = null;
+        step = null;
         try {
             step = getStepFromKeyboard(isWhite);
         } catch (IOException e) {
@@ -99,7 +101,12 @@ public class HPlayer extends Player
         return Integer.valueOf(m)-1;
     }
 
+    /*************************************/
     private ITextSource textSource;
+
+    public void setTextSource(ITextSource value){
+        textSource = value;
+    }
 
     public void NEWDoStep(boolean isWhite) {
         Boolean isOk = false;
@@ -145,6 +152,11 @@ public class HPlayer extends Player
     }
 
     private boolean applyStep(int[] ar, boolean isWhite){
-        return true; //НЕПРАВИЛЬНО!!!!
+        step = new Step(ar[2], ar[0], ar[3], ar[1]);
+        if(judge.isStepCorrect(step, isWhite)){
+            judge.handleStep(step, isWhite);
+            return true;
+        }
+        return false;
     }
 }
