@@ -356,7 +356,11 @@ public class Main implements ActionListener, ItemListener {
 
     private void doGame() {
         if (isWhite) {
+            try{
             p1.doStep(true);
+            } catch(Throwable exc){
+                System.out.println("FATAL ERROR!");
+            }
             if (ks.checkIfSomeoneWon(true)) {
                 System.out.println("win!");
                 updateField();
@@ -377,7 +381,11 @@ public class Main implements ActionListener, ItemListener {
                 coord.setText("");
             }
         } else {
-            p2.doStep(false);
+            try{
+            p2.doStep(true);
+            } catch(Throwable exc){
+                System.out.println("FATAL ERROR!");
+            }
             if (ks.checkIfSomeoneWon(false)) {
                 updateField();
                 ErLab1.setText("             " + p2.getName() + " выиграл!      ");

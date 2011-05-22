@@ -4,6 +4,7 @@ import cama.core.Judge;
 import cama.core.Player;
 import cama.core.Texts;
 import cama.core.Step;
+import java.io.*;
 
 class GHPlayer extends Player {
 
@@ -14,7 +15,7 @@ class GHPlayer extends Player {
         judge = ks_from_main;
 		setModulePlayer(false);
    }
-    public void doStep(boolean isWhite) {
+    public void doStep(boolean isWhite) throws IOException {
         /*if (s.equals("GK")) {  //  <- доработать!!!!
             System.out.println("Texts.CHEAT1");
             System.exit(0);

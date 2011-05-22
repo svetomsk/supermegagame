@@ -2,6 +2,7 @@ package cama.core;
 
 import cama.gui_cama.Main;
 import java.util.Random;
+import java.io.*;
 
 public class MPlayer extends Player {
 
@@ -16,7 +17,7 @@ public class MPlayer extends Player {
         this.isGuiGame = isGuiGame;
     }
 
-    public void doStep(boolean isWhite) {
+    public void doStep(boolean isWhite) throws IOException {
         Random r = new Random();
         int count = 0, x, y;
         String[] coord = new String[judge.getSize()], ar = new String[2];
