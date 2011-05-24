@@ -16,4 +16,9 @@ public class ConsoleTextSource implements ITextSource {
     public String getStepText() throws IOException {
         return br.readLine();
     }
+
+    public void writeText(String s) throws IOException{
+        bw.write(s);
+        bw.flush();
+    }
 }

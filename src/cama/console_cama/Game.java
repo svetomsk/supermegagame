@@ -2,7 +2,6 @@ package cama.console_cama;
 import java.io.*;
 import cama.core.IPlayer;
 import cama.core.Judge;
-import cama.core.Console;
 import cama.core.MPlayer;
 
 public class Game

@@ -300,9 +300,9 @@ public class Main implements ActionListener, ItemListener {
         field2 = new JLabel(space + "2 " + ar[1][0] + " " + ar[1][1] + " " + ar[1][2] + space);
         field3 = new JLabel(space + " 3 " + ar[2][0] + " " + ar[2][1] + " " + ar[2][2] + space);
         /*  field1.setText("<html>  a b c<br>"
-        + "1 "+ks.getCh(0,0)+" "+ks.getCh(0, 1)+" "+ks.getCh(0, 2)+"<br>"
-        + "2 "+ks.getCh(1,0)+" "+ks.getCh(1, 1)+" "+ks.getCh(1, 2)+"<br>"
-        + "3 "+ks.getCh(2,0)+" "+ks.getCh(2, 1)+" "+ks.getCh(2, 2)+"<br>");*/
+        + "1 "+ks.getCell(0,0)+" "+ks.getCell(0, 1)+" "+ks.getCell(0, 2)+"<br>"
+        + "2 "+ks.getCell(1,0)+" "+ks.getCell(1, 1)+" "+ks.getCell(1, 2)+"<br>"
+        + "3 "+ks.getCell(2,0)+" "+ks.getCell(2, 1)+" "+ks.getCell(2, 2)+"<br>");*/
 
         coord = new JTextField(3);
         ErLab1 = new JLabel("");
@@ -412,9 +412,9 @@ public class Main implements ActionListener, ItemListener {
 //        int cnt=0;
 //        for(int i=0; i<ks.getSize();i++){
 //            for(int j=0; j<ks.getSize();j++){
-//                if(ks.getCh(i, j)==ks.W){
+//                if(ks.getCell(i, j)==ks.W){
 //                    field[cnt].setText(Texts.Wh);
-//                }else if(ks.getCh(i, j) == ks.B){
+//                }else if(ks.getCell(i, j) == ks.B){
 //                    field[cnt].setText(Texts.Bl);
 //                }else{
 //                    field[cnt].setText(" ");
@@ -426,9 +426,9 @@ public class Main implements ActionListener, ItemListener {
         field2.setText(space + "2 " + ar[1][0] + " " + ar[1][1] + " " + ar[1][2] + space);
         field3.setText(space + " 3 " + ar[2][0] + " " + ar[2][1] + " " + ar[2][2] + space);
 //        field1.setText("<html>  a b c<br>"
-//                + "1 " + ks.getCh(0, 0) + " " + ks.getCh(0, 1) + " " + ks.getCh(0, 2) + "<br>"
-//                + "2 " + ks.getCh(1, 0) + " " + ks.getCh(1, 1) + " " + ks.getCh(1, 2) + "<br>"
-//                + "3 " + ks.getCh(2, 0) + " " + ks.getCh(2, 1) + " " + ks.getCh(2, 2) + "<br>");
+//                + "1 " + ks.getCell(0, 0) + " " + ks.getCell(0, 1) + " " + ks.getCell(0, 2) + "<br>"
+//                + "2 " + ks.getCell(1, 0) + " " + ks.getCell(1, 1) + " " + ks.getCell(1, 2) + "<br>"
+//                + "3 " + ks.getCell(2, 0) + " " + ks.getCell(2, 1) + " " + ks.getCell(2, 2) + "<br>");
     }
 
     private void SetActionCommands() { //1-ое - х, 2-ое - у

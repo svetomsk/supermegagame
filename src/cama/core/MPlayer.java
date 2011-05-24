@@ -24,7 +24,7 @@ public class MPlayer extends Player {
         if (isWhite == true) {
             for (int i = 0; i < judge.getSize(); i++) {
                 for (int j = 0; j < judge.getSize(); j++) {
-                    if (judge.getCh(i, j) == judge.W) {
+                    if (judge.getCell(i, j) == judge.W) {
                         coord[count] = i + " " + j;
                         count++;
                     }
@@ -44,7 +44,7 @@ public class MPlayer extends Player {
         } else {
             for (int i = 0; i < judge.getSize(); i++) {
                 for (int j = 0; j < judge.getSize(); j++) {
-                    if (judge.getCh(i, j) == judge.B) {
+                    if (judge.getCell(i, j) == judge.B) {
                         coord[count] = i + " " + j;
                         count++;
                     }
@@ -63,9 +63,9 @@ public class MPlayer extends Player {
     }
 
     private boolean doStepWhite(int i, int j) {
-        n_left = judge.getCh(i + 1, j - 1);
-        n_right = judge.getCh(i + 1, j + 1);
-        n_straight = judge.getCh(i + 1, j);
+        n_left = judge.getCell(i + 1, j - 1);
+        n_right = judge.getCell(i + 1, j + 1);
+        n_straight = judge.getCell(i + 1, j);
 
         if (n_left == judge.B) {
             doStep(i, j, i + 1, j - 1, true);
@@ -90,9 +90,9 @@ public class MPlayer extends Player {
         }
     }
     private boolean doStepBlack(int i, int j) {
-        n_left = judge.getCh(i - 1, j - 1);
-        n_right = judge.getCh(i - 1, j + 1);
-        n_straight = judge.getCh(i - 1, j);
+        n_left = judge.getCell(i - 1, j - 1);
+        n_right = judge.getCell(i - 1, j + 1);
+        n_straight = judge.getCell(i - 1, j);
         if (n_left == judge.W) {
             doStep(i, j, i - 1, j - 1, false);
             if (isGuiGame) {

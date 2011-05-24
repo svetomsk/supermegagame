@@ -1,25 +1,25 @@
-package cama.console_cama;
+package cama.gui_cama;
 
 import java.io.*;
-import cama.core.Judge;
 import cama.core.IPlayer;
+import cama.core.MPlayer;
+import cama.core.Judge;
+import cama.console_cama.Console;
 import cama.core.Texts;
 
-public class ConsoleApp {
+public class GuiApp {
     private IPlayer player1;
     private IPlayer player2;
     private Judge judge;
     private Console console;
     private int i;
     private boolean isSomebodyWon;
-    
-    public ConsoleApp(Judge judge, Console console, IPlayer pl1, IPlayer pl2){
+
+    public GuiApp(Judge judge, Console console, IPlayer pl1, IPlayer pl2){
         this.judge = judge;
         this.console = console;
         this.player1 = pl1;
         this.player2 = pl2;
-        i = 0;
-        isSomebodyWon = false;
     }
 
     public void run() {
@@ -54,5 +54,4 @@ public class ConsoleApp {
         }
         
     }
-
 }
