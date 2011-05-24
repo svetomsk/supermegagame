@@ -7,7 +7,7 @@ import java.io.*;
 public class Console {
     private BufferedWriter kw;
     Judge jd;
-    int SIZE;
+    private int SIZE;
     String[][] field;
 
     public Console(Judge jd_from_main){

@@ -1,6 +1,6 @@
 package cama.core;
 
-import cama.gui_cama.Main;
+import cama.gui_cama.OldMain;
 import java.util.Random;
 import java.io.*;
 
@@ -123,10 +123,10 @@ public class MPlayer extends Player {
     }
 
     private void setIsWhite() {
-        if (Main.isWhite) {
-            Main.isWhite = false;
+        if (OldMain.isWhite) {
+            OldMain.isWhite = false;
         } else {
-            Main.isWhite = true;
+            OldMain.isWhite = true;
         }
     }
 }
