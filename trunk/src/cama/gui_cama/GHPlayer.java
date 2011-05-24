@@ -40,8 +40,8 @@ class GHPlayer extends Player {
             Main.ErLab1.setText(Texts.ER_TEXT);
         }
 
-            int cell = judge.getCh(x1, y1);
-            int cellch = judge.getCh(x2, y2);
+            int cell = judge.getCell(x1, y1);
+            int cellch = judge.getCell(x2, y2);
             if(isWhite){
                 if(cell == judge.W && cellch ==judge.B){
                     if ((x2 - x1 == 1 && y2 - y1 == 1) || (x2 - x1 == 1 && y1 - y2 == 1)) {

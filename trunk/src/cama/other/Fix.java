@@ -58,7 +58,7 @@ public class Fix {
         int[][] ar = new int[ks.getSize()][ks.getSize()];
         for (int i = 0; i < ar.length; i++) {
             for (int j = 0; j < ar.length; j++) {
-                ar[i][j] = ks.getCh(i, j);
+                ar[i][j] = ks.getCell(i, j);
             }
         }
         for (int i =0;;i++) {

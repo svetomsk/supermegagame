@@ -1,4 +1,7 @@
-package cama.core;
+package cama.console_cama;
+import cama.core.IPlayer;
+import cama.core.Judge;
+import cama.core.Texts;
 import java.io.*;
 
 public class Console {

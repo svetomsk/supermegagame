@@ -48,7 +48,7 @@ public class Judge {
     }
 
     //getSomething
-    public int getCh(int i, int g) {
+    public int getCell(int i, int g) {
         return field[i + 1][g + 1];
     }
     public int getSize() {
@@ -58,9 +58,9 @@ public class Judge {
         String ar[][] = new String[SIZE][SIZE];
         for (int i = 0; i < ar.length; i++) {
             for (int j = 0; j < ar.length; j++) {
-                if (getCh(i, j) == W) {
+                if (getCell(i, j) == W) {
                     ar[i][j] = Texts.Wh;
-                } else if (getCh(i, j) == B) {
+                } else if (getCell(i, j) == B) {
                     ar[i][j] = Texts.Bl;
                 } else {
                     ar[i][j] = Texts.Em;
@@ -89,8 +89,8 @@ public class Judge {
         int cell2;
 
         try{
-            cell1 = getCh(x1,y1);
-            cell2 = getCh(x2,y2);
+            cell1 = getCell(x1,y1);
+            cell2 = getCell(x2,y2);
         }catch(ArrayIndexOutOfBoundsException e){
            return false;
         }
