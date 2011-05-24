@@ -236,7 +236,7 @@ public class Judge {
             return false;
         }
     }
-    private boolean isStalemate(boolean cb) {
+    private boolean isStalemate(boolean isWhite) {
         b = false;
         boolean wh[] = new boolean[SIZE];
         boolean bl[] = new boolean[SIZE];
@@ -315,7 +315,7 @@ public class Judge {
                 ib++;
             }
         }
-        if (cb == false) {
+        if (isWhite == false) {
             b = false;
             for (int i = 0; i < WhQuantity(); i++) {
                 if (wh[i] != false) {

@@ -20,7 +20,7 @@ public class HPlayer extends Player{
         textSource = value;
     }
 
-    public void doStep(boolean isWhite) throws IOException {
+    public void doStep(boolean isWhite) throws IOException{
         Boolean isOk = false;
         while (!isOk) {
             String text = textSource.getStepText();

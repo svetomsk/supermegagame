@@ -21,7 +21,7 @@ class GHPlayer extends Player {
             System.exit(0);
         }*/
 
-        String s = Main.coord.getText();
+        String s = OldMain.coord.getText();
 
         int x1, x2, y1, y2;
         String[] s1, s2, s3;
@@ -35,9 +35,9 @@ class GHPlayer extends Player {
             x1 = makeY(s2[2]);
             x2 = makeY(s3[2]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            Main.ErLab1.setText(Texts.ER_TEXT);
+            OldMain.ErLab1.setText(Texts.ER_TEXT);
         } catch (NumberFormatException er) {
-            Main.ErLab1.setText(Texts.ER_TEXT);
+            OldMain.ErLab1.setText(Texts.ER_TEXT);
         }
 
             int cell = judge.getCell(x1, y1);
@@ -46,56 +46,56 @@ class GHPlayer extends Player {
                 if(cell == judge.W && cellch ==judge.B){
                     if ((x2 - x1 == 1 && y2 - y1 == 1) || (x2 - x1 == 1 && y1 - y2 == 1)) {
                         setIsWhite();
-                        Main.ErLab1.setText("");
+                        OldMain.ErLab1.setText("");
                         //judge.rewrite(x2, y2, judge.W);
                         //judge.rewrite(x1, y1, judge.E);
                         makeStep(y1, x1, y2, x2, !isWhite);
                     }else{
                         System.out.println("here 1");
-                        Main.ErLab1.setText(Texts.ER_STEP_LN);
+                        OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                     }
                 }else if(cell == judge.W && cellch ==judge.E){
                     if (x2 - x1 == 1 && y2 - y1 == 0) {
                             setIsWhite();
-                            Main.ErLab1.setText("");
+                            OldMain.ErLab1.setText("");
                             //judge.rewrite(x2, y2, judge.W);
                             //judge.rewrite(x1, y1, judge.E);
                             makeStep(y1, x1, y2, x2, !isWhite);
                     }else{
                         System.out.println("here 2");
-                        Main.ErLab1.setText(Texts.ER_STEP_LN);
+                        OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                     }
                 }else{
                     System.out.println("here 3");
                     System.out.println(cell+" "+cellch);
-                    Main.ErLab1.setText(Texts.ER_STEP_LN);
+                    OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                 }
             }else{
                 if(cell == judge.B && cellch == judge.W){
                     if ((x2 - x1 == -1 && y2 - y1 == -1) || (x2 - x1 == -1 && y1 - y2 == -1)) {
                         setIsWhite();
-                        Main.ErLab1.setText("");
+                        OldMain.ErLab1.setText("");
                         //judge.rewrite(x2, y2, judge.B);
                         //judge.rewrite(x1, y1, judge.E);
                         makeStep(y1, x1, y2, x2, !isWhite);
                     } else {
                         System.out.println("here 4");
-                          Main.ErLab1.setText(Texts.ER_STEP_LN);
+                          OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                     }
                 }else if(cell == judge.B && cellch == judge.E){
                     if (x2 - x1 == -1 && y2 - y1 == 0) {
                         setIsWhite();
-                        Main.ErLab1.setText("");
+                        OldMain.ErLab1.setText("");
                         //judge.rewrite(x2, y2, judge.B);
                         //judge.rewrite(x1, y1, judge.E);
                         makeStep(y1, x1, y2, x2, !isWhite);
                     } else {
                         System.out.println("here 5");
-                        Main.ErLab1.setText(Texts.ER_STEP_LN);
+                        OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                     }
                 } else {
                     System.out.println("here 6");
-                    Main.ErLab1.setText(Texts.ER_STEP_LN);
+                    OldMain.ErLab1.setText(Texts.ER_STEP_LN);
                 }
             }
     }
@@ -117,10 +117,10 @@ class GHPlayer extends Player {
         return Integer.valueOf(m) - 1;
     }
     private void setIsWhite(){
-        if(Main.isWhite){
-            Main.isWhite = false;
+        if(OldMain.isWhite){
+            OldMain.isWhite = false;
         }else{
-            Main.isWhite = true;
+            OldMain.isWhite = true;
         }
     }
     private void makeStep(int col1, int row1, int col2, int row2, boolean isWhite){
