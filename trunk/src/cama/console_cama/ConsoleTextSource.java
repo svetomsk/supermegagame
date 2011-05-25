@@ -2,6 +2,7 @@ package cama.console_cama;
 
 import java.io.*;
 import cama.core.ITextSource;
+import cama.core.Texts;
 
 public class ConsoleTextSource implements ITextSource {
 
@@ -13,12 +14,23 @@ public class ConsoleTextSource implements ITextSource {
         this.br = br;
     }
 
-    public String getStepText() throws IOException {
-        return br.readLine();
+    public String getStepText() {
+        try {
+            return br.readLine();
+        } catch (IOException exc) {
+            System.out.println(Texts.IOException);
+            return null;
+        }
+        
     }
 
-    public void writeText(String s) throws IOException{
-        bw.write(s);
-        bw.flush();
+    public void writeText(String s){
+        try{
+            bw.write(s);
+            bw.flush();
+        } catch(IOException exc){
+            System.out.println(Texts.IOException);
+        }
+        
     }
 }

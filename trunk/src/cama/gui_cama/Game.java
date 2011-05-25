@@ -10,7 +10,6 @@ import java.awt.event.*;
 
 public class Game implements ActionListener {
 
-    private int number;
     private JRadioButton jrbwhite;
     private JRadioButton jrbblack;
     private JFrame jfrm;
@@ -24,12 +23,8 @@ public class Game implements ActionListener {
     private JLabel field1;
     private JLabel field2;
     private JLabel field3;
-    private JButton doStep;
-    private boolean isFirst;
-    static public JTextField coord;
     static public String s1 = null;
     static public String s2 = null;
-    static public JLabel ErLab1;
     static public boolean isWhite;
     static public String space = "                         ";
     private String[][] ar;
@@ -37,7 +32,18 @@ public class Game implements ActionListener {
     IPlayer player1;
     IPlayer player2;
 
+    static public JTextField coord;
+    private JButton doStep;
+    static public JLabel ErLab1;
+
     Game() {
+
+        Judge judge = new Judge();
+        Gui gui = new Gui(judge);
+        player1 = player2 = null;
+
+
+
         jfrm = new JFrame("Игра \"Пешки 3х3\"");
         jfrm.setLayout(new FlowLayout());
         jfrm.setBounds(500, 300, 400, 150);
@@ -169,7 +175,7 @@ public class Game implements ActionListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks);
+                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         player2 = new MPlayer(ks, true);
                         frm.setVisible(false);
 
@@ -180,7 +186,7 @@ public class Game implements ActionListener {
                         //app.run();
                     } else {
                         player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks);
+                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         frm.setVisible(false);
 
                         player1.setName("CPU");
@@ -199,13 +205,13 @@ public class Game implements ActionListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks);
+                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         player2 = new MPlayer(ks, true);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
                         player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks);
+                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
                     }
@@ -291,11 +297,11 @@ public class Game implements ActionListener {
         } else if (ae.getActionCommand().equals("Игра с компьютером")) {
             MPFrame();
         } else if (ae.getActionCommand().equals("Два игрока")) {
-            player1 = new GHPlayer(ks);
-            player2 = new GHPlayer(ks);
+            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
+            player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
             HP2Frame();
         } else if (ae.getActionCommand().equals("Игра с компьютером за белых")) {
-            player1 = new GHPlayer(ks);
+            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
             player2 = new MPlayer(ks, true);
             jfrm.setVisible(false);
 
@@ -330,7 +336,6 @@ public class Game implements ActionListener {
 
        private void StartGame(String s1, String s2) {
         isWhite = true;
-        isFirst = true;
         ar = ks.getField();
 
         player1.setName(s1);

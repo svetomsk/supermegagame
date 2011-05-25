@@ -1,15 +1,12 @@
 package cama.console_cama;
 
 import cama.core.ITextSource;
-import java.io.*;
 import cama.core.Player;
 import cama.core.Texts;
 import cama.core.Judge;
 import cama.core.Step;
 
 public class HPlayer extends Player{
-    private BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));;
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public boolean b;
     private Judge judge;
     private Step step;
@@ -20,7 +17,7 @@ public class HPlayer extends Player{
         textSource = value;
     }
 
-    public void doStep(boolean isWhite) throws IOException{
+    public void doStep(boolean isWhite){
         Boolean isOk = false;
         while (!isOk) {
             String text = textSource.getStepText();
@@ -32,12 +29,16 @@ public class HPlayer extends Player{
     }
     private int[] validateText(String text){
 
+        if(text==null){
+            return null;
+        }
+
         if (text.equals("exit")) {
             System.exit(0);
         }
 
         if (text.equals("GK")) {
-            System.out.println("Texts.CHEAT1");
+            System.out.println(Texts.CHEAT1);
             System.exit(0);
         }
 
@@ -54,14 +55,8 @@ public class HPlayer extends Player{
             x1 = makeY(s2[2]);
             x2 = makeY(s3[2]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            try {
-                bw.write(Texts.ER_TEXT);
-                bw.flush();
-                return null;
-            } catch (IOException one) {
-                System.out.println(Texts.IOException);
-                return null;
-            }
+            textSource.writeText(Texts.ER_TEXT);
+            return null;
         }
 
         ar[0]=x1;
@@ -71,7 +66,7 @@ public class HPlayer extends Player{
 
         return ar;
     }
-    private boolean applyStep(int[] ar, boolean isWhite) throws IOException{
+    private boolean applyStep(int[] ar, boolean isWhite){
         step = new Step(ar[2], ar[0], ar[3], ar[1]);
         if(judge.isStepCorrect(step, isWhite)){
             judge.handleStep(step, isWhite);

@@ -1,16 +1,39 @@
 package cama.gui_cama;
 
 import cama.core.ITextSource;
-import java.io.IOException;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class GuiTextSource implements ITextSource {
+    
+    String s;
 
-    public String getStepText() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public GuiTextSource(JButton doStep, final JTextField coord){
+        doStep.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                s = coord.getText();
+            }
+        });
+        coord.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                s = coord.getText();
+            }
+        });
+
+        s = null;
     }
 
-    public void writeText(String s) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getStepText(){
+        while(s == null){
+
+        }
+
+        return s;
+    }
+
+    public void writeText(String s) {
+        GuiApp.ErLab1.setText(s);
     }
 
 }

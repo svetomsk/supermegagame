@@ -172,7 +172,7 @@ public class OldMain implements ActionListener, ItemListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks);
+                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         player2 = new MPlayer(ks, true);
                         frm.setVisible(false);
 
@@ -183,7 +183,7 @@ public class OldMain implements ActionListener, ItemListener {
                         //app.run();
                     } else {
                         player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks);
+                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         frm.setVisible(false);
 
                         player1.setName("CPU");
@@ -202,13 +202,13 @@ public class OldMain implements ActionListener, ItemListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks);
+                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         player2 = new MPlayer(ks, true);
                         frm.setVisible(false);
                         StartGame(tf1.getText(), "CPU");
                     } else {
                         player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks);
+                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
                         frm.setVisible(false);
                         StartGame("CPU", tf1.getText());
                     }
@@ -294,11 +294,11 @@ public class OldMain implements ActionListener, ItemListener {
         } else if (ae.getActionCommand().equals("Игра с компьютером")) {
             MPFrame();
         } else if (ae.getActionCommand().equals("Два игрока")) {
-            player1 = new GHPlayer(ks);
-            player2 = new GHPlayer(ks);
+            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
+            player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
             HP2Frame();
         } else if (ae.getActionCommand().equals("Игра с компьютером за белых")) {
-            player1 = new GHPlayer(ks);
+            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
             player2 = new MPlayer(ks, true);
             jfrm.setVisible(false);
 
