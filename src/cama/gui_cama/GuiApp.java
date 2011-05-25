@@ -12,7 +12,7 @@ import cama.core.Judge;
 import cama.core.Texts;
 
 public class GuiApp {
-
+    
     private IPlayer player1;
     private IPlayer player2;
     private Judge judge;
@@ -26,19 +26,24 @@ public class GuiApp {
     private JLabel jlab2;
     private JLabel jlab3;
     private JLabel jlab4;
-    static public JTextField coord;
     private JLabel field1;
     private JLabel field2;
     private JLabel field3;
     static public String space = "                         ";
+    
     static public JLabel ErLab1;
-    private JButton doStep;
+    static public JTextField coord;
+    static public JButton doStep;
 
-    public GuiApp(Judge judge, IPlayer pl1, IPlayer pl2) {
+    public GuiApp(Judge judge, IPlayer pl1, IPlayer pl2, JButton doStep, JLabel ErLab1, JTextField coord) {
         this.judge = judge;
         this.player1 = pl1;
         this.player2 = pl2;
         isSomebodyWon = false;
+
+        GuiApp.doStep = doStep;
+        GuiApp.ErLab1 = ErLab1;
+        GuiApp.coord = coord;
     }
 
     public void run() {
@@ -115,28 +120,24 @@ public class GuiApp {
     }
 
     private void doGame() {
-        try {
-            while (!isSomebodyWon) {
-                if (i == 0) {
-                    jlab3.setText(gui.showDoStep(player1));
-                    player1.doStep(true);
-                    gui.updateField();
-                    if (judge.checkIfSomeoneWon(true)) {
-                        isSomebodyWon = true;
-                    }
-                    i = 1;
-                } else {
-                    jlab3.setText(gui.showDoStep(player2));
-                    player2.doStep(true);
-                    gui.updateField();
-                    if (judge.checkIfSomeoneWon(true)) {
-                        isSomebodyWon = true;
-                    }
-                    i = 0;
+        while (!isSomebodyWon) {
+            if (i == 0) {
+                jlab3.setText(gui.showDoStep(player1));
+                player1.doStep(true);
+                gui.updateField();
+                if (judge.checkIfSomeoneWon(true)) {
+                    isSomebodyWon = true;
                 }
+                i = 1;
+            } else {
+                jlab3.setText(gui.showDoStep(player2));
+                player2.doStep(true);
+                gui.updateField();
+                if (judge.checkIfSomeoneWon(true)) {
+                    isSomebodyWon = true;
+                }
+                i = 0;
             }
-        } catch (IOException exc) {
-            System.out.println(Texts.IOException);
         }
 
 
