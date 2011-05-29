@@ -1,7 +1,6 @@
 package cama.gui_cama;
 
 import cama.core.ITextSource;
-import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -26,10 +25,10 @@ public class GuiTextSource implements ITextSource {
     }
 
     public String getStepText(){
-        while(s == null){
-
+        if(s==null){
+            getStepText();
         }
-
+        
         return s;
     }
 

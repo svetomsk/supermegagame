@@ -40,6 +40,7 @@ public class GuiApp {
         this.player1 = pl1;
         this.player2 = pl2;
         isSomebodyWon = false;
+        gui = new Gui(judge);
 
         GuiApp.doStep = doStep;
         GuiApp.ErLab1 = ErLab1;
@@ -108,9 +109,8 @@ public class GuiApp {
         int i = 0;
         while (!isSomebodyWon) {
             if (i == 0) {
-                System.out.println(player1.getName());
                 jlab3.setText(gui.showDoStep(player1));
-                jlab3.setText(player1.getName());
+                //jlab3.setText(player1.getName());
                 player1.doStep(true);
                 gui.updateField();
                 if (judge.checkIfSomeoneWon(true)) {
@@ -119,6 +119,7 @@ public class GuiApp {
                 i = 1;
             } else {
                 jlab3.setText(gui.showDoStep(player2));
+                //jlab3.setText(player2.getName());
                 player2.doStep(true);
                 gui.updateField();
                 if (judge.checkIfSomeoneWon(true)) {
