@@ -70,19 +70,19 @@ public class MPlayer extends Player {
         if (n_left == judge.B) {
             doStep(i, j, i + 1, j - 1, true);
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else if (n_right == judge.B) {
             doStep(i, j, i + 1, j + 1, true);
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else if (n_straight == judge.E) {
             doStep(i, j, i + 1, j, true);
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else {
@@ -96,20 +96,20 @@ public class MPlayer extends Player {
         if (n_left == judge.W) {
             doStep(i, j, i - 1, j - 1, false);
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else if (n_right == judge.W) {
             doStep(i, j, i - 1, j + 1, false);
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else if (n_straight == judge.E) {
             doStep(i, j, i - 1, j, false);
 
             if (isGuiGame) {
-                setIsWhite();
+                //setIsWhite();
             }
             return true;
         } else {
@@ -122,11 +122,11 @@ public class MPlayer extends Player {
         judge.handleStep(step, isWhite);
     }
 
-    private void setIsWhite() {
-        if (OldMain.isWhite) {
-            OldMain.isWhite = false;
-        } else {
-            OldMain.isWhite = true;
-        }
-    }
+//    private void setIsWhite() {
+//        if (OldMain.isWhite) {
+//            OldMain.isWhite = false;
+//        } else {
+//            OldMain.isWhite = true;
+//        }
+//    }
 }

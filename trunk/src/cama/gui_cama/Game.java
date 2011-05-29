@@ -18,31 +18,25 @@ public class Game implements ActionListener {
     private JLabel jlab1;
     private JLabel jlab2;
     private JLabel jlab3;
-    private JLabel jlab4;
     private JLabel helplab;
-    private JLabel field1;
-    private JLabel field2;
-    private JLabel field3;
-    static public String s1 = null;
-    static public String s2 = null;
     static public boolean isWhite;
     static public String space = "                         ";
-    private String[][] ar;
-    Judge ks = new Judge();
+
+    Judge judge;
     IPlayer player1;
     IPlayer player2;
+    GuiApp app;
 
     static public JTextField coord;
     private JButton doStep;
     static public JLabel ErLab1;
 
     Game() {
-
-        Judge judge = new Judge();
-        Gui gui = new Gui(judge);
+        judge = new Judge();
         player1 = player2 = null;
 
-
+        doStep = new JButton("Хожу!");
+        coord = new JTextField(3);
 
         jfrm = new JFrame("Игра \"Пешки 3х3\"");
         jfrm.setLayout(new FlowLayout());
@@ -88,9 +82,9 @@ public class Game implements ActionListener {
         jfrm.setJMenuBar(jmb);
         jfrm.setVisible(true);
     }
-    private void HP2Frame() {
+    private void HPFrame() {
         jfrm.setVisible(false);
-        JFrame frm = new JFrame("Два игрока");
+        final JFrame frm = new JFrame("Два игрока");
         frm.setLayout(new FlowLayout());
         frm.setBounds(500, 300, 175, 215);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,8 +109,12 @@ public class Game implements ActionListener {
                 } else {
                     player1.setName(tf1.getText());
                     player2.setName(tf2.getText());
-                    StartGame(tf1.getText(), tf2.getText());
-                    //app.run();
+                    frm.setVisible(false);
+                    app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                    app.run();
+
+                    //StartGame(tf1.getText(), tf2.getText());
+                    
                 }
             }
         });
@@ -128,8 +126,10 @@ public class Game implements ActionListener {
                 } else {
                     player1.setName(tf1.getText());
                     player2.setName(tf2.getText());
-                    StartGame(tf1.getText(), tf2.getText());
-                    //app.run();
+                    frm.setVisible(false);
+                    app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                    //StartGame(tf1.getText(), tf2.getText());
+                    app.run();
                 }
             }
         });
@@ -141,8 +141,10 @@ public class Game implements ActionListener {
                 } else {
                     player1.setName(tf1.getText());
                     player2.setName(tf2.getText());
-                    StartGame(tf1.getText(), tf2.getText());
-                    //app.run();
+                    frm.setVisible(false);
+                    app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                    //StartGame(tf1.getText(), tf2.getText());
+                    app.run();
                 }
             }
         });
@@ -175,25 +177,27 @@ public class Game implements ActionListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
-                        player2 = new MPlayer(ks, true);
+                        player1 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+                        player2 = new MPlayer(judge, true);
                         frm.setVisible(false);
 
                         player1.setName(tf1.getText());
                         player2.setName("CPU");
 
-                        StartGame(tf1.getText(), "CPU");
-                        //app.run();
+                        app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                        //StartGame(tf1.getText(), "CPU");
+                        app.run();
                     } else {
-                        player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
+                        player1 = new MPlayer(judge, true);
+                        player2 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
                         frm.setVisible(false);
 
                         player1.setName("CPU");
                         player2.setName(tf1.getText());
 
-                        StartGame("CPU", tf1.getText());
-                        //app.run();
+                        app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                        //StartGame("CPU", tf1.getText());
+                        app.run();
                     }
                 }
             }
@@ -205,15 +209,27 @@ public class Game implements ActionListener {
                     ErLab1.setText("<html>Вы не ввели имя!<br>" + "Попробуйте еще раз!");
                 } else {
                     if (jrbwhite.isSelected()) {
-                        player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
-                        player2 = new MPlayer(ks, true);
+                        player1 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+                        player2 = new MPlayer(judge, true);
+
+                        player1.setName(tf1.getText());
+                        player2.setName("CPU");
+
                         frm.setVisible(false);
-                        StartGame(tf1.getText(), "CPU");
+                        app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                        //StartGame(tf1.getText(), "CPU");
+                        app.run();
                     } else {
-                        player1 = new MPlayer(ks, true);
-                        player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
+                        player1 = new MPlayer(judge, true);
+                        player2 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+
+                        player1.setName("CPU");
+                        player2.setName(tf1.getText());
+
                         frm.setVisible(false);
-                        StartGame("CPU", tf1.getText());
+                        app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+                        //StartGame("CPU", tf1.getText());
+                        app.run();
                     }
                 }
             }
@@ -268,201 +284,48 @@ public class Game implements ActionListener {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals("Выход")) {
             System.exit(0);
         } else if (ae.getActionCommand().equals("Правила")) {
             showRules();
         } else if (ae.getActionCommand().equals("Рубилище двух компьютеров")) {
-            player1 = new MPlayer(ks, true);
-            player2 = new MPlayer(ks, true);
+            player1 = new MPlayer(judge, true);
+            player2 = new MPlayer(judge, true);
+
+            player1.setName("CPU1");
+            player2.setName("CPU2");
+
             jfrm.setVisible(false);
 
-            StartGame("CPU1", "CPU2");
-            //app.run();
+            app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+            //StartGame("CPU1", "CPU2");
+            app.run();
         } else if (ae.getActionCommand().equals("Игра с компьютером")) {
             MPFrame();
         } else if (ae.getActionCommand().equals("Два игрока")) {
-            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
-            player2 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
-            HP2Frame();
+            player1 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+            player2 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+            HPFrame();
         } else if (ae.getActionCommand().equals("Игра с компьютером за белых")) {
-            player1 = new GHPlayer(ks, new GuiTextSource(doStep, coord));
-            player2 = new MPlayer(ks, true);
+            player1 = new GHPlayer(judge, new GuiTextSource(doStep, coord));
+            player2 = new MPlayer(judge, true);
+            player1.setName("Игрок 1");
+            player2.setName("CPU");
+
             jfrm.setVisible(false);
 
-            StartGame("Игрок 1", "CPU");
-            //app.run();
+            app = new GuiApp(judge, player1, player2, doStep, ErLab1, coord);
+            //StartGame("Игрок 1", "CPU");
+            app.run();
         }
     }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {
-                new OldMain();
+                new Game();
             }
         });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       private void StartGame(String s1, String s2) {
-        isWhite = true;
-        ar = ks.getField();
-
-        player1.setName(s1);
-        player2.setName(s2);
-        jfrm.setVisible(false);
-
-        JFrame frm = new JFrame("�?гра");
-        frm.setLayout(new FlowLayout());
-        frm.setBounds(500, 300, 200, 330);
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frm.setResizable(false);
-
-        jlab1 = new JLabel();
-        jlab2 = new JLabel();
-        jlab3 = new JLabel();
-        jlab4 = new JLabel();
-
-        jlab1.setText("Белые: " + player1.getName());
-        jlab2.setText("Черные: " + player2.getName());
-        //  jlab3.setText("                 "+player1.getName()+" ходит:");
-        jlab3.setText("                 " + player1.getName() + " ходит:                     ");
-
-
-
-        jlab4.setText("                             a b c                           ");
-        field1 = new JLabel();
-        field1 = new JLabel(space + "1 " + ar[0][0] + " " + ar[0][1] + " " + ar[0][2] + space);
-        field2 = new JLabel(space + "2 " + ar[1][0] + " " + ar[1][1] + " " + ar[1][2] + space);
-        field3 = new JLabel(space + " 3 " + ar[2][0] + " " + ar[2][1] + " " + ar[2][2] + space);
-
-        coord = new JTextField(3);
-        ErLab1 = new JLabel("");
-        JLabel space1 = new JLabel("                       ");
-        JLabel space2 = new JLabel("                       ");
-        doStep = new JButton("Хожу!");
-
-        doStep.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                doGame();
-            }
-        });
-        coord.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                doGame();
-            }
-        });
-
-        frm.add(jlab1);
-        frm.add(jlab2);
-        frm.add(jlab3);
-
-        frm.add(jlab4);
-        frm.add(field1);
-        frm.add(field2);
-        frm.add(field3);
-        frm.add(space1);
-        frm.add(coord);
-        frm.add(space2);
-        frm.add(doStep);
-        frm.add(ErLab1);
-
-
-        frm.setVisible(true);
-        if (player1.isModulePlayer()) {
-            doGame();
-        }
-    }
-
-
-
-    private void doGame() {
-        if (isWhite) {
-            try {
-                player1.doStep(true);
-            } catch (Throwable exc) {
-                System.out.println("FATAL ERROR!");
-            }
-            if (ks.checkIfSomeoneWon(true)) {
-                System.out.println("win!");
-                updateField();
-                ErLab1.setText("            " + player1.getName() + " выиграл!      ");
-                coord.setText("");
-                doStep.setEnabled(false);
-                coord.setEnabled(false);
-            } else {
-                if (isWhite == false) {
-                    updateField();
-                    jlab3.setText("                 " + player2.getName() + " ходит:                     ");
-                    if (player2.isModulePlayer()) {
-                        doGame();
-                    }
-                } else {
-                    System.out.println("ошибка!");
-                }
-                coord.setText("");
-            }
-        } else {
-            try {
-                player2.doStep(true);
-            } catch (Throwable exc) {
-                System.out.println("FATAL ERROR!");
-            }
-            if (ks.checkIfSomeoneWon(false)) {
-                updateField();
-                ErLab1.setText("             " + player2.getName() + " выиграл!      ");
-                coord.setText("");
-                doStep.setEnabled(false);
-                coord.setEnabled(false);
-            } else {
-                if (isWhite) {
-                    updateField();
-                    jlab3.setText("                 " + player1.getName() + " ходит:                     ");
-                    if (player1.isModulePlayer()) {
-                        doGame();
-                    }
-                } else {
-                    System.out.println("ошибка!");
-                }
-                coord.setText("");
-            }
-        }
-    }
-
-    private void updateField() {
-        ar = ks.getField();
-        field1.setText(space + "1 " + ar[0][0] + " " + ar[0][1] + " " + ar[0][2] + space);
-        field2.setText(space + "2 " + ar[1][0] + " " + ar[1][1] + " " + ar[1][2] + space);
-        field3.setText(space + " 3 " + ar[2][0] + " " + ar[2][1] + " " + ar[2][2] + space);
     }
 }
