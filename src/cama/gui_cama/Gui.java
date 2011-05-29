@@ -14,7 +14,8 @@ public class Gui {
     }
 
     public String showDoStep(IPlayer player){
-        return player.getName()+" ходит:";
+        //return "                 " + player.getName() + " ходит:                     ";
+        return "         "  ;
     }
 
     public String updateField(){

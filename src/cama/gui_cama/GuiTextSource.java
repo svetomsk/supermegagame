@@ -10,6 +10,7 @@ public class GuiTextSource implements ITextSource {
     String s;
 
     public GuiTextSource(JButton doStep, final JTextField coord){
+        
         doStep.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 s = coord.getText();

@@ -17,7 +17,7 @@ public class GuiApp {
     private IPlayer player2;
     private Judge judge;
     private Gui gui;
-    private int i;
+
     private boolean isSomebodyWon;
     static public boolean isWhite;
     static public boolean isFirst;
@@ -48,6 +48,7 @@ public class GuiApp {
 
     public void run() {
         StartGame();
+        doGame();
     }
 
     private void StartGame() {
@@ -69,7 +70,7 @@ public class GuiApp {
 
         jlab1.setText("Белые: " + player1.getName());
         jlab2.setText("Черные: " + player2.getName());
-        jlab3.setText("                 " + player1.getName() + " ходит:                     ");
+        //jlab3.setText("                 " + player1.getName() + " ходит:                     ");
 
 
         jlab4.setText("                             a b c                           ");
@@ -78,24 +79,11 @@ public class GuiApp {
         field2 = new JLabel(space + "2 " + ar[1][0] + " " + ar[1][1] + " " + ar[1][2] + space);
         field3 = new JLabel(space + " 3 " + ar[2][0] + " " + ar[2][1] + " " + ar[2][2] + space);
 
-        coord = new JTextField(3);
+        //coord = new JTextField(3);
         ErLab1 = new JLabel("");
         JLabel space1 = new JLabel("                       ");
         JLabel space2 = new JLabel("                       ");
-        doStep = new JButton("Хожу!");
-
-        doStep.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent evt) {
-                doGame();
-            }
-        });
-        coord.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent evt) {
-                doGame();
-            }
-        });
+        //doStep = new JButton("Хожу!");
 
         frm.add(jlab1);
         frm.add(jlab2);
@@ -114,15 +102,15 @@ public class GuiApp {
 
 
         frm.setVisible(true);
-        if (player1.isModulePlayer()) {
-            doGame();
-        }
     }
 
     private void doGame() {
+        int i = 0;
         while (!isSomebodyWon) {
             if (i == 0) {
+                System.out.println(player1.getName());
                 jlab3.setText(gui.showDoStep(player1));
+                jlab3.setText(player1.getName());
                 player1.doStep(true);
                 gui.updateField();
                 if (judge.checkIfSomeoneWon(true)) {
@@ -137,67 +125,6 @@ public class GuiApp {
                     isSomebodyWon = true;
                 }
                 i = 0;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-        if (isWhite) {
-            try {
-                player1.doStep(true);
-            } catch (Throwable exc) {
-                System.out.println("FATAL ERROR!");
-            }
-            if (judge.checkIfSomeoneWon(true)) {
-                System.out.println("win!");
-                updateField();
-                ErLab1.setText("            " + player1.getName() + " выиграл!      ");
-                coord.setText("");
-                doStep.setEnabled(false);
-                coord.setEnabled(false);
-            } else {
-                if (isWhite == false) {
-                    updateField();
-                    jlab3.setText("                 " + player2.getName() + " ходит:                     ");
-                    if (player2.isModulePlayer()) {
-                        doGame();
-                    }
-                } else {
-                    System.out.println("ошибка!");
-                }
-                coord.setText("");
-            }
-        } else {
-            try {
-                player2.doStep(true);
-            } catch (Throwable exc) {
-                System.out.println("FATAL ERROR!");
-            }
-            if (judge.checkIfSomeoneWon(false)) {
-                updateField();
-                ErLab1.setText("             " + player2.getName() + " выиграл!      ");
-                coord.setText("");
-                doStep.setEnabled(false);
-                coord.setEnabled(false);
-            } else {
-                if (isWhite) {
-                    updateField();
-                    jlab3.setText("                 " + player1.getName() + " ходит:                     ");
-                    if (player1.isModulePlayer()) {
-                        doGame();
-                    }
-                } else {
-                    System.out.println("ошибка!");
-                }
-                coord.setText("");
             }
         }
     }
